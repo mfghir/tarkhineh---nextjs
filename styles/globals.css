@@ -49,3 +49,82 @@
   font-family: "Estedad-Thin";
   src: url("../public/font/Estedad-Thin.ttf");
 }
+
+
+
+
+
+@layer base {
+  h1 {
+    @apply text-[44px] font-estedadBold leading-[140%];
+  }
+
+  h2 {
+    @apply text-[40px] font-estedadBold leading-[140%];
+  }
+
+  h3 {
+    @apply text-[32px] font-estedadBold leading-[140%];
+  }
+
+  h4 {
+    @apply text-2xl font-estedadBold leading-[140%];
+  }
+
+  h5 {
+    @apply text-xl font-estedadBold leading-[140%];
+  }
+
+  h6 {
+    @apply text-base font-estedadBold leading-[140%];
+  }
+
+  h7 {
+    @apply text-xl font-estedadSemiBold leading-[180%];
+  }
+
+  .body-xl {
+    @apply text-xl font-estedadRegular leading-[180%];
+  }
+
+  .body-lg {
+    @apply text-[18px] font-estedadRegular leading-[180%];
+  }
+
+  .body-md {
+    @apply text-base font-estedadRegular leading-[180%];
+  }
+
+  .body-sm {
+    @apply text-sm font-estedadRegular leading-[180%];
+  }
+
+  .caption-lg {
+    @apply text-sm font-estedadBold leading-[180%];
+  }
+
+  .caption-md {
+    @apply text-xs font-estedadBold leading-[180%];
+  }
+
+  .caption-sm {
+    @apply text-[10px] font-estedadBold leading-[180%];
+  }
+
+  .button-lg {
+    @apply text-base font-estedadMedium leading-[180%];
+  }
+
+  .button-sm {
+    @apply text-sm font-estedadMedium leading-6;
+  }
+
+  .overline-lg {
+    @apply text-base font-estedadRegular leading-[180%];
+  }
+
+  .overline-sm {
+    @apply text-xs font-estedadBold;
+  }
+
+}
