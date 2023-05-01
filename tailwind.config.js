@@ -41,6 +41,17 @@ module.exports = {
         "Warning-light": "#F4B740",
         "Warning-extralight": "#FFF8E1",
       },
+      fontFamily :{
+        estedadBlack: ["estedad-black","sans-serif"],
+        estedadBold: ["estedad-bold","sans-serif"],
+        estedadExtraBold: ["estedad-extraBold","sans-serif"],
+        estedadExtraLight: ["estedad-extraLight","sans-serif"],
+        estedadLight: ["estedad-light","sans-serif"],
+        estedadMedium: ["estedad-medium","sans-serif"],
+        estedadRegular: ["estedad-regular","sans-serif"],
+        estedadSemiBold: ["estedad-semiBold","sans-serif"],
+        estedadThin: ["estedad-thin","sans-serif"],
+      }
     },
   },
   plugins: [],

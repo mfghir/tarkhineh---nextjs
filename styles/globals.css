@@ -2,26 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+
+
+@font-face {
+  font-family: "Estedad-Black";
+  src: url("../public/font/Estedad-Black.ttf");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: "Estedad-Bold";
+  src: url("../public/font/Estedad-Bold.ttf");
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+  font-family: "Estedad-ExtraBold";
+  src: url("../public/font/Estedad-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-ExtraLight";
+  src: url("../public/font/Estedad-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-Light";
+  src: url("../public/font/Estedad-Light.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-Medium";
+  src: url("../public/font/Estedad-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-Regular";
+  src: url("../public/font/Estedad-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-SemiBold";
+  src: url("../public/font/Estedad-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Estedad-Thin";
+  src: url("../public/font/Estedad-Thin.ttf");
 }

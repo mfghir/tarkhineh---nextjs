@@ -3,7 +3,7 @@
 export default function Home() {
   return (
    <main>
-    <h1 className='text-Primary'>ترخینه</h1>
+    <h1 className='text-Primary font-estedadBlack'>ترخینه</h1>
    </main>
   )
 }
