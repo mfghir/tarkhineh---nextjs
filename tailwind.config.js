@@ -1,18 +1,47 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        Primary: "#417F56",
+        "Shade-1": "#396F4B",
+        "Shade-2": "#315F41",
+        "Shade-3": "#294F36",
+        "Shade-4": "#21402B",
+        "Shade-5": "#183020",
+        "Shade-6": "#102016",
+        "Shade-7": "#08100B",
+        "Tint-1": "#E5F2E9",
+        "Tint-2": "#CAE4D3",
+        "Tint-3": "#B0D7BD",
+        "Tint-4": "#96C9A7",
+        "Tint-5": "#7CBC91",
+        "Tint-6": "#61AE7B",
+        "Tint-7": "#4E9968",
+        "Gray-1": "#F9F9F9",
+        "Gray-2": "#E1E1E1",
+        "Gray-3": "#EDEDED",
+        "Gray-4": "#CBCBCB",
+        "Gray-5": "#ADADAD",
+        "Gray-6": "#757575",
+        "Gray-7": "#717171",
+        "Gray-8": "#353535",
+        "Error-main": "#C30000",
+        "Error-light": "#ED2E2E",
+        "Error-extralight": "#FFF2F2",
+        "Success-main": "#00966D",
+        "success-light": "#00BA88",
+        "Success-extralight": "#F3FDFA",
+        "Warning-main": "#A9791C",
+        "Warning-light": "#F4B740",
+        "Warning-extralight": "#FFF8E1",
       },
     },
   },
   plugins: [],
-}
+};
