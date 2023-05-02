@@ -4,7 +4,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <section className="w-full !flex justify-between items-center flex-nowrap p-5 !text-Primary">
+    <section className="w-full flex justify-between items-center flex-nowrap p-5 text-Primary">
       <HambergerMenu />
 
       <Image
