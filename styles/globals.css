@@ -1,7 +1,7 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 * {
   margin: 0;
   padding: 0;
@@ -9,11 +9,6 @@
   list-style-type: none;
   text-decoration: none;
 }
-
-/* 
-@import 'swiper/swiper-bundle.css';
-@import 'swiper/components/navigation/navigation.min.css';
-@import 'swiper/components/pagination/pagination.min.css'; */
 
 
 
@@ -111,15 +106,15 @@
     @apply text-sm font-estedadRegular leading-[180%];
   }
 
-  .Caption-lg {
+  .caption-lg {
     @apply text-sm font-estedadBold leading-[180%];
   }
 
-  .Caption-md {
+  .caption-md {
     @apply text-xs font-estedadBold leading-[180%];
   }
 
-  .Caption-sm {
+  .caption-sm {
     @apply text-[10px] font-estedadBold leading-[180%];
   }
 
