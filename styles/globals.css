@@ -1,137 +1,84 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style-type: none;
-  text-decoration: none;
-}
-
-
-
-@font-face {
-  font-family: "Estedad-Black";
-  src: url("../public/font/Estedad-Black.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-Bold";
-  src: url("../public/font/Estedad-Bold.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-ExtraBold";
-  src: url("../public/font/Estedad-ExtraBold.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-ExtraLight";
-  src: url("../public/font/Estedad-ExtraLight.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-Light";
-  src: url("../public/font/Estedad-Light.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-Medium";
-  src: url("../public/font/Estedad-Medium.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-Regular";
-  src: url("../public/font/Estedad-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-SemiBold";
-  src: url("../public/font/Estedad-SemiBold.ttf");
-}
-
-@font-face {
-  font-family: "Estedad-Thin";
-  src: url("../public/font/Estedad-Thin.ttf");
-}
-
-
-
-
 
 @layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold leading-[140%];
+  }
+
   h1 {
-    @apply text-[44px] font-estedadBold leading-[140%];
+    @apply text-[44px];
   }
 
   h2 {
-    @apply text-[40px] font-estedadBold leading-[140%];
+    @apply text-[40px];
   }
 
   h3 {
-    @apply text-[32px] font-estedadBold leading-[140%];
+    @apply text-[32px];
   }
 
   h4 {
-    @apply text-2xl font-estedadBold leading-[140%];
+    @apply text-2xl;
   }
 
   h5 {
-    @apply text-xl font-estedadBold leading-[140%];
+    @apply text-xl;
   }
 
   h6 {
-    @apply text-base font-estedadBold leading-[140%];
+    @apply text-base;
   }
+}
 
-  h7 {
-    @apply text-xl font-estedadSemiBold leading-[180%];
-  }
-
+@layer utilities {
   .body-xl {
-    @apply text-xl font-estedadRegular leading-[180%];
+    @apply text-xl font-normal leading-[180%];
   }
 
   .body-lg {
-    @apply text-[18px] font-estedadRegular leading-[180%];
+    @apply text-[18px] font-normal leading-[180%];
   }
 
   .body-md {
-    @apply text-base font-estedadRegular leading-[180%];
+    @apply text-base font-normal leading-[180%];
   }
 
   .body-sm {
-    @apply text-sm font-estedadRegular leading-[180%];
+    @apply text-sm font-normal leading-[180%];
   }
 
   .caption-lg {
-    @apply text-sm font-estedadBold leading-[180%];
+    @apply text-sm font-bold leading-[180%];
   }
 
   .caption-md {
-    @apply text-xs font-estedadBold leading-[180%];
+    @apply text-xs font-bold leading-[180%];
   }
 
   .caption-sm {
-    @apply text-[10px] font-estedadBold leading-[180%];
+    @apply text-[10px] fontbold leading-[180%];
   }
 
   .button-lg {
-    @apply text-base font-estedadMedium leading-[180%];
+    @apply text-base font-medium leading-[180%];
   }
 
   .button-sm {
-    @apply text-sm font-estedadMedium leading-6;
+    @apply text-sm font-medium leading-6;
   }
 
   .overline-lg {
-    @apply text-base font-estedadRegular leading-[180%];
+    @apply text-base font-normal leading-[180%];
   }
 
   .overline-sm {
-    @apply text-xs font-estedadBold;
+    @apply text-xs font-bold;
   }
-
 }

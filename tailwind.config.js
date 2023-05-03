@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,49 +10,55 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        Primary: "#417F56",
-        "Shade-1": "#396F4B",
-        "Shade-2": "#315F41",
-        "Shade-3": "#294F36",
-        "Shade-4": "#21402B",
-        "Shade-5": "#183020",
-        "Shade-6": "#102016",
-        "Shade-7": "#08100B",
-        "Tint-1": "#E5F2E9",
-        "Tint-2": "#CAE4D3",
-        "Tint-3": "#B0D7BD",
-        "Tint-4": "#96C9A7",
-        "Tint-5": "#7CBC91",
-        "Tint-6": "#61AE7B",
-        "Tint-7": "#4E9968",
-        "Gray-1": "#F9F9F9",
-        "Gray-2": "#E1E1E1",
-        "Gray-3": "#EDEDED",
-        "Gray-4": "#CBCBCB",
-        "Gray-5": "#ADADAD",
-        "Gray-6": "#757575",
-        "Gray-7": "#717171",
-        "Gray-8": "#353535",
-        "Error-main": "#C30000",
-        "Error-light": "#ED2E2E",
-        "Error-extralight": "#FFF2F2",
-        "Success-main": "#00966D",
-        "success-light": "#00BA88",
-        "Success-extralight": "#F3FDFA",
-        "Warning-main": "#A9791C",
-        "Warning-light": "#F4B740",
-        "Warning-extralight": "#FFF8E1",
+        primary: {
+          DEFAULT: "#417F56",
+        },
+        shade: {
+          "100": "#396F4B",
+          "200": "#315F41",
+          "300": "#294F36",
+          "400": "#21402B",
+          "500": "#183020",
+          "600": "#102016",
+          "700": "#08100B",
+        },
+        tint: {
+          "100": "#E5F2E9",
+          "200": "#CAE4D3",
+          "300": "#B0D7BD",
+          "400": "#96C9A7",
+          "500": "#7CBC91",
+          "600": "#61AE7B",
+          "700": "#4E9968",
+        },
+        gray: {
+          "100": "#F9F9F9",
+          "200": "#E1E1E1",
+          "300": "#EDEDED",
+          "400": "#CBCBCB",
+          "500": "#ADADAD",
+          "600": "#757575",
+          "700": "#717171",
+          "800": "#353535",
+        },
+        error: {
+          DEFAULT: "#C30000",
+          light: "#ED2E2E",
+          lighter: "#FFF2F2",
+        },
+        success: {
+          DEFAULT: "#00966D",
+          light: "#00BA88",
+          lighter: "#F3FDFA",
+        },
+        warning: {
+          DEFAULT: "#A9791C",
+          light: "#F4B740",
+          lighter: "#FFF8E1",
+        }
       },
       fontFamily :{
-        estedadBlack: ["estedad-black","sans-serif"],
-        estedadBold: ["estedad-bold","sans-serif"],
-        estedadExtraBold: ["estedad-extraBold","sans-serif"],
-        estedadExtraLight: ["estedad-extraLight","sans-serif"],
-        estedadLight: ["estedad-light","sans-serif"],
-        estedadMedium: ["estedad-medium","sans-serif"],
-        estedadRegular: ["estedad-regular","sans-serif"],
-        estedadSemiBold: ["estedad-semiBold","sans-serif"],
-        estedadThin: ["estedad-thin","sans-serif"],
+        sans: ["var(--font-estedad)", ...defaultTheme.fontFamily.sans]
       }
     },
   },

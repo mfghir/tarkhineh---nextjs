@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       {/* <h1 className="text-Primary font-estedadBlack">ترخینه</h1> */}
 
-      <div class="swiper-container swiper-container-sm md:swiper-container-md lg:swiper-container-lg h-[176px] bg-pink-300">
+      <div className="swiper-container swiper-container-sm md:swiper-container-md lg:swiper-container-lg h-[176px] bg-pink-300">
         <Swiper
           cssMode={true}
           navigation={true}
