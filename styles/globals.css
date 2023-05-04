@@ -1,7 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -134,4 +134,9 @@
     @apply text-xs font-estedadBold;
   }
 
+
+.bulletActiveClass{
+  color: red !important;
+  background: red !important;
+}
 }
