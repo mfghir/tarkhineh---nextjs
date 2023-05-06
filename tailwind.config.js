@@ -61,6 +61,9 @@ module.exports = {
         sans: ["var(--font-estedad)", ...defaultTheme.fontFamily.sans]
       }
     },
+    screens: {
+      'xs-p': '375px',
+    }
   },
   plugins: [],
 };
