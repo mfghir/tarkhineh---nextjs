@@ -59,7 +59,7 @@
   }
 
   .caption-md {
-    @apply text-xs font-bold leading-[180%];
+    @apply text-xs font-normal leading-[180%];
   }
 
   .caption-sm {

@@ -10,11 +10,11 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <section className="w-full flex justify-between items-center flex-nowrap p-5">
-      <HambergerMenu className="lg:hidden md:text-2xl" />
+    <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex">
+      <HambergerMenu className="lg:hidden md:text-2xl text-primary" />
 
       <Image
-        className="lg:hidden"
+        className="lg:hidden mx-auto"
         src="/img/Logo-phone.png"
         alt="Logo-phone"
         width={102}
@@ -58,7 +58,7 @@ const Navbar = () => {
 
       
 
-      <ul className="flex text-primary">
+      <ul className="flex text-primary md:justify-end">
         <li className="hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100">
           <SearchNormal1  />
         </li>
