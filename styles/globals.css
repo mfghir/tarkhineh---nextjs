@@ -63,7 +63,7 @@
   }
 
   .caption-sm {
-    @apply text-[10px] font-bold leading-[180%];
+    @apply text-[10px] font-normal leading-[180%];
   }
 
   .button-lg {

@@ -15,14 +15,14 @@ const Navbar = () => {
 
       <Image
         className="lg:hidden mx-auto"
-        src="/img/Logo-phone.png"
+        src="/images/Logo-phone.png"
         alt="Logo-phone"
         width={102}
         height={32}
       />
       <Image
         className="hidden lg:block"
-        src="/img/Logo-desktop.png"
+        src="/images/Logo-desktop.png"
         alt="Logo-desktop"
         width={155}
         height={51}
