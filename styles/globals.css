@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   h1,
   h2,
   h3,
@@ -80,5 +81,23 @@
 
   .overline-sm {
     @apply text-xs font-bold;
+  }
+
+  .header-7 {
+    @apply text-xl font-semibold leading-[180%]
+  }
+
+
+
+  .choose-branch {
+    @apply border border-primary rounded grid grid-cols-2 gap-2 lg:flex lg:justify-between lg:items-center lg:flex-col duration-300
+  }
+
+  .choose-branch:hover img {
+    @apply brightness-50 lg:hover:h-[190px]
+  }
+
+  .choose-branch:hover button {
+    @apply flex
   }
 }
