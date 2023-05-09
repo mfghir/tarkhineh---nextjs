@@ -56,7 +56,7 @@
   }
 
   .caption-lg {
-    @apply text-sm font-bold leading-[180%];
+    @apply text-sm font-normal leading-[180%];
   }
 
   .caption-md {
@@ -82,6 +82,11 @@
   .overline-sm {
     @apply text-xs font-bold;
   }
+
+  .header-5{
+    @apply text-xl font-bold leading-[140%]
+  }
+
 
   .header-7 {
     @apply text-xl font-semibold leading-[180%]

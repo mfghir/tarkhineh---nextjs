@@ -202,7 +202,6 @@ const HomePage = () => {
               <button className="caption-md text-shade-200 border border-primary rounded hidden justify-between items-center py-1 px-6 mt-2">صفحه شعبه <ArrowLeft2 size="16" className="mr-2" /> </button>
             </div>
           </li>
-
           
           <li className="choose-branch lg:hover:choose-branch-shadow">
             <Image
