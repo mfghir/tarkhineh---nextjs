@@ -50,7 +50,7 @@ const Layout = ({ children }) => {
     <div className={`${estedad.variable} font-sans`}>
       <Navbar />
       <main>{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

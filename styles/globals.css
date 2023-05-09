@@ -88,16 +88,24 @@
   }
 
 
-
-  .choose-branch {
-    @apply border border-primary rounded grid grid-cols-2 gap-2 lg:flex lg:justify-between lg:items-center lg:flex-col duration-300
+  .choose-branch-shadow {
+    box-shadow: 0px 16px 6px rgba(0, 0, 0, 0.01), 0px 9px 5px rgba(0, 0, 0, 0.05), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   }
 
-  .choose-branch:hover img {
-    @apply brightness-50 lg:hover:h-[190px]
+
+  .choose-branch {
+    @apply border border-primary rounded lg:rounded-lg grid grid-cols-2 gap-2 lg:flex lg:items-center lg:flex-col duration-300 relative lg:h-[344px] overflow-hidden
+  }
+
+  .choose-branch:hover .img-desktop {
+    @apply brightness-50 lg:h-[190px]
   }
 
   .choose-branch:hover button {
+    @apply flex
+  }
+
+  .choose-branch:hover span {
     @apply flex
   }
 }

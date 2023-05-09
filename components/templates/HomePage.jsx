@@ -145,7 +145,7 @@ const HomePage = () => {
         <h4 className="hidden lg:block mb-6">ترخینه گردی</h4>
 
         <ul className="grid grid-cols-1 gap-y-3 md:grid-cols-2 md:gap-x-3 lg:grid-cols-4">
-          <li className="choose-branch relative">
+          <li className="choose-branch lg:hover:choose-branch-shadow">
             <Image
               src="/images/choose-branch1-phone.png"
               alt="phone"
@@ -158,11 +158,11 @@ const HomePage = () => {
               alt="desktop"
               width={288}
               height={230}
-              className="hidden lg:block w-full h-[187px]  xl:h-[230px] duration-300 relative"
+              className="img-desktop hidden lg:block w-full h-[187px]  xl:h-[230px] duration-300 relative"
             />
 
-            <span className="w-[58px] h-[58px] rounded-full bg-white/20 flex justify-center items-center absolute top-1/4 left-6/12 z-10">
-            <span className="w-[42px] h-[42px] rounded-full bg-white/30 flex justify-center items-center"><Gallery size={32} /></span>
+            <span className="w-[58px] h-[58px] rounded-full bg-white/20 hidden justify-center items-center absolute top-1/4 left-6/12 z-10 ">
+            <span className="w-[42px] h-[42px] rounded-full bg-white/30 flex justify-center items-center"><Gallery size={32} color="#ffffff" /></span>
             </span>
 
             <div className="flex justify-center items-center flex-col py-2 px-1 lg:mb-2 text-gray-800">
@@ -174,7 +174,92 @@ const HomePage = () => {
             </div>
           </li>
 
+          <li className="choose-branch lg:hover:choose-branch-shadow">
+            <Image
+              src="/images/choose-branch2-phone.png"
+              alt="phone"
+              width={144}
+              height={80}
+              className="lg:hidden h-full"
+            />
+            <Image
+              src="/images/choose-branch2-desktop.png"
+              alt="desktop"
+              width={288}
+              height={230}
+              className="img-desktop hidden lg:block w-full h-[187px]  xl:h-[230px] duration-300 relative"
+            />
+
+            <span className="w-[58px] h-[58px] rounded-full bg-white/20 hidden justify-center items-center absolute top-1/4 left-6/12 z-10 ">
+            <span className="w-[42px] h-[42px] rounded-full bg-white/30 flex justify-center items-center"><Gallery size={32} color="#ffffff" /></span>
+            </span>
+
+            <div className="flex justify-center items-center flex-col py-2 px-1 lg:mb-2 text-gray-800">
+              <span className="button-sm lg:header-7 mb-1">شعبه چالوس</span>
+              <p className="caption-sm text-center lg:caption-lg">
+              چالوس، خیابان ۱۷ شهریور، بعد کوچه کوروش، جنب داروخانه دکتر میلانی
+              </p>
+              <button className="caption-md text-shade-200 border border-primary rounded hidden justify-between items-center py-1 px-6 mt-2">صفحه شعبه <ArrowLeft2 size="16" className="mr-2" /> </button>
+            </div>
+          </li>
+
+          
+          <li className="choose-branch lg:hover:choose-branch-shadow">
+            <Image
+              src="/images/choose-branch3-phone.png"
+              alt="phone"
+              width={144}
+              height={80}
+              className="lg:hidden h-full"
+            />
+            <Image
+              src="/images/choose-branch3-desktop.png"
+              alt="desktop"
+              width={288}
+              height={230}
+              className="img-desktop hidden lg:block w-full h-[187px]  xl:h-[230px] duration-300 relative"
+            />
+
+            <span className="w-[58px] h-[58px] rounded-full bg-white/20 hidden justify-center items-center absolute top-1/4 left-6/12 z-10 ">
+            <span className="w-[42px] h-[42px] rounded-full bg-white/30 flex justify-center items-center"><Gallery size={32} color="#ffffff" /></span>
+            </span>
+
+            <div className="flex justify-center items-center flex-col py-2 px-1 lg:mb-2 text-gray-800">
+              <span className="button-sm lg:header-7 mb-1">شعبه اقدسیه</span>
+              <p className="caption-sm text-center lg:caption-lg">
+              خیابان اقدسیه ، نرسیده به میدان خیام، پلاک ۸
+              </p>
+              <button className="caption-md text-shade-200 border border-primary rounded hidden justify-between items-center py-1 px-6 mt-2">صفحه شعبه <ArrowLeft2 size="16" className="mr-2" /> </button>
+            </div>
+          </li>
          
+          <li className="choose-branch lg:hover:choose-branch-shadow">
+            <Image
+              src="/images/choose-branch4-phone.png"
+              alt="phone"
+              width={144}
+              height={80}
+              className="lg:hidden h-full"
+            />
+            <Image
+              src="/images/choose-branch4-desktop.png"
+              alt="desktop"
+              width={288}
+              height={230}
+              className="img-desktop hidden lg:block w-full h-[187px]  xl:h-[230px] duration-300 relative"
+            />
+
+            <span className="w-[58px] h-[58px] rounded-full bg-white/20 hidden justify-center items-center absolute top-1/4 left-6/12 z-10 ">
+            <span className="w-[42px] h-[42px] rounded-full bg-white/30 flex justify-center items-center"><Gallery size={32} color="#ffffff" /></span>
+            </span>
+
+            <div className="flex justify-center items-center flex-col py-2 px-1 lg:mb-2 text-gray-800">
+              <span className="button-sm lg:header-7 mb-1">شعبه ونک</span>
+              <p className="caption-sm text-center lg:caption-lg">
+              میدان ونک، خیابان فردوسی، نبش کوچه نیلوفر، پلاک ۲۶              </p>
+              <button className="caption-md text-shade-200 border border-primary rounded hidden justify-between items-center py-1 px-6 mt-2">صفحه شعبه <ArrowLeft2 size="16" className="mr-2" /> </button>
+            </div>
+          </li>
         </ul>
       </section>
     </div>
