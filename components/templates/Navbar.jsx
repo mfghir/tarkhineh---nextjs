@@ -28,6 +28,37 @@ const Navbar = () => {
         height={51}
       />
 
+<div class="p-10">
+
+{/* <div class="dropdown inline-block relative">
+    <span class=" body-xl text-gray-700 flex justify-center items-center">
+      شعبه
+    <ArrowDown2 size="16" className="mr-1" />
+      </span>
+
+  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+    <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">One</a></li>
+    <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
+    <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Three is the magic number</a></li>
+  </ul>
+</div> */}
+
+<div className="dropdown inline-block relative">
+    <span className=" body-xl text-gray-700 flex justify-center items-center">
+      منو
+    <ArrowDown2 size="16" className="mr-1" />
+      </span>
+      
+  <ul className="dropdown-menu absolute hidden hover:dropdown-menu-shadow pt-1">
+    <li className=""><a className="rounded-t border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">One</a></li>
+    <li className=""><a className="border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
+    <li className=""><a className="rounded-b border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Three is the magic number</a></li>
+  </ul>
+</div>
+
+</div>
+
+
       <ul className="hidden lg:flex justify-between items-center">
         <li>
           <h5 className="text-primary">صفحه اصلی</h5>
