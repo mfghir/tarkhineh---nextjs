@@ -113,4 +113,8 @@
   .choose-branch:hover span {
     @apply flex
   }
+
+  .inp3:focus-visible p{
+    display: none;
+  }
 }

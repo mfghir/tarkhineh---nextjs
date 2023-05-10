@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <section className="bg-[url('/images/footer-phone.png')] lg:bg-[url('/images/footer-desktop.png')] bg-cover w-full h-[152px] lg:h-[319px] px-5 lg:px-20 py-6 lg:py-8 flex justify-center items-start">
+    <section className="bg-[url('/images/footer-phone.png')] lg:bg-[url('/images/footer-desktop.png')] bg-cover w-full h-[152px] lg:h-[319px] px-5 lg:px-20 py-6 lg:py-8 flex items-start">
       <div className="flex items-start flex-col text-white w-[87px] lg:w-[184px]">
         <p className="caption-md lg:header-5 mb-2 lg:mb-4">دسترسی آسان</p>
         <ul className="caption-sm lg:caption-lg">
@@ -77,43 +77,52 @@ const Footer = () => {
       <div className="flex flex-col text-white w-[85px] lg:w-[184px] mr-20">
         <p className="caption-md lg:header-5 mb-2 lg:mb-4">شعبه‌های ترخینه</p>
         <ul className="caption-sm lg:caption-lg">
-          <li className="mr-2 lg:mr-4">شعبه اکباتان</li>
+          <li className="mr-2 lg:mr-4 whitespace-nowrap">شعبه اکباتان</li>
           <li className="mt-1 lg:mt-4 mr-2 lg:mr-4">شعبه چالوس</li>
           <li className="mt-1 lg:mt-4 mr-2 lg:mr-4">شعبه اقدسیه</li>
           <li className="mt-1 lg:mt-4 mr-2 lg:mr-4">شعبه ونک</li>
         </ul>
       </div>
 
-      <div className="text-white flex justify-between flex-wrap mr-32 w-[600px]">
-        <p className="header-5 mb-4">پیام به ترخینه </p>
+      <div className="w-full h-full text-white mr-32 hidden lg:block">
+        <p className="header-5 mb-4 whitespace-nowrap">پیام به ترخینه </p>
 
-        <section className="w-[275px] grid grid-cols-2 gap-x-6 ">
-          <div className="bg-red-200 flex  flex-col flex-wrap">
+        <section className="flex justify-between w-full">
+          <div className="w-5/12 flex  flex-col flex-wrap">
             <input
               type="text"
               placeholder="نام و نام خانوادگی"
-              className="w-full h-10 mb-3 bg-transparent border border-gray-700 px-4 py-2 absolute rounded placeholder:text-gray-100 body-sm"
+              className="w-full h-10 mb-3 bg-transparent border border-gray-700 px-4 py-2 rounded placeholder:text-gray-100 body-sm focus:border focus:border-white"
             />
 
             <input
               type="text"
               placeholder="شماره تماس"
-              className="w-full h-10 mb-3 bg-transparent border border-gray-700 px-4 py-2 absolute rounded placeholder:text-gray-100 body-sm"
+              className="w-full h-10 mb-3 bg-transparent border border-gray-700 px-4 py-2 rounded placeholder:text-gray-100 body-sm"
             />
 
-            <input
-              type="text"
-              placeholder="آدرس ایمیل (اختیاری)"
-              className="w-full h-10 bg-transparent border border-gray-700 px-4 py-2 absolute rounded placeholder:text-gray-100 body-sm"
-            />
+            <div className="relative ">
+              <input
+                type="text"
+                placeholder=""
+                className="inp3 w-full h-10 bg-transparent border border-gray-700 px-4 py-2 rounded placeholder:text-gray-100 body-sm"
+              />
+              <p className="body-sm flex justify-center items-center absolute top-2 right-4">
+                آدرس ایمیل
+                <span className="caption-sm">(اختیاری)</span>
+              </p>
+            </div>
           </div>
 
-          <div className="">
+          <div className="w-6/12 mr-6 flex flex-col flex-wrap justify-end items-end">
             <textarea
               type="text"
               placeholder="پیام شما"
-              className="w-[275px] h-8 bg-transparent border border-gray-400 px-4 py-2 absolute rounded placeholder:text-gray-800 caption-sm"
+              className="w-full block h-[144px] bg-transparent border border-gray-400 p-4 2 rounded placeholder:text-gray-100 body-sm "
             />
+            <button className="bg-transparent button-sm rounded text-white w-[183px] h-10 border border-gray-700 mt-6">
+              ارسال پیام
+            </button>
           </div>
         </section>
       </div>
