@@ -126,8 +126,11 @@
     @apply block
   }
   
-  .dropdown:hover .dropdown-menu span {
-    @apply text-primary border-b border-primary
+  .dropdown:hover div>span{
+  @apply text-primary border-b
+  }
+  .dropdown:hover div>svg{
+    @apply text-primary rotate-180
   }
   
 

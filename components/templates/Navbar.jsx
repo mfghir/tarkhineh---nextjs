@@ -6,11 +6,10 @@ import {
   User,
 } from "iconsax-react";
 import Image from "next/image";
-import React from "react";
 
 const Navbar = () => {
   return (
-    <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex">
+    <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex px-20 py-8">
       <HambergerMenu className="lg:hidden md:text-2xl text-primary" />
 
       <Image
@@ -28,50 +27,57 @@ const Navbar = () => {
         height={51}
       />
 
-<div class="p-10">
-
-{/* <div class="dropdown inline-block relative">
-    <span class=" body-xl text-gray-700 flex justify-center items-center">
-      شعبه
-    <ArrowDown2 size="16" className="mr-1" />
-      </span>
-
-  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-    <li class=""><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">One</a></li>
-    <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
-    <li class=""><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Three is the magic number</a></li>
-  </ul>
-</div> */}
-
-<div className="dropdown inline-block relative">
-    <span className=" body-xl text-gray-700 flex justify-center items-center">
-      منو
-    <ArrowDown2 size="16" className="mr-1" />
-      </span>
-      
-  <ul className="dropdown-menu absolute hidden hover:dropdown-menu-shadow pt-1">
-    <li className=""><a className="rounded-t border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">One</a></li>
-    <li className=""><a className="border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
-    <li className=""><a className="rounded-b border border-b border-gray-100 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Three is the magic number</a></li>
-  </ul>
-</div>
-
-</div>
-
-
       <ul className="hidden lg:flex justify-between items-center">
         <li>
           <h5 className="text-primary">صفحه اصلی</h5>
         </li>
 
-        <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
-          شعبه
-          <ArrowDown2 size="16" className="mr-1" />
+        <li className="dropdown inline-block relative z-20 mr-6">
+          <div className="flex justify-center items-center cursor-pointer">
+            <span className=" body-xl hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
+              شعبه
+            </span>
+            <ArrowDown2 size="16" className="mr-1 duration-300" />
+          </div>
+
+          <ul className="dropdown-menu absolute pt-2 bg-transparent hidden w-36 body-sm ">
+            <li className="bg-white  border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-tr rounded-tl dropdown-menu-shadow">
+              <a href="#">اکباتان</a>
+            </li>
+            <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap">
+              <a href="#">چالوس</a>
+            </li>
+            <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap">
+              <a href="#">اقدسیه</a>
+            </li>
+            <li className="bg-white hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-br rounded-bl">
+              <a href="#">ونک</a>
+            </li>
+          </ul>
         </li>
 
-        <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
-          منو
-          <ArrowDown2 size="16" className="mr-1" />
+        <li className="dropdown inline-block relative z-20 mr-6">
+          <div className="flex justify-center items-center cursor-pointer">
+            <span className=" body-xl hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
+              منو
+            </span>
+            <ArrowDown2 size="16" className="mr-1 duration-300" />
+          </div>
+
+          <ul className="dropdown-menu absolute pt-2 bg-transparent hidden w-36 body-sm rounded">
+            <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-tr rounded-tl dropdown-menu-shadow ">
+              <a href="#">غذای اصلی</a>
+            </li>
+            <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap">
+              <a href="#">پیش غذا</a>
+            </li>
+            <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap">
+              <a href="#">دسر</a>
+            </li>
+            <li className="bg-white hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-br rounded-bl">
+              <a href="#">نوشیدنی</a>
+            </li>
+          </ul>
         </li>
 
         <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
@@ -87,11 +93,9 @@ const Navbar = () => {
         </li>
       </ul>
 
-      
-
       <ul className="flex text-primary md:justify-end">
         <li className="hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100">
-          <SearchNormal1  />
+          <SearchNormal1 />
         </li>
         <li className="flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2">
           <ShoppingCart className="w-4 h-4 md:w-6 md:h-6" />
