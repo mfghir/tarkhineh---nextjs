@@ -1,9 +1,13 @@
 import {
   ArrowDown2,
   HambergerMenu,
+  Heart,
+  Location,
+  LogoutCurve,
   SearchNormal1,
   ShoppingCart,
   User,
+  Wallet2,
 } from "iconsax-react";
 import Image from "next/image";
 
@@ -100,8 +104,35 @@ const Navbar = () => {
         <li className="flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2">
           <ShoppingCart className="w-4 h-4 md:w-6 md:h-6" />
         </li>
-        <li className="flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ">
-          <User className="w-4 h-4 md:w-6 md:h-6" />
+
+        <li className="user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300">
+          <div className="flex justify-center items-baseline cursor-pointer ">
+            <User className="text-primary " />
+            <ArrowDown2 size="16" className="mr-[2px] duration-300 hidden" />
+          </div>
+
+          <ul className="dropdown-menu absolute left-0 mt-4 bg-transparent hidden w-36 body-sm rounded text-gray-800 dropdown-menu-shadow">
+            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl ">
+              <User size="16" className="ml-1" />
+              پروفایل
+            </li>
+            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap">
+              <Wallet2 size="16" className="ml-1" />
+              پیگیری سفارش
+            </li>
+            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap">
+              <Heart size="16" className="ml-1" />
+              علاقه‌مندی‌ها
+            </li>
+            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap">
+              <Location size="16" className="ml-1" />
+              آدرس‌های من
+            </li>
+            <li className="cursor-pointer flex justify-edn items-center bg-white hover:bg-tint-100 p-2 whitespace-no-wrap rounded-br rounded-bl">
+              <LogoutCurve size="16" className="ml-1" />
+              خروج از حساب
+            </li>
+          </ul>
         </li>
       </ul>
     </section>
