@@ -10,11 +10,23 @@ import {
   Wallet2,
 } from "iconsax-react";
 import Image from "next/image";
+import PhoneMenu from "../modules/PhoneMenu";
+import { useState } from "react";
 
 const Navbar = () => {
+
+
+
+  const [showMenu, setShowMenu] = useState(false);
+  // const showMenuHandler=()=>{
+
+  // }
+
+
   return (
-    <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex px-20 py-8">
-      <HambergerMenu className="lg:hidden md:text-2xl text-primary" />
+    <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex lg:px-20 lg:py-8">
+      <HambergerMenu className="lg:hidden md:text-2xl text-primary cursor-pointer" onClick={()=>setShowMenu(!showMenu)} />
+     {showMenu && <PhoneMenu showMenu={showMenu} />}
 
       <Image
         className="lg:hidden mx-auto"
@@ -97,7 +109,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <ul className="flex text-primary md:justify-end">
+      <ul className="text-primary flex justify-between md:justify-end">
         <li className="hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100">
           <SearchNormal1 />
         </li>
@@ -107,12 +119,12 @@ const Navbar = () => {
 
         <li className="user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300">
           <div className="flex justify-center items-baseline cursor-pointer ">
-            <User className="text-primary " />
+            <User className="text-primary w-4 h-4 md:w-6 md:h-6" />
             <ArrowDown2 size="16" className="mr-[2px] duration-300 hidden" />
           </div>
 
-          <ul className="dropdown-menu absolute left-0 mt-4 bg-transparent hidden w-36 body-sm rounded text-gray-800 dropdown-menu-shadow">
-            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl ">
+          <ul className="dropdown-menu absolute left-0 pt-4 bg-transparent hidden w-36 body-sm rounded text-gray-800">
+            <li className="cursor-pointer flex justify-edn items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl  dropdown-menu-shadow">
               <User size="16" className="ml-1" />
               پروفایل
             </li>

@@ -83,7 +83,7 @@
     @apply text-xs font-bold;
   }
 
-  .header-5{
+  .header-5 {
     @apply text-xl font-bold leading-[140%]
   }
 
@@ -118,27 +118,36 @@
     display: none;
   } */
 
-  .dropdown-menu-shadow{
+  .dropdown-menu-shadow {
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
   }
-  .dropdown:hover .dropdown-menu ,
+
+  .dropdown:hover .dropdown-menu,
   .user-dropdown:hover .dropdown-menu {
     /* display: block; */
     @apply block
   }
-  
-  .dropdown:hover div>span{
-  @apply text-primary border-b
+
+  .dropdown:hover div>span {
+    @apply text-primary border-b
   }
-  .dropdown:hover div>svg{
+
+  .dropdown:hover div>svg {
     @apply text-primary rotate-180
   }
 
-  .user-dropdown:hover div>svg{
-    @apply  text-white
+  .user-dropdown:hover div>svg {
+    @apply text-white
   }
-  .user-dropdown:hover div>svg:nth-of-type(2){
+
+  .user-dropdown:hover div>svg:nth-of-type(2) {
     @apply block
   }
+
+  .phoneMenu-bg {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    filter: blur(3px);
+  }
+
 
 }
