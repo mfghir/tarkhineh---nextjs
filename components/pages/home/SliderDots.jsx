@@ -24,9 +24,9 @@ const SliderDots = ({ activeIndex = 0 }) => {
       {swiper?.slides.map((slide, index) => (
         <span
           key={index}
-          className={`block w-2 h-2 rounded-full ${
-            index === activeIndex ? 'bg-primary' : 'bg-gray-500'
-          }`}></span>
+          className={`block w-2 h-2 rounded-full 
+          ${index === activeIndex ? 'bg-primary' : 'bg-gray-500'}
+          `}></span>
       ))}
     </div>
   );

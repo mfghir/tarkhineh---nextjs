@@ -44,13 +44,13 @@ const Navbar = () => {
       />
 
       <ul className="hidden lg:flex justify-between items-center">
-        <li>
-          <h5 className="text-primary">صفحه اصلی</h5>
+        <li className="text-primary body-md">
+          صفحه اصلی
         </li>
 
         <li className="dropdown inline-block relative z-20 mr-6">
           <div className="flex justify-center items-center cursor-pointer">
-            <span className=" body-xl hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
+            <span className="body-md hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
               شعبه
             </span>
             <ArrowDown2 size="16" className="mr-1 duration-300" />
@@ -74,7 +74,7 @@ const Navbar = () => {
 
         <li className="dropdown inline-block relative z-20 mr-6">
           <div className="flex justify-center items-center cursor-pointer">
-            <span className=" body-xl hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
+            <span className=" body-md hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
               منو
             </span>
             <ArrowDown2 size="16" className="mr-1 duration-300" />
@@ -96,15 +96,15 @@ const Navbar = () => {
           </ul>
         </li>
 
-        <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
+        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
           اعطای نمایندگی
         </li>
 
-        <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
+        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
           درباره ما
         </li>
 
-        <li className="body-xl text-gray-700 flex justify-center items-center mr-6">
+        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
           تماس با ما
         </li>
       </ul>

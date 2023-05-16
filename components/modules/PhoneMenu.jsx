@@ -17,12 +17,12 @@ const PhoneMenu = ({ showMenu }) => {
 
   return (
     <div
-      className={`w-full h-screen fixed top-0 z-30 duration-300 md:hidden
-      ${showMenu ? "right-0" : ""}
-      ${close ? "right-full opacity-0 duration-300" : ""}`}
+      className={`w-full h-screen fixed top-0 z-30 duration-300 md:hidden opacity-0 
+      ${showMenu ? "right-0 opacity-100 duration-300" : ""}
+      ${close ? "-right-full opacity-0 duration-300" : ""}`}
     >
       <section
-        className={`w-full h-full phoneMenu-bg  z-30  duration-300 `}
+        className={`w-full h-full phoneMenu-bg z-30  ${close ? "opacity-0 " : ""}`}
         onClick={() => setClose(!close)}
       ></section>
 

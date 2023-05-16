@@ -83,10 +83,17 @@
     @apply text-xs font-bold;
   }
 
+  .header-2 {
+    @apply text-[40px] font-bold leading-[140%]
+  }
+
   .header-5 {
     @apply text-xl font-bold leading-[140%]
   }
 
+  .header-6 {
+    @apply text-base font-bold leading-[140%]
+  }
 
   .header-7 {
     @apply text-xl font-semibold leading-[180%]
