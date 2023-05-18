@@ -9,24 +9,34 @@ import {
   User,
   Wallet2,
 } from "iconsax-react";
-import Image from "next/image";
+
 import PhoneMenu from "../modules/PhoneMenu";
 import { useState } from "react";
+import { useRouter } from "next/router";
+
+import Image from "next/image";
+import Link from "next/link";
+// import { Menu } from '@headlessui/react'
 
 const Navbar = () => {
-
-
-
   const [showMenu, setShowMenu] = useState(false);
-  // const showMenuHandler=()=>{
+  const router = useRouter();
 
-  // }
 
+  const [selectedValue, setSelectedValue] = useState('');
+
+  function handleSelectChange(e) {
+    setSelectedValue(e.target.value);
+   router.push(`/branch/${e.target.value}`)
+  }
 
   return (
     <section className="w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex lg:px-20 lg:py-8">
-      <HambergerMenu className="lg:hidden md:text-2xl text-primary cursor-pointer" onClick={()=>setShowMenu(!showMenu)} />
-     {showMenu && <PhoneMenu showMenu={showMenu} />}
+      <HambergerMenu
+        className="lg:hidden md:text-2xl text-primary cursor-pointer"
+        onClick={() => setShowMenu(!showMenu)}
+      />
+      {showMenu && <PhoneMenu showMenu={showMenu} />}
 
       <Image
         className="lg:hidden mx-auto"
@@ -43,22 +53,51 @@ const Navbar = () => {
         height={51}
       />
 
+
       <ul className="hidden lg:flex justify-between items-center">
         <li className="text-primary body-md">
-          صفحه اصلی
+          <Link
+            href="/"
+            className={
+              router.pathname === "/"
+                ? "text-primary header-5 border-b border-primary pb-1"
+                : ""
+            }
+          >
+            صفحه اصلی
+          </Link>
         </li>
+
+{/* <li className="body-md text-gray-700 hover:text-primary flex justify-center items-center mr-6">
+<select id="branch" className="body-md text-gray-700 hover:text-primary duration-300 bg-transparent focus:border-none"
+value={selectedValue} onChange={handleSelectChange}
+>
+  <option selected className="appearance-none" >شعبه</option>
+  <option value="ekbatan" className={`appearance-none bg-white w-36 border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-tr rounded-tl dropdown-menu-shadow
+   ${router.pathname === "/branch/ekbatan"? "text-primary header-5 border-b border-primary pb-1": ""}`}>    
+  اکباتان </option>
+
+</select>
+</li> */}
 
         <li className="dropdown inline-block relative z-20 mr-6">
           <div className="flex justify-center items-center cursor-pointer">
-            <span className="body-md hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
-              شعبه
+            <span className="body-md text-gray-700 hover:text-primary duration-300">
+                شعبه
             </span>
             <ArrowDown2 size="16" className="mr-1 duration-300" />
           </div>
-
+          
           <ul className="dropdown-menu absolute pt-2 bg-transparent hidden w-36 body-sm ">
             <li className="bg-white  border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap rounded-tr rounded-tl dropdown-menu-shadow">
-              <a href="#">اکباتان</a>
+            <Link
+                href="/branch/ekbatan"
+                className={
+                  router.pathname === "/branch"
+                    ? "text-primary header-5 border-b border-primary pb-1"
+                    : ""
+                }
+              >اکباتان </Link>
             </li>
             <li className="bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap">
               <a href="#">چالوس</a>
@@ -74,8 +113,17 @@ const Navbar = () => {
 
         <li className="dropdown inline-block relative z-20 mr-6">
           <div className="flex justify-center items-center cursor-pointer">
-            <span className=" body-md hover:header-5 text-gray-700  border-primary duration-300 hover:pb-1">
+            <span className="body-md text-gray-700 hover:text-primary border-primary duration-300">
+            {/* <Link
+                href="/menu"
+                className={
+                  router.pathname === "/branch"
+                    ? "text-primary header-5 border-b border-primary pb-1"
+                    : ""
+                }
+              > */}
               منو
+              {/* </Link> */}
             </span>
             <ArrowDown2 size="16" className="mr-1 duration-300" />
           </div>
@@ -96,16 +144,41 @@ const Navbar = () => {
           </ul>
         </li>
 
-        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
+        <li className="body-md text-gray-700 hover:text-primary flex justify-center items-center mr-6">
+        <Link
+                href="/agency"
+                className={
+                  router.pathname === "/agency"
+                    ? "text-primary header-5 border-b border-primary pb-1"
+                    : ""
+                }
+              >
           اعطای نمایندگی
+          </Link>
         </li>
 
-        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
-          درباره ما
+        <li className="body-md text-gray-700 hover:text-primary flex justify-center items-center mr-6">
+        <Link
+                href="/about-us"
+                className={
+                  router.pathname === "/about-us"
+                    ? "text-primary header-5 border-b border-primary pb-1"
+                    : ""
+                }
+              >
+              درباره ما
+              </Link>
         </li>
 
-        <li className="body-md text-gray-700 flex justify-center items-center mr-6">
-          تماس با ما
+        <li className="body-md text-gray-700 hover:text-primary flex justify-center items-center mr-6">
+        <Link
+                href="/contact"
+                className={
+                  router.pathname === "/contact"
+                    ? "text-primary header-5 border-b border-primary pb-1"
+                    : ""
+                }
+              > تماس با ما </Link>
         </li>
       </ul>
 

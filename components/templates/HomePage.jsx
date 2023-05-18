@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import HeaderSlider from "../pages/home/HeaderSlider";
+import SearchBar from "../modules/SearchBar";
 
 const HomePage = () => {
   return (
@@ -17,15 +18,9 @@ const HomePage = () => {
       <HeaderSlider />
 
       {/* ---------------    menu cards */}
+        
+        <SearchBar />
       <section className="w-full p-5 lg:px-20 flex justify-center items-center flex-col flex-wrap">
-        <div className="relative mb-6 w-full text-gray-800 lg:hidden">
-          <input
-            type="text"
-            placeholder="جستجو"
-            className="w-full h-8 border border-gray-400 px-4 py-2 absolute rounded placeholder:text-gray-800 caption-sm"
-          />
-          <SearchNormal1 className="absolute top-2 left-4 w-4 h-4" />
-        </div>
 
         <h6 className="text-gray-800 lg:hidden mb-3 mt-6">منوی رستوران</h6>
         <h4 className="text-gray-800 hidden lg:block mb-8 mt-12">

@@ -87,6 +87,10 @@
     @apply text-[40px] font-bold leading-[140%]
   }
 
+  .header-4 {
+    @apply text-2xl font-bold leading-[140%]
+  }
+
   .header-5 {
     @apply text-xl font-bold leading-[140%]
   }
