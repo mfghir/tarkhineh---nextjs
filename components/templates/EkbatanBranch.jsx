@@ -1,6 +1,6 @@
 import HeaderSlider from '../pages/home/HeaderSlider';
 import SearchBar from '../modules/SearchBar';
-import { Heart, Note } from 'iconsax-react';
+import { CallCalling, Clock, Heart, Location, Note } from 'iconsax-react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import SliderLeftBtn from '../pages/home/SliderLeftBtn';
+import SliderEkbatan from '../pages/home/SliderEkbatan';
 
 const EkbatanBranch = ({ data }) => {
   const specialOffer = data.filter(food => food.type === 'specialOffer');
@@ -200,7 +201,7 @@ const EkbatanBranch = ({ data }) => {
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -295,7 +296,7 @@ const EkbatanBranch = ({ data }) => {
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -306,10 +307,36 @@ const EkbatanBranch = ({ data }) => {
         </div>
       </section>
 
-      <button className='mx-auto flex justify-center items-center border border-primary text-primary rounded caption-md lg:button-lg py-1 lg:py-2 px-2'>
+      <button className='mx-auto flex justify-center items-center border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300  rounded caption-md lg:button-lg py-1 lg:py-2 px-2 mb-6 lg:mb-12 duration-300'>
         <Note className='w-4 h-4 lg:w-6 lg:h-6 ml-1 lg:ml-2' />
         مشاهده منوی کامل
       </button>
+
+      <section className='relative flex justify-center items-center flex-col'>
+        <p className='header-6 lg:header-4 mb-3 lg:mb-[18px] text-center text-gray-800'>
+          شعبه اکباتان
+        </p>
+        <SliderEkbatan  />
+        {/* <ul className='bg-white border border-primary rounded lg:rounded-lg p-2 lg:px-12 lg:py-4 z-10 absolute top-[90%] mx-auto'> */}
+        <ul className='bg-white border border-primary rounded lg:rounded-lg p-2 lg:px-12 lg:py-4 z-10 absolute top-[90%] mx-auto grid grid-cols-6 gap-y-2 '>
+
+          {/* <div className='flex justify-between items-center mt-2'> */}
+            <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 whitespace-nowrap col-start-2 col-span-2'>
+              <CallCalling className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
+              ۳۳۵۳۵۳۵۴-۳۳۵۳۵۳۵۶
+            </li>
+          <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 col-start-1 col-span-4'>
+            <Location className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
+            شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم
+          </li>
+
+            <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 whitespace-nowrap col-start-2 col-span-2'>
+              <Clock className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
+              همه‌روزه از ساعت ۱۲ الی ۲۳
+            </li>
+          {/* </div> */}
+        </ul>
+      </section>
     </>
   );
 };
