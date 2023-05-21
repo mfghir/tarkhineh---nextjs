@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import Image from 'next/image';
 import SliderLeftBtn from '../pages/home/SliderLeftBtn';
 import SliderEkbatan from '../pages/home/SliderEkbatan';
+import OpinionSlider from '../pages/home/OpinionSlider';
 
 const EkbatanBranch = ({ data }) => {
   const specialOffer = data.filter(food => food.type === 'specialOffer');
@@ -316,26 +317,35 @@ const EkbatanBranch = ({ data }) => {
         <p className='header-6 lg:header-4 mb-3 lg:mb-[18px] text-center text-gray-800'>
           شعبه اکباتان
         </p>
-        <SliderEkbatan  />
-        {/* <ul className='bg-white border border-primary rounded lg:rounded-lg p-2 lg:px-12 lg:py-4 z-10 absolute top-[90%] mx-auto'> */}
-        <ul className='bg-white border border-primary rounded lg:rounded-lg p-2 lg:px-12 lg:py-4 z-10 absolute top-[90%] mx-auto grid grid-cols-6 gap-y-2 '>
+        <SliderEkbatan />
+        <ul className='bg-white border border-primary rounded lg:rounded-lg p-2 md:p-4 lg:px-12 lg:py-4 z-10 absolute top-[90%] mx-5 md:mx-auto flex justify-between flex-wrap-reverse  md:flex-wrap'>
+          <li className='caption-sm lg:body-md flex justify-center items-center md:flex-col text-gray-800 whitespace-nowrap col-start-2 col-span-2 md:whitespace-pre-wrap'>
+            <CallCalling className='w-4 h-4 lg:w-8 lg:h-8 ml-1 md:ml-0 md:mb-2' />
+            <p className='md:hidden'>۳۳۵۳۵۳۵۴-۳۳۵۳۵۳۵۶</p>
+            <p className='hidden md:flex flex-col flex-wrap '>
+              ۰۲۱-۳۳۵۳۵۳۵۴ <br />
+              ۰۲۱-۳۳۵۳۵۳۵۶
+            </p>
+          </li>
 
-          {/* <div className='flex justify-between items-center mt-2'> */}
-            <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 whitespace-nowrap col-start-2 col-span-2'>
-              <CallCalling className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
-              ۳۳۵۳۵۳۵۴-۳۳۵۳۵۳۵۶
-            </li>
-          <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 col-start-1 col-span-4'>
-            <Location className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
+          <li className='caption-sm lg:body-md flex justify-center items-center md:flex-col text-gray-800 col-start-1 col-span-4 order-1 md:order-[0] mb-2 md:mb-0 md:mx-8'>
+            <Location className='w-4 h-4 lg:w-8 lg:h-8 ml-1 md:ml-0 md:mb-2' />
             شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم
           </li>
 
-            <li className='caption-sm lg:body-md  flex justify-center items-center text-gray-800 whitespace-nowrap col-start-2 col-span-2'>
-              <Clock className='w-4 h-4 lg:w-8 lg:h-8 ml-1' />
-              همه‌روزه از ساعت ۱۲ الی ۲۳
-            </li>
-          {/* </div> */}
+          <li className='caption-sm lg:body-md flex justify-center items-center md:flex-col text-gray-800 whitespace-nowrap col-start-2 col-span-2 md:whitespace-normal'>
+            <Clock className='w-4 h-4 lg:w-8 lg:h-8 ml-1 md:ml-0 md:mb-2' />
+            همه‌روزه از ساعت ۱۲ الی ۲۳
+          </li>
         </ul>
+      </section>
+
+      <section className='pr-5 lg:pr-20 mt-[74px] lg:mt-[145px] mb-6 lg:mb-12'>
+        <p className='header-6 lg:header-4 mb-3 lg:mb-[18px] text-center text-gray-800'>
+          نظرات کاربران
+        </p>
+
+        <OpinionSlider />
       </section>
     </>
   );

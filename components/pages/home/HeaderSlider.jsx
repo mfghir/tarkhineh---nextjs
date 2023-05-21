@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Keyboard, Mousewheel } from 'swiper';
+import Image from 'next/image';
+
 import SliderBtn from '@/components/pages/home/SliderBtn';
 import SliderDots from '@/components/pages/home/SliderDots';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
 
 function HeaderSlider() {
   const [activeIndex, setActiveIndex] = useState(0);

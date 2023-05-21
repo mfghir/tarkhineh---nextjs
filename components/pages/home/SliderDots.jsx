@@ -7,7 +7,7 @@ const SliderDots = ({ activeIndex = 0 }) => {
   return (
     <div
       slot='container-end'
-      className='flex flex-row items-center gap-0.5 absolute bottom-0 left-1/2 -translate-x-1/2 w-fit z-10 px-4 py-2'>
+      className='flex flex-row items-center gap-1 absolute bottom-0 left-1/2 -translate-x-1/2 w-fit z-10 px-4 py-2'>
       <svg
         width='154'
         height='33'
@@ -24,8 +24,8 @@ const SliderDots = ({ activeIndex = 0 }) => {
       {swiper?.slides.map((slide, index) => (
         <span
           key={index}
-          className={`block w-2 h-2 rounded-full 
-          ${index === activeIndex ? 'bg-primary' : 'bg-gray-500'}
+          className={`block w-2 h-2 rounded-full
+          ${index === activeIndex ? 'bg-primary !w-3 !h-3 border-2 border-tint-100' : 'bg-gray-500'}
           `}></span>
       ))}
     </div>
