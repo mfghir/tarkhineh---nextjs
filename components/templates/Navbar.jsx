@@ -114,16 +114,16 @@ value={selectedValue} onChange={handleSelectChange}
         <li className="dropdown inline-block relative z-20 mr-6">
           <div className="flex justify-center items-center cursor-pointer">
             <span className="body-md text-gray-700 hover:text-primary border-primary duration-300">
-            {/* <Link
+            <Link
                 href="/menu"
                 className={
                   router.pathname === "/branch"
                     ? "text-primary header-5 border-b border-primary pb-1"
                     : ""
                 }
-              > */}
+              >
               منو
-              {/* </Link> */}
+              </Link>
             </span>
             <ArrowDown2 size="16" className="mr-1 duration-300" />
           </div>

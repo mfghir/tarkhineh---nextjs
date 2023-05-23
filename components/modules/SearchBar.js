@@ -3,8 +3,8 @@ import React from 'react';
 
 const SearchBar = () => {
   return (
-    <section className='px-5 mt-4 mb-6 flex'>
-    <div className='relative  w-full text-gray-800 lg:hidden'>
+    // <section className='px-5 mt-4 mb-6 flex'>
+    <div className='relative  w-full text-gray-800'>
       <input
         type='text'
         placeholder='جستجو'
@@ -12,7 +12,7 @@ const SearchBar = () => {
       />
       <SearchNormal1 className='absolute top-2 left-4 w-4 h-4' />
     </div>
-    </section>
+    // </section>
   );
 };
 

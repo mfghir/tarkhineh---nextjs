@@ -21,7 +21,9 @@ const EkbatanBranch = ({ data }) => {
     <>
       <HeaderSlider />
 
+      <section className='px-5 mt-4 mb-6 flex lg:hidden'>
       <SearchBar />
+      </section>
 
       <section className='pr-5 lg:pr-20 pt-6 mb-6 lg:mb-12'>
         <p className='header-6 lg:header-4 text-gray-800 pb-3 lg:pb-6'>
@@ -79,7 +81,7 @@ const EkbatanBranch = ({ data }) => {
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
                         <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500'>{discountPrice}</span>
+                        <span className='text-gray-500 line-through'>{discountPrice}</span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
@@ -174,7 +176,7 @@ const EkbatanBranch = ({ data }) => {
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
                         <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500'>{discountPrice}</span>
+                        <span className='text-gray-500 line-through'>{discountPrice}</span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
@@ -269,7 +271,7 @@ const EkbatanBranch = ({ data }) => {
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
                         <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500'>{discountPrice}</span>
+                        <span className='text-gray-500 line-through'>{discountPrice}</span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
