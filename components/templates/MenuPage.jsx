@@ -8,6 +8,12 @@ import StarRating from '../modules/StarRating ';
 
 const MenuPage = () => {
   const iranianFood = foodMenuData.filter(food => food.type === 'iranianFood');
+  const nonIranianFood = foodMenuData.filter(
+    food => food.type === 'nonIranianFood'
+  );
+
+  const pizza = foodMenuData.filter(food => food.type === 'pizza');
+  const sandwich = foodMenuData.filter(food => food.type === 'sandwich');
 
   return (
     <>
@@ -66,9 +72,9 @@ const MenuPage = () => {
         </div>
       </nav>
 
-      <section className='min-h-screen px-5 lg:px-20 mt-14 lg:mt-8'>
-        <section className=''>
-          <div className='flex justify-between items-center mb-3 lg:mb-6'>
+      <section className='px-5 lg:px-20 mt-14 lg:mt-8 '>
+        <section className='mb-6 lg:mb-12'>
+          <div className='flex justify-between items-center  mb-3 lg:mb-6'>
             <p className='header-6 lg:header-4 text-gray-800'>غذاهای ایرانی</p>
             <button className='flex justify-center items-center border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300  rounded caption-md lg:button-lg py-1 lg:py-2 px-2 duration-300'>
               <ShoppingCart className='w-4 h-4 lg:w-6 lg:h-6 ml-1 lg:ml-2' />
@@ -89,21 +95,27 @@ const MenuPage = () => {
               } = item;
               return (
                 <div
-                  className='w-full flex justify-between items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
+                  className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
                   key={index}>
                   <Image
-                    className='object-cover w-[92px] h-[100px] lg:w-[169px] lg:h-[158px] '
+                    className='object-cover w-[92px] h-full lg:w-[169px]  '
                     src={img}
                     alt={name}
                     width={169}
                     height={158}
                   />
 
-                  <ul className='p-2 lg:p-4'>
-                    <li className='flex justify-between items-center'>
-                      <p className='caption-md lg:header-7 text-gray-800'>
-                        {name}
-                      </p>
+                  <ul className='w-full p-2 lg:p-4'>
+                    <li className='flex justify-end items-center lg:flex-wrap'>
+                      <div className='flex justify-between items-center w-full'>
+                        <p className='caption-md lg:header-7 text-gray-800'>
+                          {name}
+                        </p>
+                        <Heart
+                          className='hidden lg:w-6 lg:h-6 lg:block'
+                          color='#717171'
+                        />
+                      </div>
 
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
                         <span className='text-error mr-2'>{discount}</span>
@@ -114,20 +126,259 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
-                      <p className='caption-sm  line-clamp-1'>{ingredient}</p>
+                      <p className='caption-sm lg:caption-md line-clamp-1'>
+                        {ingredient}
+                      </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
                         {price} تومان
                       </p>
                     </li>
 
-                    <li className='flex justify-between items-center'>
+                    <li className='flex justify-between items-center w-full'>
                       <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6'
+                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
                         color='#717171'
                       />
 
-                      <div className='flex justify-center items-center flex-row-reverse'>
-                        <button className='bg-primary rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                      <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
+                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                          افزودن به سبد خرید
+                        </button>
+                        <span className=''>
+                          <StarRating rating={star} />
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className='mb-6 lg:mb-12'>
+          <p className='header-6 lg:header-4 text-gray-800 mb-3 lg:mb-6'>
+            غذاهای غیر ایرانی
+          </p>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
+            {nonIranianFood.map((item, index) => {
+              const {
+                name,
+                img,
+                ingredient,
+                discount,
+                discountPrice,
+                price,
+                star,
+              } = item;
+              return (
+                <div
+                  className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
+                  key={index}>
+                  <Image
+                    className='object-cover w-[92px] h-full lg:w-[169px]  '
+                    src={img}
+                    alt={name}
+                    width={169}
+                    height={158}
+                  />
+
+                  <ul className='w-full p-2 lg:p-4'>
+                    <li className='flex justify-end items-center lg:flex-wrap'>
+                      <div className='flex justify-between items-center w-full'>
+                        <p className='caption-md lg:header-7 text-gray-800'>
+                          {name}
+                        </p>
+                        <Heart
+                          className='hidden lg:w-6 lg:h-6 lg:block'
+                          color='#717171'
+                        />
+                      </div>
+
+                      <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
+                        <span className='text-error mr-2'>{discount}</span>
+                        <span className='text-gray-500 line-through'>
+                          {discountPrice}
+                        </span>
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
+                      <p className='caption-sm lg:caption-md line-clamp-1'>
+                        {ingredient}
+                      </p>
+                      <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
+                        {price} تومان
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center w-full'>
+                      <Heart
+                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                        color='#717171'
+                      />
+
+                      <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
+                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                          افزودن به سبد خرید
+                        </button>
+                        <span className=''>
+                          <StarRating rating={star} />
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className='mb-6 lg:mb-12'>
+          <p className='header-6 lg:header-4 text-gray-800 mb-3 lg:mb-6'>
+            پیتزاها
+          </p>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
+            {pizza.map((item, index) => {
+              const {
+                name,
+                img,
+                ingredient,
+                discount,
+                discountPrice,
+                price,
+                star,
+              } = item;
+              return (
+                <div
+                  className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
+                  key={index}>
+                  <Image
+                    className='object-cover w-[92px] h-full lg:w-[169px]  '
+                    src={img}
+                    alt={name}
+                    width={169}
+                    height={158}
+                  />
+
+                  <ul className='w-full p-2 lg:p-4'>
+                    <li className='flex justify-end items-center lg:flex-wrap'>
+                      <div className='flex justify-between items-center w-full'>
+                        <p className='caption-md lg:header-7 text-gray-800'>
+                          {name}
+                        </p>
+                        <Heart
+                          className='hidden lg:w-6 lg:h-6 lg:block'
+                          color='#717171'
+                        />
+                      </div>
+
+                      <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
+                        <span className='text-error mr-2'>{discount}</span>
+                        <span className='text-gray-500 line-through'>
+                          {discountPrice}
+                        </span>
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
+                      <p className='caption-sm lg:caption-md line-clamp-1'>
+                        {ingredient}
+                      </p>
+                      <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
+                        {price} تومان
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center w-full'>
+                      <Heart
+                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                        color='#717171'
+                      />
+
+                      <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
+                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                          افزودن به سبد خرید
+                        </button>
+                        <span className=''>
+                          <StarRating rating={star} />
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className='mb-6 lg:mb-12'>
+          <p className='header-6 lg:header-4 text-gray-800 mb-3 lg:mb-6'>
+          ساندویچ‌ها
+          </p>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
+            {sandwich.map((item, index) => {
+              const {
+                name,
+                img,
+                ingredient,
+                discount,
+                discountPrice,
+                price,
+                star,
+              } = item;
+              return (
+                <div
+                  className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
+                  key={index}>
+                  <Image
+                    className='object-cover w-[92px] h-full lg:w-[169px]  '
+                    src={img}
+                    alt={name}
+                    width={169}
+                    height={158}
+                  />
+
+                  <ul className='w-full p-2 lg:p-4'>
+                    <li className='flex justify-end items-center lg:flex-wrap'>
+                      <div className='flex justify-between items-center w-full'>
+                        <p className='caption-md lg:header-7 text-gray-800'>
+                          {name}
+                        </p>
+                        <Heart
+                          className='hidden lg:w-6 lg:h-6 lg:block'
+                          color='#717171'
+                        />
+                      </div>
+
+                      <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
+                        <span className='text-error mr-2'>{discount}</span>
+                        <span className='text-gray-500 line-through'>
+                          {discountPrice}
+                        </span>
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
+                      <p className='caption-sm lg:caption-md line-clamp-1'>
+                        {ingredient}
+                      </p>
+                      <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
+                        {price} تومان
+                      </p>
+                    </li>
+
+                    <li className='flex justify-between items-center w-full'>
+                      <Heart
+                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                        color='#717171'
+                      />
+
+                      <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
+                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
                           افزودن به سبد خرید
                         </button>
                         <span className=''>

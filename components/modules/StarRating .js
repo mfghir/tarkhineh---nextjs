@@ -16,16 +16,16 @@ const StarRating = ({ rating }) => {
   //   }
 
   return (
-    <div>
+    <div className="flex flex-row-reverse justify-between items-center">
       {[...Array(5)].map((item, key) => {
         return (
           <React.Fragment key={key}>
             {key < rating ? (
-              <span className="ml-[2px] lg:scale-[1.5] lg:ml-[5px] inline-block text-[#fbad39]">
+              <span className="mr-[2px] scale-[1.2] lg:scale-[1.8] lg:ml-[5px] inline-block text-warning-light">
                 &#9733;
               </span>
             ) : (
-              <span className="ml-[2px] lg:scale-[1.5] lg:ml-[5px] inline-block text-[#90A3BF]">
+              <span className="mr-[2px] scale-[1.2] lg:scale-[1.8]  lg:ml-[5px] inline-block text-warning-light">
                 &#9734;
               </span>
             )}
