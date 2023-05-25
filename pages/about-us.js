@@ -1,9 +1,7 @@
-import React from 'react'
+import AboutUsPage from '@/components/templates/AboutUsPage';
 
 const AboutUs = () => {
-  return (
-    <div>AboutUs</div>
-  )
-}
+  return <AboutUsPage />;
+};
 
-export default AboutUs
+export default AboutUs;
