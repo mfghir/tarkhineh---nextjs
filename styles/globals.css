@@ -108,34 +108,53 @@
     box-shadow: 0px 16px 6px rgba(0, 0, 0, 0.01), 0px 9px 5px rgba(0, 0, 0, 0.05), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   }
 
-
   .choose-branch {
     @apply border border-primary rounded lg:rounded-lg grid grid-cols-2 gap-2 lg:flex lg:items-center lg:flex-col duration-300 relative lg:h-[344px] overflow-hidden
+  }
+
+  .card-contact {
+    @apply w-full flex flex-col items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden duration-300
   }
 
   .choose-branch:hover .img-desktop {
     @apply brightness-50 lg:h-[190px]
   }
 
-  .choose-branch:hover button {
+  .choose-branch:hover button,
+  .card-contact:hover .btn-contact,
+  .card-contact:hover .pic-contact {
     @apply flex
   }
 
-  .choose-branch:hover span {
+  .card-contact:hover .pic-contact>img {
+    @apply brightness-50
+  }
+  
+  .card-contact:hover .icon-pic {
     @apply flex
   }
 
-  /* .inp3:focus-visible p{
-    display: none;
-  } */
+  .card-contact:hover .test{
+    @apply lg:flex-row
+  }
+  
+  .choose-branch:hover>span {
+    @apply flex
+  }
+
+
+
 
   .dropdown-menu-shadow {
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
   }
 
+  .card-contact-shadow {
+    box-shadow: 0px 42px 17px rgba(0, 0, 0, 0.01), 0px 24px 14px rgba(0, 0, 0, 0.05), 0px 11px 11px rgba(0, 0, 0, 0.09), 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  }
+
   .dropdown:hover .dropdown-menu,
   .user-dropdown:hover .dropdown-menu {
-    /* display: block; */
     @apply block
   }
 
