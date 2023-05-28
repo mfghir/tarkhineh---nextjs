@@ -10,13 +10,13 @@ const FqaFooter = () => {
     { id: 'tab3', label: 'حریم خصوصی' },
   ];
   const [activeTab, setActiveTab] = useState('tab1');
-  const [showText, setShowText] = useState(false);
 
   const fqa = fqaData.filter(item => item.type === 'fqa');
-  const [activeIndex, setActiveIndex] = useState(null);
+  const law = fqaData.filter(item => item.type === 'law');
+  const pv = fqaData.filter(item => item.type === 'pv');
 
+  const [activeIndex, setActiveIndex] = useState(null);
   const onItemClick = index => {
-    // setShowText(!showText)
     setActiveIndex(activeIndex === index ? null : index);
   };
   return (
@@ -41,7 +41,7 @@ const FqaFooter = () => {
             {tabs.map(tab => (
               <li
                 key={tab.id}
-                className={`caption-md lg:body-xl text-gray-700 flex justify-center items-center 
+                className={`caption-md lg:body-xl text-gray-700 flex justify-center items-center cursor-pointer
                 ${
                   activeTab === tab.id
                     ? 'border-b-2 border-primary text-primary pb-1'
@@ -61,12 +61,12 @@ const FqaFooter = () => {
               {fqa.map((item, index) => (
                 <div
                   key={index}
-                  className='w-full px-4 py-2 lg:py-4 border-b border-gray-400'
+                  className='w-full px-4 py-2 lg:py-4 border-b border-gray-400 cursor-pointer'
                   onClick={() => onItemClick(index)}>
                   <p
                     className={`flex justify-between items-center duration-300 
                     ${activeIndex === index ? 'text-primary' : 'text-gray-800'}
-                `}>
+                  `}>
                     <span className='caption-md lg:body-xl'>
                       {item.question}
                     </span>
@@ -87,8 +87,67 @@ const FqaFooter = () => {
             </section>
           )}
 
-          {activeTab === 'tab2' && <div>Tab 2 content</div>}
-          {activeTab === 'tab3' && <div>Tab 3 content</div>}
+          {activeTab === 'tab2' && (
+            <section className='border border-gray-400 rounded lg:rounded-lg'>
+              {law.map((item, index) => (
+                <div
+                  key={index}
+                  className='w-full px-4 py-2 lg:py-4 border-b border-gray-400 cursor-pointer'
+                  onClick={() => onItemClick(index)}>
+                  <p
+                    className={`flex justify-between items-center duration-300 
+                    ${activeIndex === index ? 'text-primary' : 'text-gray-800'}
+                  `}>
+                    <span className='caption-md lg:body-xl'>
+                      {item.question}
+                    </span>
+                    {activeIndex === index ? (
+                      <ArrowUp2 className='w-4 h-4 lg:w-8 lg:h-8' />
+                    ) : (
+                      <ArrowDown2 className='w-4 h-4 lg:w-8 lg:h-8' />
+                    )}
+                  </p>
+
+                  {activeIndex === index && (
+                    <p className='caption-sm lg:body-md text-gray-700 mt-2 lg:mt-4 px-3'>
+                      {item.answer}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {activeTab === 'tab3' && (
+            <section className='border border-gray-400 rounded lg:rounded-lg'>
+              {pv.map((item, index) => (
+                <div
+                  key={index}
+                  className='w-full px-4 py-2 lg:py-4 border-b border-gray-400 cursor-pointer'
+                  onClick={() => onItemClick(index)}>
+                  <p
+                    className={`flex justify-between items-center duration-300 
+                    ${activeIndex === index ? 'text-primary' : 'text-gray-800'}
+                  `}>
+                    <span className='caption-md lg:body-xl'>
+                      {item.question}
+                    </span>
+                    {activeIndex === index ? (
+                      <ArrowUp2 className='w-4 h-4 lg:w-8 lg:h-8' />
+                    ) : (
+                      <ArrowDown2 className='w-4 h-4 lg:w-8 lg:h-8' />
+                    )}
+                  </p>
+
+                  {activeIndex === index && (
+                    <p className='caption-sm lg:body-md text-gray-700 mt-2 lg:mt-4 px-3'>
+                      {item.answer}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
         </div>
       </section>
     </>

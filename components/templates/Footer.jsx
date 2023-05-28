@@ -10,8 +10,12 @@ const Footer = () => {
           <li className='mr-2 lg:mr-4'>
             <Link href='/fqa'>پرسش‌های متداول</Link>
           </li>
-          <li className='mt-1 lg:mt-4 mr-2 lg:mr-4'>قوانین ترخینه</li>
-          <li className='mt-1 lg:mt-4 mr-2 lg:mr-4'>حریم خصوصی</li>
+          <li className='mt-1 lg:mt-4 mr-2 lg:mr-4'>
+            <Link href='/fqa'>قوانین ترخینه</Link>
+          </li>
+          <li className='mt-1 lg:mt-4 mr-2 lg:mr-4'>
+            <Link href='/fqa'>حریم خصوصی</Link>
+          </li>
         </ul>
 
         <ul className='mt-1 lg:mt-4 flex justify-center items-center'>
