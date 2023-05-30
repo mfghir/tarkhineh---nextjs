@@ -19,8 +19,8 @@ const HomePage = () => {
 
       {/* ---------------    menu cards */}
 
-      <section className='px-5 mt-4 mb-6 flex'>
-        <SearchBar className='lg:hidden' />
+      <section className='px-5 mt-4 mb-6 flex lg:hidden'>
+        <SearchBar />
       </section>
 
       <section className='w-full p-5 lg:px-20 flex justify-center items-center flex-col flex-wrap'>
