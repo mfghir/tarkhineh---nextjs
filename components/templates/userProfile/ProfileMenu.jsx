@@ -8,8 +8,8 @@ const ProfileMenu = () => {
   const { pathname } = useRouter();
 
   return (
-    <section className='lg:border lg:border-gray-400 lg:rounded-lg lg:px-2 lg:py-4'>
-      <nav className='flex py-2 border-b border-gray-600'>
+    <section className='lg:w-[25%] lg:border lg:border-gray-400 lg:rounded-lg lg:px-2 lg:py-4'>
+      <nav className='flex py-2 border-b border-gray-400'>
         <Image
           className='w-12 h-12 lg:w-20 lg:h-20 border border-gray-400 rounded-full'
           src='/images/user.png'

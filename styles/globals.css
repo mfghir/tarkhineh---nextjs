@@ -182,5 +182,22 @@
     filter: blur(3px);
   }
 
+  .inp{
+    @apply w-full px-4 py-2 rounded border border-gray-400 body-sm outline-none focus:border-gray-800
+  }
+
+  .inp-label{
+    @apply body-sm text-gray-400 absolute top-2 right-4 transition-all duration-300
+  }
+
+  .inp:focus + .inp-label{
+    @apply -top-4 bg-white px-1 text-gray-800 caption-md
+
+    /* top: -15px;
+    background: #fff;
+    padding: 0 4px; */
+  }
+
+
 
 }
