@@ -8,7 +8,7 @@ const ProfileMenu = () => {
   const { pathname } = useRouter();
 
   return (
-    <section className='lg:w-[25%] lg:border lg:border-gray-400 lg:rounded-lg lg:px-2 lg:py-4'>
+    <section className='w-full lg:border lg:border-gray-400 lg:rounded-lg lg:px-2 lg:py-4'>
       <nav className='flex py-2 border-b border-gray-400'>
         <Image
           className='w-12 h-12 lg:w-20 lg:h-20 border border-gray-400 rounded-full'
@@ -27,14 +27,14 @@ const ProfileMenu = () => {
       </nav>
 
       <ul className='caption-md lg:body-sm text-gray-800 py-2'>
-        <Link href='/profile'>
+        <Link href='/profile/user-profile'>
           <li
             className={`flex items-center p-2 ${
-              pathname === '/profile'
+              pathname === '/profile/user-profile'
                 ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
                 : ''
             }`}>
-            {pathname === '/profile' ? (
+            {pathname === '/profile/user-profile' ? (
               <User size='16' className='ml-1' variant='Bold' />
             ) : (
               <User size='16' className='ml-1' />
@@ -43,14 +43,14 @@ const ProfileMenu = () => {
           </li>
         </Link>
 
-        <Link href='/orderTracking'>
+        <Link href='/profile/orderTracking'>
           <li
             className={`flex items-center p-2 ${
-              pathname === '/orderTracking'
+              pathname === '/profile/orderTracking'
                 ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
                 : ''
             }`}>
-            {pathname === '/orderTracking' ? (
+            {pathname === '/profile/orderTracking' ? (
               <User size='16' className='ml-1' variant='Bold' />
             ) : (
               <User size='16' className='ml-1' />

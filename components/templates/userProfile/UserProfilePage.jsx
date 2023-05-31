@@ -6,10 +6,10 @@ import DatePicker from 'react-modern-calendar-datepicker';
 import ProfileMenu from './ProfileMenu';
 import { useRouter } from 'next/router';
 
-const ProfilePage = () => {
+const UerProfilePage = () => {
   const [showBtns, setShowBtns] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const { pathname, push } = useRouter();
+  const { pathname,push } = useRouter();
 
   const renderCustomInput = ({ ref }) => (
     <div className='relative w-full'>
@@ -32,17 +32,14 @@ const ProfilePage = () => {
   return (
     <>
       <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between'>
-        <div className='block lg:w-[25%] h-full  min-h-screen'>
+        <div className='hidden lg:block lg:w-[25%] '>
+          {/* {pathname === '/profile/user-profile' ? '' : <ProfileMenu />} */}
           <ProfileMenu />
         </div>
 
-        <section className='hidden lg:block lg:w-[73%] lg:border lg:border-gray-400 lg:rounded-lg lg:p-6'>
+        <section className='lg:w-[73%] lg:border lg:border-gray-400 lg:rounded-lg lg:p-6'>
           <div className='flex items-center'>
-            <ArrowRight2
-              className='lg:hidden ml-4'
-              size='16'
-              onClick={() => push('/profile')}
-            />
+            <ArrowRight2  className='lg:hidden ml-4' size="16" onClick={()=> push('/profile')} />
             <p className='w-full header-7 lg:header-6 text-gray-800 text-center lg:text-right lg:pb-2 lg:border-b lg:border-gray-400'>
               پروفایل من
             </p>
@@ -125,4 +122,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default UerProfilePage;
