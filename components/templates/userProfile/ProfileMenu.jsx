@@ -51,18 +51,36 @@ const ProfileMenu = () => {
                 : ''
             }`}>
             {pathname === '/profile/orderTracking' ? (
-              <User size='16' className='ml-1' variant='Bold' />
+              <Wallet2 size='16' className='ml-1' variant='Bold' />
             ) : (
-              <User size='16' className='ml-1' />
+              <Wallet2 size='16' className='ml-1' />
             )}
             پیگیری سفارش
           </li>
         </Link>
 
-        <li className='cursor-pointer flex items-center p-2'>
-          <Heart size='16' className='ml-1' />
-          علاقه‌مندی‌ها
-        </li>
+
+
+
+
+        <Link href='/profile/liking'>
+          <li
+            className={`flex items-center p-2 ${
+              pathname === '/profile/liking'
+                ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
+                : ''
+            }`}>
+            {pathname === '/profile/liking' ? (
+              <Heart size='16' className='ml-1' variant='Bold' />
+            ) : (
+              <Heart size='16' className='ml-1' />
+            )}
+                       علاقه‌مندی‌ها
+
+          </li>
+        </Link>
+
+
         <li className='cursor-pointer flex items-center p-2'>
           <Location size='16' className='ml-1' />
           آدرس‌های من

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 const ProfilePage = () => {
   const [showBtns, setShowBtns] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const { pathname, push } = useRouter();
+  const { push } = useRouter();
 
   const renderCustomInput = ({ ref }) => (
     <div className='relative w-full'>
