@@ -129,22 +129,22 @@
   .card-contact:hover .pic-contact>img {
     @apply brightness-50
   }
-  
+
   .card-contact:hover .icon-pic {
     @apply flex
   }
 
-  .card-contact:hover .test{
+  .card-contact:hover .test {
     @apply lg:flex-row
   }
-  
+
   .choose-branch:hover>span {
     @apply flex
   }
 
 
 
-  .phoneMenu-shadow{
+  .phoneMenu-shadow {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   }
 
@@ -177,27 +177,24 @@
     @apply block
   }
 
-  .phoneMenu-bg {
+  .phoneMenu-bg ,
+  .exitPage-bg {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     filter: blur(3px);
   }
 
-  .inp{
+  .inp {
     @apply w-full px-4 py-2 rounded border border-gray-400 body-sm outline-none focus:border-gray-800
   }
 
-  .inp-label{
+  .inp-label {
     @apply body-sm text-gray-400 absolute top-2 right-4 transition-all duration-300
   }
 
-  .inp:focus + .inp-label{
+  .inp:focus+.inp-label {
     @apply -top-4 bg-white px-1 text-gray-800 caption-md
-
-    /* top: -15px;
-    background: #fff;
-    padding: 0 4px; */
   }
 
-
+  
 
 }

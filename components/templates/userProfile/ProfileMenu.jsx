@@ -59,10 +59,6 @@ const ProfileMenu = () => {
           </li>
         </Link>
 
-
-
-
-
         <Link href='/profile/liking'>
           <li
             className={`flex items-center p-2 ${
@@ -75,20 +71,32 @@ const ProfileMenu = () => {
             ) : (
               <Heart size='16' className='ml-1' />
             )}
-                       علاقه‌مندی‌ها
-
+            علاقه‌مندی‌ها
           </li>
         </Link>
-
 
         <li className='cursor-pointer flex items-center p-2'>
           <Location size='16' className='ml-1' />
           آدرس‌های من
         </li>
-        <li className='cursor-pointer flex items-center p-2 text-error'>
-          <LogoutCurve size='16' className='ml-1' />
-          خروج
-        </li>
+
+
+        <Link href='/profile/exit'>
+          <li
+            className={`flex items-center text-error  p-2 ${
+              pathname === '/profile/exit'
+                ? 'border-r-2 border-errorcaption-lg lg:body-md'
+                : ''
+            }`}>
+            {pathname === '/profile/exit' ? (
+              <LogoutCurve size='16' className='ml-1' variant='Bold' />
+            ) : (
+              <LogoutCurve size='16' className='ml-1' />
+            )}
+            خروج
+          </li>
+        </Link>
+    
       </ul>
     </section>
   );
