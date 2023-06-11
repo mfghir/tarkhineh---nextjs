@@ -183,9 +183,13 @@ value={selectedValue} onChange={handleSelectChange}
         <li className='hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100'>
           <SearchNormal1 />
         </li>
-        <li className='flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2'>
+
+        <Link href='/shopping-cart'>
+
+        <li className='flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 '>
           <ShoppingCart className='w-4 h-4 md:w-6 md:h-6' />
         </li>
+        </Link>
 
         <li className='user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
           <div className='flex justify-center items-baseline cursor-pointer '>

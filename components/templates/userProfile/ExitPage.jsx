@@ -1,6 +1,6 @@
 import ProfileMenu from './ProfileMenu';
 import { ArrowRight2 } from 'iconsax-react';
-import ModalMessage from '@/components/modules/modalMessage';
+import ModalMessage from '@/components/modules/ModalMessage';
 
 const ExitPage = () => {
   return (
