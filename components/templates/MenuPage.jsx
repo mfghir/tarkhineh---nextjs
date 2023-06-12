@@ -1,10 +1,14 @@
-import React from 'react';
 import HeaderSlider from '../pages/home/HeaderSlider';
 import SearchBar from '../modules/SearchBar';
 import { ArrowLeft2, Heart, ShoppingCart } from 'iconsax-react';
+
 import foodMenuData from '@/db/foodMenuData';
 import Image from 'next/image';
 import StarRating from '../modules/StarRating ';
+
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/redux/cartSlice';
+import useFarsiNumber from '../modules/useFarsiNumber';
 
 const MenuPage = () => {
   const iranianFood = foodMenuData.filter(food => food.type === 'iranianFood');
@@ -14,6 +18,9 @@ const MenuPage = () => {
 
   const pizza = foodMenuData.filter(food => food.type === 'pizza');
   const sandwich = foodMenuData.filter(food => food.type === 'sandwich');
+
+  const dispatch = useDispatch();
+  // const priceFa= useFarsiNumber(123)
 
   return (
     <>
@@ -93,6 +100,8 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
+              const formattedPrice = useFarsiNumber(price);
+
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
@@ -130,7 +139,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {price} تومان
+                        {formattedPrice.toLocaleString()} تومان
                       </p>
                     </li>
 
@@ -141,7 +150,9 @@ const MenuPage = () => {
                       />
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
-                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                        <button
+                          className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'
+                          onClick={() => dispatch(addToCart(item))}>
                           افزودن به سبد خرید
                         </button>
                         <span className=''>
@@ -172,6 +183,8 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
+              const formattedPrice = useFarsiNumber(price);
+
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
@@ -209,7 +222,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {price} تومان
+                        {formattedPrice} تومان
                       </p>
                     </li>
 
@@ -251,6 +264,8 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
+              const formattedPrice = useFarsiNumber(price);
+
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
@@ -288,7 +303,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {price} تومان
+                        {formattedPrice} تومان
                       </p>
                     </li>
 
@@ -316,7 +331,7 @@ const MenuPage = () => {
 
         <section className='mb-6 lg:mb-12'>
           <p className='header-6 lg:header-4 text-gray-800 mb-3 lg:mb-6'>
-          ساندویچ‌ها
+            ساندویچ‌ها
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
@@ -330,6 +345,8 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
+              const formattedPrice = useFarsiNumber(price)
+
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
@@ -367,7 +384,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {price} تومان
+                        {formattedPrice} تومان
                       </p>
                     </li>
 

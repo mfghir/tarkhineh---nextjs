@@ -1,5 +1,6 @@
 const data = [
   {
+    id: 1,
     type: 'specialOffer',
     img: '/images/so1.png',
     name: 'دلمه برگ کلم',
@@ -10,6 +11,7 @@ const data = [
     totalStars: '۵۲ امتیاز',
   },
   {
+    id: 2,
     type: 'specialOffer',
     img: '/images/so2.png',
     name: 'بادمجان شکم‌پر',
@@ -20,6 +22,7 @@ const data = [
     totalStars: '۳۲ امتیاز',
   },
   {
+    id: 3,
     type: 'specialOffer',
     img: '/images/so3.png',
     name: 'کالزونه اسفناج',
@@ -30,6 +33,7 @@ const data = [
     totalStars: '۶۲ امتیاز',
   },
   {
+    id: 4,
     type: 'specialOffer',
     img: '/images/so4.png',
     name: 'پیتزا قارچ',
@@ -40,6 +44,7 @@ const data = [
     totalStars: '۳۳ امتیاز',
   },
   {
+    id: 5,
     type: 'specialOffer',
     img: '/images/so5.png',
     name: 'پاستا سبزیجات',
@@ -50,6 +55,7 @@ const data = [
     totalStars: '۵۰ امتیاز',
   },
   {
+    id: 6,
     type: 'specialOffer',
     img: '/images/so1.png',
     name: 'دلمه برگ کلم',
@@ -60,6 +66,7 @@ const data = [
     totalStars: '۵۲ امتیاز',
   },
   {
+    id: 7,
     type: 'specialOffer',
     img: '/images/so2.png',
     name: 'بادمجان شکم‌پر',
@@ -70,6 +77,7 @@ const data = [
     totalStars: '۳۲ امتیاز',
   },
   {
+    id: 8,
     type: 'specialOffer',
     img: '/images/so3.png',
     name: 'کالزونه اسفناج',
@@ -80,6 +88,7 @@ const data = [
     totalStars: '۶۲ امتیاز',
   },
   {
+    id: 9,
     type: 'specialOffer',
     img: '/images/so4.png',
     name: 'پیتزا قارچ',
@@ -90,6 +99,7 @@ const data = [
     totalStars: '۳۳ امتیاز',
   },
   {
+    id: 10,
     type: 'specialOffer',
     img: '/images/so5.png',
     name: 'پاستا سبزیجات',
@@ -108,6 +118,7 @@ const data = [
   // -------------------------------------------------------------
 
   {
+    id: 11,
     type: 'favFood',
     img: '/images/favFood1.png',
     name: 'پنینی اسفناج',
@@ -118,6 +129,7 @@ const data = [
     totalStars: '۲۰ امتیاز',
   },
   {
+    id: 12,
     type: 'favFood',
     img: '/images/favFood2.png',
     name: 'پیتزا پپرونی',
@@ -128,6 +140,7 @@ const data = [
     totalStars: '۵۱ امتیاز',
   },
   {
+    id: 13,
     type: 'favFood',
     img: '/images/favFood3.png',
     name: 'راتاتویی',
@@ -138,6 +151,7 @@ const data = [
     totalStars: '۴۳ امتیاز',
   },
   {
+    id: 14,
     type: 'favFood',
     img: '/images/favFood4.png',
     name: 'بورانی بادمجان',
@@ -148,6 +162,7 @@ const data = [
     totalStars: '۷۵ امتیاز',
   },
   {
+    id: 15,
     type: 'favFood',
     img: '/images/favFood5.png',
     name: 'پاکورا گیاهی',
@@ -158,6 +173,7 @@ const data = [
     totalStars: '۸۰ امتیاز',
   },
   {
+    id: 16,
     type: 'favFood',
     img: '/images/favFood1.png',
     name: 'پنینی اسفناج',
@@ -168,6 +184,7 @@ const data = [
     totalStars: '۲۰ امتیاز',
   },
   {
+    id: 17,
     type: 'favFood',
     img: '/images/favFood2.png',
     name: 'پیتزا پپرونی',
@@ -178,6 +195,7 @@ const data = [
     totalStars: '۵۱ امتیاز',
   },
   {
+    id: 18,
     type: 'favFood',
     img: '/images/favFood3.png',
     name: 'راتاتویی',
@@ -188,6 +206,7 @@ const data = [
     totalStars: '۴۳ امتیاز',
   },
   {
+    id: 19,
     type: 'favFood',
     img: '/images/favFood4.png',
     name: 'بورانی بادمجان',
@@ -198,6 +217,7 @@ const data = [
     totalStars: '۷۵ امتیاز',
   },
   {
+    id: 20,
     type: 'favFood',
     img: '/images/favFood5.png',
     name: 'پاکورا گیاهی',
@@ -215,6 +235,7 @@ const data = [
   // -------------------------------------------------------------
   // -------------------------------------------------------------
   {
+    id: 21,
     type: 'foreignFood',
     img: '/images/foreignFood1.png',
     name: 'سوشی',
@@ -225,6 +246,7 @@ const data = [
     totalStars: '۷۰ امتیاز',
   },
   {
+    id: 22,
     type: 'foreignFood',
     img: '/images/foreignFood2.png',
     name: 'راتاتویی',
@@ -235,6 +257,7 @@ const data = [
     totalStars: '۶۰ امتیاز',
   },
   {
+    id: 23,
     type: 'foreignFood',
     img: '/images/foreignFood3.png',
     name: 'پاکورا سبزیجات',
@@ -245,6 +268,7 @@ const data = [
     totalStars: '۷۵ امتیاز',
   },
   {
+    id: 24,
     type: 'foreignFood',
     img: '/images/foreignFood4.png',
     name: 'لازانیا',
@@ -255,6 +279,7 @@ const data = [
     totalStars: '۴۸ امتیاز',
   },
   {
+    id: 25,
     type: 'foreignFood',
     img: '/images/foreignFood5.png',
     name: 'سالاد خانگی',
@@ -265,6 +290,7 @@ const data = [
     totalStars: '۵۹ امتیاز',
   },
   {
+    id: 26,
     type: 'foreignFood',
     img: '/images/foreignFood1.png',
     name: 'سوشی',
@@ -275,6 +301,7 @@ const data = [
     totalStars: '۷۰ امتیاز',
   },
   {
+    id: 27,
     type: 'foreignFood',
     img: '/images/foreignFood2.png',
     name: 'راتاتویی',
@@ -285,6 +312,7 @@ const data = [
     totalStars: '۶۰ امتیاز',
   },
   {
+    id: 28,
     type: 'foreignFood',
     img: '/images/foreignFood3.png',
     name: 'پاکورا سبزیجات',
@@ -295,6 +323,7 @@ const data = [
     totalStars: '۷۵ امتیاز',
   },
   {
+    id: 29,
     type: 'foreignFood',
     img: '/images/foreignFood4.png',
     name: 'لازانیا',
@@ -305,6 +334,7 @@ const data = [
     totalStars: '۴۸ امتیاز',
   },
   {
+    id: 30,
     type: 'foreignFood',
     img: '/images/foreignFood5.png',
     name: 'سالاد خانگی',

@@ -37,21 +37,26 @@ const Navbar = () => {
       />
       {showMenu && <PhoneMenu showMenu={showMenu} />}
 
-      <Image
-        className='lg:hidden mx-auto'
-        src='/images/Logo-phone.png'
-        alt='Logo-phone'
-        width={102}
-        height={32}
-      />
-      <Image
-        className='hidden lg:block'
-        src='/images/Logo-desktop.png'
-        alt='Logo-desktop'
-        width={155}
-        height={51}
-      />
+      <Link href='/'>
+        <Image
+          className='lg:hidden mx-auto'
+          src='/images/Logo-phone.png'
+          alt='Logo-phone'
+          width={102}
+          height={32}
+        />
+      </Link>
 
+      <Link href='/'>
+        <Image
+          className='hidden lg:block'
+          src='/images/Logo-desktop.png'
+          alt='Logo-desktop'
+          width={155}
+          height={51}
+        />
+      </Link>
+      
       <ul className='hidden lg:flex justify-between items-center'>
         <li className='text-primary body-md'>
           <Link
@@ -185,10 +190,9 @@ value={selectedValue} onChange={handleSelectChange}
         </li>
 
         <Link href='/shopping-cart'>
-
-        <li className='flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 '>
-          <ShoppingCart className='w-4 h-4 md:w-6 md:h-6' />
-        </li>
+          <li className='flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 '>
+            <ShoppingCart className='w-4 h-4 md:w-6 md:h-6' />
+          </li>
         </Link>
 
         <li className='user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
