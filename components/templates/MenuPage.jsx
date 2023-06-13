@@ -8,7 +8,7 @@ import StarRating from '../modules/StarRating ';
 
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/redux/cartSlice';
-import useFarsiNumber from '../modules/useFarsiNumber';
+import { convertToFaNumber } from '../modules/FarsiNumber';
 
 const MenuPage = () => {
   const iranianFood = foodMenuData.filter(food => food.type === 'iranianFood');
@@ -100,7 +100,6 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
-              const formattedPrice = useFarsiNumber(price);
 
               return (
                 <div
@@ -139,7 +138,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {formattedPrice.toLocaleString()} تومان
+                        {convertToFaNumber(price)} تومان
                       </p>
                     </li>
 
@@ -183,7 +182,6 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
-              const formattedPrice = useFarsiNumber(price);
 
               return (
                 <div
@@ -222,7 +220,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {formattedPrice} تومان
+                        {convertToFaNumber(price)} تومان
                       </p>
                     </li>
 
@@ -266,7 +264,6 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
-              const formattedPrice = useFarsiNumber(price);
 
               return (
                 <div
@@ -305,7 +302,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {formattedPrice} تومان
+                        {convertToFaNumber(price)} تومان
                       </p>
                     </li>
 
@@ -349,7 +346,6 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
-              const formattedPrice = useFarsiNumber(price);
 
               return (
                 <div
@@ -388,7 +384,7 @@ const MenuPage = () => {
                         {ingredient}
                       </p>
                       <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                        {formattedPrice} تومان
+                        {convertToFaNumber(price)} تومان
                       </p>
                     </li>
 

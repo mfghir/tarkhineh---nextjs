@@ -10,7 +10,7 @@ import {
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useFarsiNumber from '../modules/useFarsiNumber';
+import { convertToFaNumber } from '../modules/FarsiNumber';
 import {
   addToCart,
   decrementQuantity,
@@ -21,8 +21,6 @@ import {
 const ShoppingCartPage = () => {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
-
-
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -57,7 +55,7 @@ const ShoppingCartPage = () => {
             <span className='flex items-center justify-center text-gray-400 body-sm'>
               <TickSquare className='ml-1' />
               تکمیل اطلاعات
-            </span>
+            </span>x
 
             <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
 
@@ -92,7 +90,7 @@ const ShoppingCartPage = () => {
                     {item.name}
                   </span>
                   <span className='caption-sm text-gray-700'>
-                    {useFarsiNumber(item.price)}
+                    {convertToFaNumber(item.price)}
                     {/* {faNum} */}
                   </span>
                 </p>
@@ -104,13 +102,13 @@ const ShoppingCartPage = () => {
                     <Add size='16' />
                   </li>
                   <li className='body-sm mx-2'>
-                    {useFarsiNumber(item.quantity)}
+                    {convertToFaNumber(item.quantity)}
                   </li>
                   <li className=''>
                     {item.quantity === 1 ? (
                       <Trash
                         size='16'
-                        onClick={() => (removeFromCart(item.id))}
+                        onClick={() => removeFromCart(item.id)}
                       />
                     ) : (
                       <Minus
