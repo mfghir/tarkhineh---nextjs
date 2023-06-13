@@ -1,5 +1,7 @@
 import {
+  Add,
   ArrowRight2,
+  Minus,
   ShoppingCart,
   TickSquare,
   Trash,
@@ -8,10 +10,26 @@ import {
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useFarsiNumber from '../modules/useFarsiNumber';
+import {
+  addToCart,
+  decrementQuantity,
+  incrementQuantity,
+  removeFromCart,
+} from '@/redux/cartSlice';
 
 const ShoppingCartPage = () => {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
+
+
+
+  const getTotalPrice = () => {
+    return cart.reduce(
+      (accumulator, item) => accumulator + item.quantity * item.price,
+      0
+    );
+  };
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
@@ -20,7 +38,10 @@ const ShoppingCartPage = () => {
         <p className='w-full header-6 text-gray-800 text-center mx-auto lg:text-right lg:pb-2 lg:border-b lg:border-gray-400'>
           سبد خرید
         </p>
-        <Trash size='16' className={cart.length === 0 ? 'text-gray-400' : "text-gray-800"} />
+        <Trash
+          size='16'
+          className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
+        />
       </div>
 
       {cart.length === 0 ? (
@@ -57,17 +78,52 @@ const ShoppingCartPage = () => {
         </>
       ) : (
         <section className='border border-gray-400 rounded-lg p-6 flex justify-center items-center flex-col'>
-          {cart.map(item => (
-            <div className='bg-red-500 w-full mb-5' key={item.id}>
-              {/* <div className={styles.image}>
+          {cart.map(item => {
+            return (
+              <div
+                className='w-full flex justify-between items-center p-2'
+                key={item.id}>
+                {/* <div className={styles.image}>
                 <Image src={item.image} height='90' width='65' />
               </div> */}
-              <p>{item.name}</p>
-              <p>{item.price}</p>
-              <p>{item.quantity}</p>
-              <p>{item.quantity * item.price}</p>
-            </div>
-          ))}
+
+                <p className='flex flex-col'>
+                  <span className='caption-md lg:header-7 text-gray-800'>
+                    {item.name}
+                  </span>
+                  <span className='caption-sm text-gray-700'>
+                    {useFarsiNumber(item.price)}
+                    {/* {faNum} */}
+                  </span>
+                </p>
+
+                <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
+                  <li
+                    className=''
+                    onClick={() => dispatch(incrementQuantity(item.id))}>
+                    <Add size='16' />
+                  </li>
+                  <li className='body-sm mx-2'>
+                    {useFarsiNumber(item.quantity)}
+                  </li>
+                  <li className=''>
+                    {item.quantity === 1 ? (
+                      <Trash
+                        size='16'
+                        onClick={() => (removeFromCart(item.id))}
+                      />
+                    ) : (
+                      <Minus
+                        size='16'
+                        onClick={() => dispatch(decrementQuantity(item.id))}
+                      />
+                    )}{' '}
+                  </li>
+                </ul>
+                {/* <p>{item.quantity * item.price}</p> */}
+              </div>
+            );
+          })}
         </section>
       )}
     </section>

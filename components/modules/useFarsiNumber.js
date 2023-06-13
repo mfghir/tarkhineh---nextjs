@@ -5,7 +5,7 @@ export default function useFarsiNumber(number) {
 
   useEffect(() => {
     const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    const formatted = number.toLocaleString("en").replace(/\d/g, digit => persianDigits[digit]);
+    const formatted = number?.toLocaleString("fa").replace(/\d/g, digit => persianDigits[digit]);
     setFormattedNumber(formatted);
   }, [number]);
 

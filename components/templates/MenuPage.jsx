@@ -233,7 +233,9 @@ const MenuPage = () => {
                       />
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
-                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                        <button
+                          className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'
+                          onClick={() => dispatch(addToCart(item))}>
                           افزودن به سبد خرید
                         </button>
                         <span className=''>
@@ -314,7 +316,9 @@ const MenuPage = () => {
                       />
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
-                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                        <button
+                          className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'
+                          onClick={() => dispatch(addToCart(item))}>
                           افزودن به سبد خرید
                         </button>
                         <span className=''>
@@ -345,7 +349,7 @@ const MenuPage = () => {
                 price,
                 star,
               } = item;
-              const formattedPrice = useFarsiNumber(price)
+              const formattedPrice = useFarsiNumber(price);
 
               return (
                 <div
@@ -395,7 +399,9 @@ const MenuPage = () => {
                       />
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
-                        <button className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'>
+                        <button
+                          className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'
+                          onClick={() => dispatch(addToCart(item))}>
                           افزودن به سبد خرید
                         </button>
                         <span className=''>
