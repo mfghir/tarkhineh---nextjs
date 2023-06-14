@@ -11,12 +11,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
-import {
-  addToCart,
-  decrementQuantity,
-  incrementQuantity,
-  removeFromCart,
-} from '@/redux/cartSlice';
+import { addToCart, removeFromCart } from '@/redux/cartSlice';
 
 const ShoppingCartPage = () => {
   const cart = useSelector(state => state.cart);
@@ -49,16 +44,13 @@ const ShoppingCartPage = () => {
               <ShoppingCart size='32' className='ml-1' />
               سبد خرید
             </span>
-
             <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
-
             <span className='flex items-center justify-center text-gray-400 body-sm'>
               <TickSquare className='ml-1' />
               تکمیل اطلاعات
-            </span>x
-
+            </span>
+            x
             <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
-
             <span className='flex items-center justify-center text-gray-400 body-sm'>
               <Wallet className='ml-1' />
               پرداخت
@@ -96,26 +88,22 @@ const ShoppingCartPage = () => {
                 </p>
 
                 <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
-                  <li
-                    className=''
-                    onClick={() => dispatch(incrementQuantity(item.id))}>
+                  <li className='' onClick={() => dispatch(addToCart(item))}>
                     <Add size='16' />
                   </li>
                   <li className='body-sm mx-2'>
                     {convertToFaNumber(item.quantity)}
                   </li>
                   <li className=''>
-                    {item.quantity === 1 ? (
-                      <Trash
-                        size='16'
-                        onClick={() => removeFromCart(item.id)}
-                      />
-                    ) : (
-                      <Minus
-                        size='16'
-                        onClick={() => dispatch(decrementQuantity(item.id))}
-                      />
-                    )}{' '}
+                    <button
+                      className={'w-4 h-4 block'}
+                      onClick={() => dispatch(removeFromCart(item))}>
+                      {item.quantity <= 1 ? (
+                        <Trash size='16' />
+                      ) : (
+                        <Minus size='16' />
+                      )}
+                    </button>
                   </li>
                 </ul>
                 {/* <p>{item.quantity * item.price}</p> */}
