@@ -1,45 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
-    name: 'cart',
-    initialState: [],
-    reducers: {
-      addToCart: (state, action) => {
-        const itemExists = state.find((item) => item.id === action.payload.id);
-        if (itemExists) {
-          itemExists.quantity++;
-        } else {
-          state.push({ ...action.payload, quantity: 1 });
-        }
-      },
-
-      incrementQuantity: (state, action) => {
-        const item = state.find((item) => item.id === action.payload);
-        item.quantity++;
-      },
-
-      decrementQuantity: (state, action) => {
-        const item = state.find((item) => item.id === action.payload);
-        if (item.quantity === 1) {
-          const index = state.findIndex((item) => item.id === action.payload);
-          state.splice(index, 1);
-        } else {
-          item.quantity--;
-        }
-      },
-      
-      removeFromCart: (state, action) => {
-        const index = state.findIndex((item) => item.id === action.payload);
-        state.splice(index, 1);
-      },
+  name: 'cart',
+  initialState: [],
+  reducers: {
+    addToCart(state, action) {
+      const item = state.find(item => item.id === action.payload.id);
+      if (item) {
+        item.quantity += 1;
+      } else {
+        state.push({ ...action.payload, quantity: 1 });
+      }
     },
-  });
-  
-  export const cartReducer = cartSlice.reducer;
-  
-  export const {
-    addToCart,
-    incrementQuantity,
-    decrementQuantity,
-    removeFromCart,
-  } = cartSlice.actions;
+    removeFromCart(state, action) {
+      const item = state.find(item => item.id === action.payload.id);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          const itemIndex = state.indexOf(item => {
+            if (item.id === action.payload.id) return item;
+          });
+          state.splice(itemIndex, 1);
+        }
+      }
+    },
+  },
+});
+
+export const cartReducer = cartSlice.reducer;
+
+export const { addToCart, removeFromCart } = cartSlice.actions;
