@@ -16,11 +16,14 @@ import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Link from 'next/link';
-// import { Menu } from '@headlessui/react'
+import { convertToFaNumber } from '../modules/FarsiNumber';
+
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
+  const cart = useSelector(state => state.cart);
 
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -56,7 +59,7 @@ const Navbar = () => {
           height={51}
         />
       </Link>
-      
+
       <ul className='hidden lg:flex justify-between items-center'>
         <li className='text-primary body-md'>
           <Link
@@ -99,7 +102,7 @@ value={selectedValue} onChange={handleSelectChange}
                     ? 'text-primary header-5 border-b border-primary pb-1'
                     : ''
                 }>
-                اکباتان{' '}
+                اکباتان
               </Link>
             </li>
             <li className='bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 block whitespace-no-wrap'>
@@ -178,8 +181,7 @@ value={selectedValue} onChange={handleSelectChange}
                 ? 'text-primary header-5 border-b border-primary pb-1'
                 : ''
             }>
-            {' '}
-            تماس با ما{' '}
+            تماس با ما
           </Link>
         </li>
       </ul>
@@ -190,8 +192,22 @@ value={selectedValue} onChange={handleSelectChange}
         </li>
 
         <Link href='/shopping-cart'>
-          <li className='flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 '>
+          <li
+            className={`relative flex justify-center items-center p-1 md:p-2 rounded  ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 
+            ${
+              router.pathname === '/shopping-cart'
+                ? 'bg-primary text-white'
+                : 'bg-tint-100'
+            }
+          `}>
             <ShoppingCart className='w-4 h-4 md:w-6 md:h-6' />
+            {cart.length === 0 ? (
+              ''
+            ) : (
+              <span className='caption-sm bg-tint-600 text-white w-3 h-3 p-1 flex justify-center items-center rounded-full absolute bottom-4 left-4'>
+                {convertToFaNumber(cart.length)}
+              </span>
+            )}
           </li>
         </Link>
 

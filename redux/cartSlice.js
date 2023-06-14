@@ -27,14 +27,13 @@ const cartSlice = createSlice({
       }
     },
 
-    calculateTotal: state => {
-      // state.totalPrice = state.items.reduce((total, item) => total + item.price, 0);
-      state.totalDiscount = state.items.reduce((total, item) => total + item.discount || 0, 0);
-    }
+    clearList: () => {
+      return [];
+    },
 
   },
 });
 
 export const cartReducer = cartSlice.reducer;
 
-export const { addToCart, removeFromCart, calculateTotal } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearList } = cartSlice.actions;

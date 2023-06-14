@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
-import { addToCart, calculateTotal, removeFromCart } from '@/redux/cartSlice';
+import { addToCart,  clearList, removeFromCart } from '@/redux/cartSlice';
 import Link from 'next/link';
 
 const ShoppingCartPage = () => {
@@ -36,6 +36,9 @@ const ShoppingCartPage = () => {
   }
 
   const totalDiscountPrice = getTotalDiscountPrice(cart);
+
+
+
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
@@ -43,10 +46,13 @@ const ShoppingCartPage = () => {
         <p className='w-full header-6 text-gray-800 text-center mx-auto lg:text-right lg:pb-2 lg:border-b lg:border-gray-400'>
           سبد خرید
         </p>
-        <Trash
-          size='16'
-          className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
-        />
+
+       <button onClick={() => dispatch(clearList())}>
+          <Trash
+            size='16'
+            className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
+          />
+        </button>
       </div>
 
       {cart.length === 0 ? (

@@ -9,6 +9,7 @@ import StarRating from '../modules/StarRating ';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/redux/cartSlice';
 import { convertToFaNumber } from '../modules/FarsiNumber';
+import Link from 'next/link';
 
 const MenuPage = () => {
   const iranianFood = foodMenuData.filter(food => food.type === 'iranianFood');
@@ -83,10 +84,13 @@ const MenuPage = () => {
         <section className='mb-6 lg:mb-12'>
           <div className='flex justify-between items-center  mb-3 lg:mb-6'>
             <p className='header-6 lg:header-4 text-gray-800'>غذاهای ایرانی</p>
-            <button className='flex justify-center items-center border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300  rounded caption-md lg:button-lg py-1 lg:py-2 px-2 duration-300'>
-              <ShoppingCart className='w-4 h-4 lg:w-6 lg:h-6 ml-1 lg:ml-2' />
-              تکمیل خرید
-            </button>
+
+            <Link href='/shopping-cart'>
+              <button className='flex justify-center items-center border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300  rounded caption-md lg:button-lg py-1 lg:py-2 px-2 duration-300'>
+                <ShoppingCart className='w-4 h-4 lg:w-6 lg:h-6 ml-1 lg:ml-2' />
+                تکمیل خرید
+              </button>
+            </Link>
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
