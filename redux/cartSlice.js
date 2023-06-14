@@ -12,6 +12,7 @@ const cartSlice = createSlice({
         state.push({ ...action.payload, quantity: 1 });
       }
     },
+
     removeFromCart(state, action) {
       const item = state.find(item => item.id === action.payload.id);
       if (item) {
@@ -25,9 +26,15 @@ const cartSlice = createSlice({
         }
       }
     },
+
+    calculateTotal: state => {
+      // state.totalPrice = state.items.reduce((total, item) => total + item.price, 0);
+      state.totalDiscount = state.items.reduce((total, item) => total + item.discount || 0, 0);
+    }
+
   },
 });
 
 export const cartReducer = cartSlice.reducer;
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, calculateTotal } = cartSlice.actions;

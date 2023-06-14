@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
-import { addToCart, removeFromCart } from '@/redux/cartSlice';
+import { addToCart, calculateTotal, removeFromCart } from '@/redux/cartSlice';
 import Link from 'next/link';
 
 const ShoppingCartPage = () => {
@@ -25,6 +25,17 @@ const ShoppingCartPage = () => {
     );
   };
 
+  function getTotalDiscountPrice(cart) {
+    let totalDiscountPrice = 0;
+    cart.forEach(item => {
+      if (item.discountPrice) {
+        totalDiscountPrice += parseFloat(item.discountPrice);
+      }
+    });
+    return totalDiscountPrice;
+  }
+
+  const totalDiscountPrice = getTotalDiscountPrice(cart);
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
@@ -117,7 +128,9 @@ const ShoppingCartPage = () => {
 
           <div className='w-full flex justify-between items-center border-y border-gray-400 body-sm py-3'>
             <p className='text-gray-800'>تخفیف محصولات</p>
-            <p className='text-gray-700'>{convertToFaNumber(6000)} تومان</p>
+            <p className='text-gray-700'>
+              {convertToFaNumber(totalDiscountPrice)} تومان
+            </p>
           </div>
         </section>
       )}

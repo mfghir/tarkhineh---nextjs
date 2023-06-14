@@ -128,7 +128,7 @@ const MenuPage = () => {
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
                         <span className='text-error mr-2'>{discount}</span>
                         <span className='text-gray-500 line-through'>
-                          {discountPrice}
+                          {convertToFaNumber(discountPrice)}
                         </span>
                       </p>
                     </li>
@@ -210,7 +210,7 @@ const MenuPage = () => {
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
                         <span className='text-error mr-2'>{discount}</span>
                         <span className='text-gray-500 line-through'>
-                          {discountPrice}
+                          {convertToFaNumber(discountPrice)}
                         </span>
                       </p>
                     </li>
@@ -292,7 +292,7 @@ const MenuPage = () => {
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
                         <span className='text-error mr-2'>{discount}</span>
                         <span className='text-gray-500 line-through'>
-                          {discountPrice}
+                          {convertToFaNumber(discountPrice)}
                         </span>
                       </p>
                     </li>
@@ -374,7 +374,7 @@ const MenuPage = () => {
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
                         <span className='text-error mr-2'>{discount}</span>
                         <span className='text-gray-500 line-through'>
-                          {discountPrice}
+                          {convertToFaNumber(discountPrice)}
                         </span>
                       </p>
                     </li>
