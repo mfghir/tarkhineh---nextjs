@@ -204,7 +204,7 @@ value={selectedValue} onChange={handleSelectChange}
             {cart.length === 0 ? (
               ''
             ) : (
-              <span className='caption-sm bg-tint-600 text-white w-3 h-3 p-1 flex justify-center items-center rounded-full absolute bottom-4 left-4'>
+              <span className='caption-sm bg-tint-600 text-white w-3 h-3 p-1 flex justify-center items-center rounded-full absolute bottom-4 left-4 lg:bottom-6 lg:left-6'>
                 {convertToFaNumber(cart.length)}
               </span>
             )}

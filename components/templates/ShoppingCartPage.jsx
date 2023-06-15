@@ -17,6 +17,8 @@ import { convertToFaNumber } from '../modules/FarsiNumber';
 import { addToCart, clearList, removeFromCart } from '@/redux/cartSlice';
 import Link from 'next/link';
 import ModalShoppinCart from '../modules/ModalShoppinCart';
+import Image from 'next/image';
+import StarRating from '../modules/StarRating ';
 
 const ShoppingCartPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -91,89 +93,241 @@ const ShoppingCartPage = () => {
           </div>
         </>
       ) : (
-        <section className='border border-gray-400 rounded-lg p-6 flex justify-center items-center flex-col'>
-          <div className='w-full h-44 overflow-y-scroll pb-3'>
-            {cart.map(item => {
-              return (
-                <div
-                  className='w-full flex justify-between items-center p-2'
-                  key={item.id}>
-                  <p className='flex flex-col'>
-                    <span className='caption-md lg:header-7 text-gray-800'>
-                      {item.name}
-                    </span>
-                    <span className='caption-sm text-gray-700'>
-                      {convertToFaNumber(item.price)}
-                    </span>
-                  </p>
+        <>
+          <section className='lg:hidden border border-gray-400 rounded-lg p-6 flex justify-center items-center flex-col'>
+            <div className='w-full h-44 overflow-y-scroll pb-3'>
+              {cart.map(item => {
+                return (
+                  <div
+                    className='w-full flex justify-between items-center p-2'
+                    key={item.id}>
+                    <p className='flex flex-col'>
+                      <span className='caption-md lg:header-7 text-gray-800'>
+                        {item.name}
+                      </span>
+                      <span className='caption-sm text-gray-700'>
+                        {convertToFaNumber(item.price)}
+                      </span>
+                    </p>
 
-                  <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
-                    <li className='' onClick={() => dispatch(addToCart(item))}>
-                      <Add size='16' />
-                    </li>
+                    <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
+                      <li
+                        className=''
+                        onClick={() => dispatch(addToCart(item))}>
+                        <Add size='16' />
+                      </li>
 
-                    <li className='body-sm mx-2'>
-                      {convertToFaNumber(item.quantity)}
-                    </li>
+                      <li className='body-sm mx-2'>
+                        {convertToFaNumber(item.quantity)}
+                      </li>
 
-                    <li className=''>
-                      <button
-                        className='w-4 h-4 block'
-                        onClick={() => dispatch(removeFromCart(item))}>
-                        {item.quantity <= 1 ? (
-                          <Trash size='16' />
-                        ) : (
-                          <Minus size='16' />
-                        )}
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+                      <li className=''>
+                        <button
+                          className='w-4 h-4 block'
+                          onClick={() => dispatch(removeFromCart(item))}>
+                          {item.quantity <= 1 ? (
+                            <Trash size='16' />
+                          ) : (
+                            <Minus size='16' />
+                          )}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
 
-          <div className='w-full flex justify-between items-center border-y border-gray-400 body-sm py-3'>
-            <p className='text-gray-800'>تخفیف محصولات</p>
-            <p className='text-gray-700'>
-              {convertToFaNumber(totalDiscountPrice)} تومان
-            </p>
-          </div>
-
-          <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
-            <p className='flex justify-between items-center'>
-              <span className='text-gray-800'>هزینه ارسال</span>
-              <span className='text-gray-700'>
-                {convertToFaNumber(0)} تومان
-              </span>
-            </p>
-
-            <p className='text-warning flex justify-between items-start mt-2'>
-              <Warning2 size='16' />
-              <p className='caption-sm mr-2'>
-                هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی شما
-                محاسبه و به این مبلغ اضافه خواهد شد.
+            <div className='w-full flex justify-between items-center border-y border-gray-400 body-sm py-3'>
+              <p className='text-gray-800'>تخفیف محصولات</p>
+              <p className='text-gray-700'>
+                {convertToFaNumber(totalDiscountPrice)} تومان
               </p>
-            </p>
-          </div>
+            </div>
 
-          <div className='w-full flex justify-between items-center body-sm py-3'>
-            <p className='text-gray-800'>مبلغ قابل پرداخت</p>
-            <p className='text-primary'>
-              {convertToFaNumber(getTotalPrice())} تومان
-            </p>
-          </div>
+            <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
+              <p className='flex justify-between items-center'>
+                <span className='text-gray-800'>هزینه ارسال</span>
+                <span className='text-gray-700'>
+                  {convertToFaNumber(0)} تومان
+                </span>
+              </p>
 
-          <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
-          onClick={()=> setShowModal(!showModal)  }
-          >
-            <User size='16' className='ml-1' />
-            ورود/ثبت‌نام
-          </button>
-        </section>
+              <p className='text-warning flex justify-between items-start mt-2'>
+                <Warning2 size='16' />
+                <p className='caption-sm mr-2'>
+                  هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی
+                  شما محاسبه و به این مبلغ اضافه خواهد شد.
+                </p>
+              </p>
+            </div>
+
+            <div className='w-full flex justify-between items-center body-sm py-3'>
+              <p className='text-gray-800'>مبلغ قابل پرداخت</p>
+              <p className='text-primary'>
+                {convertToFaNumber(getTotalPrice())} تومان
+              </p>
+            </div>
+
+            <button
+              className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
+              onClick={() => setShowModal(!showModal)}>
+              <User size='16' className='ml-1' />
+              ورود/ثبت‌نام
+            </button>
+          </section>
+
+          <section className='hidden lg:grid grid-cols-5 gap-x-6'>
+            <section className='col-span-3 h-[400px] overflow-y-scroll border border-gray-400 p-6 rounded-lg'>
+              <div className='w-full h-full overflow-y-scroll pb-3'>
+                {cart.map(item => {
+                  const {
+                    id,
+                    name,
+                    img,
+                    ingredient,
+                    discount,
+                    discountPrice,
+                    price,
+                    star,
+                  } = item;
+
+                  return (
+                    <div
+                      className='w-full flex justify-center items-center rounded-lg border border-gray-400 overflow-hidden mb-4'
+                      key={id}>
+                      <Image
+                        className='object-cover h-full w-[169px]'
+                        src={img}
+                        alt={name}
+                        width={169}
+                        height={158}
+                      />
+
+                      <ul className='w-full p-4'>
+                        <li className='flex justify-between items-center'>
+                          <p className='header-7 text-gray-800'>{name}</p>
+
+                          <button
+                            className='text-gray-800'
+                            onClick={() => dispatch(removeFromCart(item))}>
+                            <Trash />
+                          </button>
+                        </li>
+
+                        <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
+                          <p className='caption-sm lg:caption-md line-clamp-1'>
+                            {ingredient}
+                          </p>
+
+                          <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
+                            <span className='text-error mr-2'>{discount}</span>
+                            <span className='text-gray-500 line-through'>
+                              {convertToFaNumber(discountPrice)}
+                            </span>
+                          </p>
+                        </li>
+
+                        <li className='flex justify-between items-center w-full'>
+                          <div className='w-full flex justify-start items-center'>
+                            <span className='ml-6'>
+                              <StarRating rating={star} />
+                            </span>
+
+                            <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
+                              <li
+                                className=''
+                                onClick={() => dispatch(addToCart(item))}>
+                                <Add size='16' />
+                              </li>
+
+                              <li className='body-sm mx-2'>
+                                {convertToFaNumber(item.quantity)}
+                              </li>
+
+                              <li className=''>
+                                <button
+                                  className='w-4 h-4 block'
+                                  onClick={() =>
+                                    dispatch(removeFromCart(item))
+                                  }>
+                                  {item.quantity <= 1 ? (
+                                    <Trash size='16' />
+                                  ) : (
+                                    <Minus size='16' />
+                                  )}
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
+                            {convertToFaNumber(price)} تومان
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className='col-span-2 rounded-lg border border-gray-400 p-6 h-fit'>
+              <div className='w-full flex justify-between items-center border-b border-gray-400 body-sm pb-3'>
+                <p className='body-md text-gray-800'>
+                  سبد خرید ({convertToFaNumber(cart.length)})
+                </p>
+
+                <button
+                  className='text-gray-800'
+                  onClick={() => dispatch(clearList())}>
+                  <Trash />
+                </button>
+              </div>
+
+              <div className='w-full flex justify-between items-center border-b border-gray-400 body-sm py-3'>
+                <p className='text-gray-800'>تخفیف محصولات</p>
+                <p className='text-gray-700'>
+                  {convertToFaNumber(totalDiscountPrice)} تومان
+                </p>
+              </div>
+
+              <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
+                <p className='flex justify-between items-center'>
+                  <span className='text-gray-800'>هزینه ارسال</span>
+                  <span className='text-gray-700'>
+                    {convertToFaNumber(0)} تومان
+                  </span>
+                </p>
+
+                <p className='text-warning flex justify-between items-start mt-2'>
+                  <Warning2 />
+                  <p className='caption-sm mr-2'>
+                    هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی
+                    شما محاسبه و به این مبلغ اضافه خواهد شد.
+                  </p>
+                </p>
+              </div>
+
+              <div className='w-full flex justify-between items-center body-sm py-3'>
+                <p className='text-gray-800'>مبلغ قابل پرداخت</p>
+                <p className='text-primary'>
+                  {convertToFaNumber(getTotalPrice())} تومان
+                </p>
+              </div>
+
+              <button
+                className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
+                onClick={() => setShowModal(!showModal)}>
+                <User size='16' className='ml-1' />
+                ورود/ثبت‌نام
+              </button>
+            </section>
+          </section>
+        </>
       )}
 
-      {showModal ? <ModalShoppinCart /> : ""}
+      {showModal ? <ModalShoppinCart /> : ''}
     </section>
   );
 };
