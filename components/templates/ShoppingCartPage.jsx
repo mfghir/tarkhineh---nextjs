@@ -5,16 +5,21 @@ import {
   ShoppingCart,
   TickSquare,
   Trash,
+  User,
   Wallet,
+  Warning2,
 } from 'iconsax-react';
 
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
-import { addToCart,  clearList, removeFromCart } from '@/redux/cartSlice';
+
+import { addToCart, clearList, removeFromCart } from '@/redux/cartSlice';
 import Link from 'next/link';
+import ModalShoppinCart from '../modules/ModalShoppinCart';
 
 const ShoppingCartPage = () => {
+  const [showModal, setShowModal] = useState(false);
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
@@ -37,8 +42,6 @@ const ShoppingCartPage = () => {
 
   const totalDiscountPrice = getTotalDiscountPrice(cart);
 
-
-
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
@@ -47,7 +50,7 @@ const ShoppingCartPage = () => {
           سبد خرید
         </p>
 
-       <button onClick={() => dispatch(clearList())}>
+        <button onClick={() => dispatch(clearList())}>
           <Trash
             size='16'
             className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
@@ -95,10 +98,6 @@ const ShoppingCartPage = () => {
                 <div
                   className='w-full flex justify-between items-center p-2'
                   key={item.id}>
-                  {/* <div className={styles.image}>
-                <Image src={item.image} height='90' width='65' />
-              </div> */}
-
                   <p className='flex flex-col'>
                     <span className='caption-md lg:header-7 text-gray-800'>
                       {item.name}
@@ -112,12 +111,14 @@ const ShoppingCartPage = () => {
                     <li className='' onClick={() => dispatch(addToCart(item))}>
                       <Add size='16' />
                     </li>
+
                     <li className='body-sm mx-2'>
                       {convertToFaNumber(item.quantity)}
                     </li>
+
                     <li className=''>
                       <button
-                        className={'w-4 h-4 block'}
+                        className='w-4 h-4 block'
                         onClick={() => dispatch(removeFromCart(item))}>
                         {item.quantity <= 1 ? (
                           <Trash size='16' />
@@ -138,8 +139,41 @@ const ShoppingCartPage = () => {
               {convertToFaNumber(totalDiscountPrice)} تومان
             </p>
           </div>
+
+          <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
+            <p className='flex justify-between items-center'>
+              <span className='text-gray-800'>هزینه ارسال</span>
+              <span className='text-gray-700'>
+                {convertToFaNumber(0)} تومان
+              </span>
+            </p>
+
+            <p className='text-warning flex justify-between items-start mt-2'>
+              <Warning2 size='16' />
+              <p className='caption-sm mr-2'>
+                هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی شما
+                محاسبه و به این مبلغ اضافه خواهد شد.
+              </p>
+            </p>
+          </div>
+
+          <div className='w-full flex justify-between items-center body-sm py-3'>
+            <p className='text-gray-800'>مبلغ قابل پرداخت</p>
+            <p className='text-primary'>
+              {convertToFaNumber(getTotalPrice())} تومان
+            </p>
+          </div>
+
+          <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
+          onClick={()=> setShowModal(!showModal)  }
+          >
+            <User size='16' className='ml-1' />
+            ورود/ثبت‌نام
+          </button>
         </section>
       )}
+
+      {showModal ? <ModalShoppinCart /> : ""}
     </section>
   );
 };
