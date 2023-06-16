@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 
-import { addToCart, clearList, removeFromCart } from '@/redux/cartSlice';
+import { addToCart, clearList, deleteOneItemFromCart, removeFromCart } from '@/redux/cartSlice';
 import Link from 'next/link';
 import ModalShoppinCart from '../modules/ModalShoppinCart';
 import Image from 'next/image';
@@ -34,7 +34,7 @@ const ShoppingCartPage = () => {
 
   function getTotalDiscountPrice(cart) {
     let totalDiscountPrice = 0;
-    cart.forEach(item => {
+    cart.map(item => {
       if (item.discountPrice) {
         totalDiscountPrice += parseFloat(item.discountPrice);
       }
@@ -43,6 +43,9 @@ const ShoppingCartPage = () => {
   }
 
   const totalDiscountPrice = getTotalDiscountPrice(cart);
+
+  const inputValue = useSelector((state) => state.input.value);
+  console.log("inputValue",inputValue);
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
@@ -210,7 +213,7 @@ const ShoppingCartPage = () => {
 
                           <button
                             className='text-gray-800'
-                            onClick={() => dispatch(removeFromCart(item))}>
+                            onClick={() => dispatch(deleteOneItemFromCart(item))}>
                             <Trash />
                           </button>
                         </li>

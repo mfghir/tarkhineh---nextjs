@@ -1,17 +1,35 @@
+import { phoneCodeInputValue } from '@/redux/inputSlice';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import ModalCode from './ModalCode';
 
 const ModalShoppinCart = () => {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  const [inputValue, setInputValue] = useState('');
+  const dispatch = useDispatch();
+  const [secondModal, setSecondModal] = useState(false);
+
+  const handleInputChange = event => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    dispatch(phoneCodeInputValue(inputValue));
+    setSecondModal(!secondModal);
+  };
+
   return (
     <>
       {showModal ? (
         ''
       ) : (
-        <div className='fixed  inset-0 overflow-y-auto z-50 min-h-screen'>
+       <>
+      {secondModal ? <ModalCode /> :  <div className='fixed  inset-0 overflow-y-auto z-50 min-h-screen'>
           <div className='flex items-center justify-center min-h-screen'>
             <div className='fixed inset-0 transition-opacity'>
               <div
@@ -54,12 +72,24 @@ const ModalShoppinCart = () => {
                 <input
                   type='text'
                   placeholder='شماره همراه'
-                  className='mt-6  w-full  border border-gray-400 px-4 py-2  rounded placeholder:text-gray-700 caption-sm'
+                  className='mt-6 w-full border border-gray-400 px-4 py-2  rounded placeholder:text-gray-700 caption-sm'
+                  value={inputValue}
+                  onChange={handleInputChange}
                 />
 
-                <button className='w-full py-1 caption-lg bg-gray-300 text-gray-400 mt-3'>
-                  تایید و ادامه
-                </button>
+                {inputValue === '09221234567' ? (
+                  <button
+                    className='w-full py-1 caption-lg bg-primary text-white mt-3'
+                    onClick={handleSubmit}>
+                    تایید و ادامه
+                  </button>
+                ) : (
+                  <button
+                    className='w-full py-1 caption-lg bg-gray-300 text-gray-400 mt-3'
+                    onClick={handleSubmit}>
+                    تایید و ادامه
+                  </button>
+                )}
 
                 <p className='caption-sm text-center text-[#0C0C0C] mt-1'>
                   ورود و عضویت در ترخینه به منزله قبول
@@ -68,8 +98,10 @@ const ModalShoppinCart = () => {
               </div>
             </section>
           </div>
-        </div>
+        </div>}
+      </>
       )}
+
     </>
   );
 };
