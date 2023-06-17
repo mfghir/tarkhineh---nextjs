@@ -110,7 +110,7 @@ const MenuPage = () => {
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
                   key={index}>
                   <Image
-                    className='object-cover w-[92px] h-full lg:w-[169px]  '
+                    className='object-cover w-[92px] h-full lg:w-[169px]'
                     src={img}
                     alt={name}
                     width={169}

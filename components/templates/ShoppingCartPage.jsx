@@ -1,5 +1,6 @@
 import {
   Add,
+  ArrowLeft2,
   ArrowRight2,
   Minus,
   ShoppingCart,
@@ -14,16 +15,28 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 
-import { addToCart, clearList, deleteOneItemFromCart, removeFromCart } from '@/redux/cartSlice';
+import {
+  addToCart,
+  clearList,
+  deleteOneItemFromCart,
+  removeFromCart,
+} from '@/redux/cartSlice';
+
 import Link from 'next/link';
-import ModalShoppinCart from '../modules/ModalShoppinCart';
 import Image from 'next/image';
+import ModalShoppinCart from '../modules/ModalShoppinCart';
+
 import StarRating from '../modules/StarRating ';
+import ModalMessage from '../modules/ModalMessage';
 
 const ShoppingCartPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const cart = useSelector(state => state.cart);
+  const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
+  
+  const cart = useSelector(state => state.cart);
+  const totalDiscountPrice = getTotalDiscountPrice(cart);
+  const buttonClicked = useSelector(state => state.button);
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -42,10 +55,6 @@ const ShoppingCartPage = () => {
     return totalDiscountPrice;
   }
 
-  const totalDiscountPrice = getTotalDiscountPrice(cart);
-
-  const inputValue = useSelector((state) => state.input.value);
-  console.log("inputValue",inputValue);
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
@@ -55,7 +64,7 @@ const ShoppingCartPage = () => {
           سبد خرید
         </p>
 
-        <button onClick={() => dispatch(clearList())}>
+        <button onClick={() => setDeleteModal(!deleteModal)}>
           <Trash
             size='16'
             className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
@@ -197,15 +206,16 @@ const ShoppingCartPage = () => {
 
                   return (
                     <div
-                      className='w-full flex justify-center items-center rounded-lg border border-gray-400 overflow-hidden mb-4'
+                      className='w-full flex flex-row rounded-lg border border-gray-400 overflow-hidden mb-4'
                       key={id}>
                       <Image
-                        className='object-cover h-full w-[169px]'
+                        className='object-cover h-[158px] w-[169px]'
                         src={img}
                         alt={name}
                         width={169}
                         height={158}
                       />
+                      
 
                       <ul className='w-full p-4'>
                         <li className='flex justify-between items-center'>
@@ -213,7 +223,9 @@ const ShoppingCartPage = () => {
 
                           <button
                             className='text-gray-800'
-                            onClick={() => dispatch(deleteOneItemFromCart(item))}>
+                            onClick={() =>
+                              dispatch(deleteOneItemFromCart(item))
+                            }>
                             <Trash />
                           </button>
                         </li>
@@ -283,7 +295,7 @@ const ShoppingCartPage = () => {
 
                 <button
                   className='text-gray-800'
-                  onClick={() => dispatch(clearList())}>
+                  onClick={() => setDeleteModal(true)}>
                   <Trash />
                 </button>
               </div>
@@ -322,8 +334,17 @@ const ShoppingCartPage = () => {
               <button
                 className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
                 onClick={() => setShowModal(!showModal)}>
-                <User size='16' className='ml-1' />
-                ورود/ثبت‌نام
+                {buttonClicked ? (
+                  <>
+                    مرحله بعد
+                    <ArrowLeft2 className='mr-1' />
+                  </>
+                ) : (
+                  <>
+                    <User size='16' className='ml-1' />
+                    ورود/ثبت‌نام
+                  </>
+                )}
               </button>
             </section>
           </section>
@@ -331,6 +352,7 @@ const ShoppingCartPage = () => {
       )}
 
       {showModal ? <ModalShoppinCart /> : ''}
+      {deleteModal ? <ModalMessage /> : ''}
     </section>
   );
 };

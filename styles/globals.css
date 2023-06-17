@@ -195,6 +195,10 @@
     @apply -top-4 bg-white px-1 text-gray-800 caption-md
   }
 
+
+  .ltr{
+    direction: ltr;
+  }
   
 
 }
