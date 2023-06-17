@@ -28,7 +28,7 @@ import ModalShoppinCart from '../modules/ModalShoppinCart';
 import StarRating from '../modules/StarRating ';
 import ModalMessage from '../modules/ModalMessage';
 
-const ShoppingCartPage = () => {
+const DeliveryCompletionPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
@@ -59,25 +59,19 @@ const ShoppingCartPage = () => {
       <div className='flex items-center my-6 lg:hidden'>
         <ArrowRight2 className='lg:hidden ml-4' size='16' />
         <p className='w-full header-6 text-gray-800 text-center mx-auto lg:text-right lg:pb-2 lg:border-b lg:border-gray-400'>
-          سبد خرید
+          تکمیل اطلاعات
         </p>
-
-        <button onClick={() => setDeleteModal(!deleteModal)}>
-          <Trash
-            size='16'
-            className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
-          />
-        </button>
       </div>
 
       <div className='justify-center items-center hidden lg:flex mb-12'>
-        <span className='flex items-center justify-center text-primary header-6'>
-          <ShoppingCart size='32' className='ml-1' />
-          سبد خرید
-        </span>
-        <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
         <span className='flex items-center justify-center text-gray-400 body-sm'>
           <TickSquare className='ml-1' />
+          سبد خرید
+        </span>
+
+        <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
+        <span className='flex items-center justify-center text-primary header-6'>
+          <ShoppingCart size='32' className='ml-1' />
           تکمیل اطلاعات
         </span>
 
@@ -326,21 +320,21 @@ const ShoppingCartPage = () => {
                 </p>
               </div>
 
-              {buttonClicked ? (
-                <Link href='/delivery-completion'>
-                  <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
+              <button
+                className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
+                onClick={() => setShowModal(!showModal)}>
+                {buttonClicked ? (
+                  <>
                     مرحله بعد
                     <ArrowLeft2 className='mr-1' />
-                  </button>
-                </Link>
-              ) : (
-                <button
-                  className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
-                  onClick={() => setShowModal(!showModal)}>
-                  <User size='16' className='ml-1' />
-                  ورود/ثبت‌نام
-                </button>
-              )}
+                  </>
+                ) : (
+                  <>
+                    <User size='16' className='ml-1' />
+                    ورود/ثبت‌نام
+                  </>
+                )}
+              </button>
             </section>
           </section>
         </>
@@ -352,4 +346,4 @@ const ShoppingCartPage = () => {
   );
 };
 
-export default ShoppingCartPage;
+export default DeliveryCompletionPage;
