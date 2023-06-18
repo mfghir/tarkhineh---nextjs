@@ -30,7 +30,7 @@ import ModalMessage from '../modules/ModalMessage';
 
 const ShoppingCartPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(null);
   const dispatch = useDispatch();
 
   const cart = useSelector(state => state.cart);
@@ -290,7 +290,7 @@ const ShoppingCartPage = () => {
 
                 <button
                   className='text-gray-800'
-                  onClick={() => setDeleteModal(true)}>
+                  onClick={() => setDeleteModal(!deleteModal)}>
                   <Trash />
                 </button>
               </div>
