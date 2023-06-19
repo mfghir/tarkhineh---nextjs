@@ -64,6 +64,10 @@ const DeliveryCompletionPage = () => {
     return totalDiscountPrice;
   }
 
+  const onOptionChange = e => {
+    setDelivery(e.target.value)
+  }
+
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
@@ -103,6 +107,7 @@ const DeliveryCompletionPage = () => {
             <Radio
               value='deliverySend'
               checked={delivery === 'deliverySend'}
+               onChange={onOptionChange}
               name='description'
               id='description-html'
               color='green'
@@ -130,6 +135,7 @@ const DeliveryCompletionPage = () => {
             <Radio
               value='placeSend'
               checked={delivery === 'placeSend'}
+               onChange={onOptionChange}
               name='description'
               id='description-html'
               color='green'
@@ -178,7 +184,7 @@ const DeliveryCompletionPage = () => {
 
           </ul> */}
         </section>
-        
+
         {delivery === 'deliverySend' ? (
           <>
             <section className='lg:hidden h-[180px] border border-gray-400 rounded-lg p-4 flex flex-col mb-3'>
@@ -271,6 +277,7 @@ const DeliveryCompletionPage = () => {
                 <Radio
                   value='deliverySend'
                   checked={delivery === 'deliverySend'}
+                   onChange={onOptionChange}
                   name='description'
                   id='description-html'
                   color='green'
@@ -298,6 +305,7 @@ const DeliveryCompletionPage = () => {
                 <Radio
                   value='placeSend'
                   checked={delivery === 'placeSend'}
+                   onChange={onOptionChange}
                   name='description'
                   id='description-html'
                   color='green'
