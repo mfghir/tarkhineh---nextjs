@@ -3,10 +3,12 @@ import {
   ArrowLeft2,
   ArrowRight2,
   CloseCircle,
+  Document,
   Location,
   Minus,
   ShoppingBag,
   ShoppingCart,
+  TickCircle,
   TickSquare,
   Trash,
   Truck,
@@ -33,8 +35,10 @@ import ModalShoppinCart from '../modules/ModalShoppinCart';
 import StarRating from '../modules/StarRating ';
 import ModalMessage from '../modules/ModalMessage';
 import { Radio, Typography } from '@material-tailwind/react';
+import DeliveryPlace from './DeliveryPlace';
 
 const DeliveryCompletionPage = () => {
+  const [delivery, setDelivery] = useState('deliverySend');
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
@@ -89,14 +93,68 @@ const DeliveryCompletionPage = () => {
       </div>
 
       <>
-        <section className='border border-gray-400 rounded-lg p-4 flex justify-center items-center flex-col mb-3'>
-          <div className='body-sm lg:body-md w-full pb-2 lg:pb-0 flex lg:flex-row justify-start items-center border-b border-gray-400 lg:border-none text-gray-800'>
+        <section className='lg:hidden border border-gray-400 rounded-lg p-4 flex justify-between lg:flex-row items-center flex-col mb-3'>
+          <div className='body-sm lg:body-md w-full  pb-2 lg:pb-0 flex lg:flex-row justify-start items-center border-b border-gray-400 lg:border-none text-gray-800 whitespace-nowrap'>
             <Truck className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
             روش تحویل سفارش
           </div>
 
-          <ul className='w-full flex flex-col lg:flex-row justify-center items-center mt-3'>
-            <li className='w-full flex flex-row text-gray-700 mb-2 lg:mb-0'>
+          <div className='w-full flex flex-row items-center text-gray-700'>
+            <Radio
+              value='deliverySend'
+              checked={delivery === 'deliverySend'}
+              name='description'
+              id='description-html'
+              color='green'
+              label={
+                <div className=''>
+                  <Typography className='caption-md lg:body-sm '>
+                    ارسال توسط پیک
+                  </Typography>
+                  <Typography
+                    variant='small'
+                    className='hidden lg:block caption-sm'>
+                    توسط پیک رستوران ارسال شود.
+                  </Typography>
+                </div>
+              }
+              containerProps={{
+                className: 'flex',
+              }}
+            />
+
+            <TruckFast className='w-4 h-4 lg:w-6 lg:h-6 mr-1' />
+          </div>
+
+          <div className='w-full flex flex-row items-center text-gray-700'>
+            <Radio
+              value='placeSend'
+              checked={delivery === 'placeSend'}
+              name='description'
+              id='description-html'
+              color='green'
+              label={
+                <div className=''>
+                  <Typography className='caption-md lg:body-sm '>
+                    تحویل حضوری
+                  </Typography>
+                  <Typography
+                    variant='small'
+                    className='hidden lg:block caption-sm'>
+                    توسط پیک رستوران ارسال شود.
+                  </Typography>
+                </div>
+              }
+              containerProps={{
+                className: 'flex',
+              }}
+            />
+
+            <ShoppingBag className='w-4 h-4 lg:w-6 lg:h-6 mr-1' />
+          </div>
+
+          {/* <ul className='w-full  flex flex-col lg:flex-row justify-center lg:justify-between items-center mt-3'> 
+             <li className='w-full flex flex-row text-gray-700 mb-2 lg:mb-0'>
               <Radio id='green' name='color' color='#00BA88' />
               <p className='flex flex-col mx-2'>
                 <span className='caption-md lg:body-sm'>ارسال توسط پیک</span>
@@ -116,184 +174,192 @@ const DeliveryCompletionPage = () => {
                 </span>
               </p>
               <ShoppingBag className='w-4 h-4 lg:w-6 lg:h-6' />
-            </li>
+            </li> 
 
-            <li className='w-full flex flex-row items-center text-gray-700'>
-              <Radio
-                name='description'
-                id='description-html'
-                label={
-                  <div className=''>
-                    <Typography className='caption-md lg:body-sm'>
-                      تحویل حضوری
-                    </Typography>
-                    <Typography
-                      variant='small'
-                      className='hidden lg:block caption-sm'>
-                      توسط پیک رستوران ارسال شود.
-                    </Typography>
-                  </div>
-                }
-                containerProps={{
-                  className: '',
-                }}
-              />
-
-              <ShoppingBag className='w-4 h-4 lg:w-6 lg:h-6' />
-            </li>
-          </ul>
+          </ul> */}
         </section>
+        
+        {delivery === 'deliverySend' ? (
+          <>
+            <section className='lg:hidden h-[180px] border border-gray-400 rounded-lg p-4 flex flex-col mb-3'>
+              <div className='w-full pb-2 lg:pb-0 flex justify-between items-center border-b border-gray-400'>
+                <p className='body-sm lg:body-md text-gray-800 flex justify-center items-center'>
+                  <Location className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
+                  آدرس‌ها
+                </p>
 
-        <section className='h-[180px] border border-gray-400 rounded-lg p-4 flex justify-center items-center flex-col mb-3'>
-          <div className='w-full pb-2 lg:pb-0 flex justify-between items-center border-b border-gray-400'>
-            <p className='body-sm lg:body-md text-gray-800 flex justify-center items-center'>
-              <Location className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
-              آدرس‌ها
-            </p>
+                <p className='caption-md text-primary flex justify-center items-center'>
+                  <CloseCircle size='16' className='ml-1' />
+                  افزودن آدرس
+                </p>
+              </div>
 
-            <p className='caption-md text-primary flex justify-center items-center'>
-              <CloseCircle size='16' />
-              افزودن آدرس
-            </p>
-          </div>
-
-          <p className='caption-sm lg:body-sm text-gray-600 text-center'>
-            شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!
-          </p>
-        </section>
-
-        <section className='lg:hidden border border-gray-400 rounded-lg p-6 flex justify-center items-center flex-col'>
-          <div className='w-full flex justify-between items-center border-y border-gray-400 body-sm py-3'>
-            <p className='text-gray-800'>تخفیف محصولات</p>
-            <p className='text-gray-700'>
-              {convertToFaNumber(totalDiscountPrice)} تومان
-            </p>
-          </div>
-
-          <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
-            <p className='flex justify-between items-center'>
-              <span className='text-gray-800'>هزینه ارسال</span>
-              <span className='text-gray-700'>
-                {convertToFaNumber(0)} تومان
-              </span>
-            </p>
-
-            <p className='text-warning flex justify-between items-start mt-2'>
-              <Warning2 size='16' />
-              <p className='caption-sm mr-2'>
-                هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی شما
-                محاسبه و به این مبلغ اضافه خواهد شد.
+              <p className='caption-sm lg:body-sm text-gray-600 text-center my-auto'>
+                شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!
               </p>
-            </p>
-          </div>
+            </section>
 
-          <div className='w-full flex justify-between items-center body-sm py-3'>
-            <p className='text-gray-800'>مبلغ قابل پرداخت</p>
-            <p className='text-primary'>
-              {convertToFaNumber(getTotalPrice())} تومان
-            </p>
-          </div>
+            <section className='lg:hidden relative h-[180px] border border-gray-400 rounded-lg text-gray-700 lg:text-gray-800 mb-3'>
+              <textarea className='w-full h-full p-4 ' />
 
-          <button
-            className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
-            onClick={() => setShowModal(!showModal)}>
-            <User size='16' className='ml-1' />
-            ورود/ثبت‌نام
-          </button>
-        </section>
+              <div className='flex justify-center items-center absolute top-4 right-4'>
+                <p className='caption-md flex justify-center items-center'>
+                  <Document className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
+                  توضیحات سفارش
+                </p>
+
+                <span className=' caption-sm lg:caption-md  mr-1 '>
+                  (اختیاری)
+                </span>
+              </div>
+            </section>
+
+            <section className='lg:hidden border border-gray-400 rounded-lg p-6 flex justify-center items-center flex-col'>
+              <div className='w-full flex justify-between items-center border-b border-gray-400 body-sm pb-3'>
+                <p className='text-gray-800'>تخفیف محصولات</p>
+                <p className='text-gray-700'>
+                  {convertToFaNumber(totalDiscountPrice)} تومان
+                </p>
+              </div>
+
+              <div className='w-full flex flex-col border-b border-gray-400 body-sm py-3'>
+                <p className='flex justify-between items-center'>
+                  <span className='text-gray-800'>هزینه ارسال</span>
+                  <span className='text-gray-700'>
+                    {convertToFaNumber(0)} تومان
+                  </span>
+                </p>
+
+                <p className='text-warning flex justify-between items-start mt-2'>
+                  <Warning2 size='16' />
+                  <p className='caption-sm mr-2'>
+                    هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی
+                    شما محاسبه و به این مبلغ اضافه خواهد شد.
+                  </p>
+                </p>
+              </div>
+
+              <div className='w-full flex justify-between items-center body-sm py-3'>
+                <p className='text-gray-800'>مبلغ قابل پرداخت</p>
+                <p className='text-primary'>
+                  {convertToFaNumber(getTotalPrice())} تومان
+                </p>
+              </div>
+
+              <button
+                className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
+                onClick={() => setShowModal(!showModal)}>
+                <User size='16' className='ml-1' />
+                ورود/ثبت‌نام
+              </button>
+            </section>
+          </>
+        ) : (
+          <DeliveryPlace />
+        )}
 
         {/* ------------------- desktop */}
         <section className='hidden lg:grid grid-cols-5 gap-x-6'>
-          <section className='col-span-3 h-[400px] overflow-y-scroll border border-gray-400 p-6 rounded-lg'>
-            <div className='w-full h-full overflow-y-scroll pb-3'>
-              {cart.map(item => {
-                const {
-                  id,
-                  name,
-                  img,
-                  ingredient,
-                  discount,
-                  discountPrice,
-                  price,
-                  star,
-                } = item;
+          <section className='col-span-3 '>
+            <div className='border border-gray-400 rounded-lg p-4 flex justify-between lg:flex-row items-center flex-col mb-3'>
+              <div className='body-sm lg:body-md w-full  pb-2 lg:pb-0 flex lg:flex-row justify-start items-center border-b border-gray-400 lg:border-none text-gray-800 whitespace-nowrap'>
+                <Truck className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
+                روش تحویل سفارش
+              </div>
 
-                return (
-                  <div
-                    className='w-full flex flex-row rounded-lg border border-gray-400 overflow-hidden mb-4'
-                    key={id}>
-                    <Image
-                      className='object-cover h-[158px] w-[169px]'
-                      src={img}
-                      alt={name}
-                      width={169}
-                      height={158}
-                    />
+              <div className='w-full flex flex-row items-center text-gray-700'>
+                <Radio
+                  value='deliverySend'
+                  checked={delivery === 'deliverySend'}
+                  name='description'
+                  id='description-html'
+                  color='green'
+                  label={
+                    <div className=''>
+                      <Typography className='caption-md lg:body-sm '>
+                        ارسال توسط پیک
+                      </Typography>
+                      <Typography
+                        variant='small'
+                        className='hidden lg:block caption-sm'>
+                        توسط پیک رستوران ارسال شود.
+                      </Typography>
+                    </div>
+                  }
+                  containerProps={{
+                    className: 'flex',
+                  }}
+                />
 
-                    <ul className='w-full p-4'>
-                      <li className='flex justify-between items-center'>
-                        <p className='header-7 text-gray-800'>{name}</p>
+                <TruckFast className='w-4 h-4 lg:w-6 lg:h-6 mr-1' />
+              </div>
 
-                        <button
-                          className='text-gray-800'
-                          onClick={() => dispatch(deleteOneItemFromCart(item))}>
-                          <Trash />
-                        </button>
-                      </li>
+              <div className='w-full flex flex-row items-center text-gray-700'>
+                <Radio
+                  value='placeSend'
+                  checked={delivery === 'placeSend'}
+                  name='description'
+                  id='description-html'
+                  color='green'
+                  label={
+                    <div className=''>
+                      <Typography className='caption-md lg:body-sm '>
+                        تحویل حضوری
+                      </Typography>
+                      <Typography
+                        variant='small'
+                        className='hidden lg:block caption-sm'>
+                        توسط پیک رستوران ارسال شود.
+                      </Typography>
+                    </div>
+                  }
+                  containerProps={{
+                    className: 'flex',
+                  }}
+                />
 
-                      <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
-                        <p className='caption-sm lg:caption-md line-clamp-1'>
-                          {ingredient}
-                        </p>
-
-                        <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
-                          <span className='text-error mr-2'>{discount}</span>
-                          <span className='text-gray-500 line-through'>
-                            {convertToFaNumber(discountPrice)}
-                          </span>
-                        </p>
-                      </li>
-
-                      <li className='flex justify-between items-center w-full'>
-                        <div className='w-full flex justify-start items-center'>
-                          <span className='ml-6'>
-                            <StarRating rating={star} />
-                          </span>
-
-                          <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
-                            <li
-                              className=''
-                              onClick={() => dispatch(addToCart(item))}>
-                              <Add size='16' />
-                            </li>
-
-                            <li className='body-sm mx-2'>
-                              {convertToFaNumber(item.quantity)}
-                            </li>
-
-                            <li className=''>
-                              <button
-                                className='w-4 h-4 block'
-                                onClick={() => dispatch(removeFromCart(item))}>
-                                {item.quantity <= 1 ? (
-                                  <Trash size='16' />
-                                ) : (
-                                  <Minus size='16' />
-                                )}
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                          {convertToFaNumber(price)} تومان
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                );
-              })}
+                <ShoppingBag className='w-4 h-4 lg:w-6 lg:h-6 mr-1' />
+              </div>
             </div>
+
+            {delivery === 'deliverySend' ? (
+              <>
+                <div className='h-[180px] border border-gray-400 rounded-lg p-4 flex flex-col mb-3'>
+                  <div className='w-full pb-2 lg:pb-0 flex justify-between items-center border-b border-gray-400'>
+                    <p className='body-sm lg:body-md text-gray-800 flex justify-center items-center'>
+                      <Location className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
+                      آدرس‌ها
+                    </p>
+
+                    <p className='caption-md text-primary flex justify-center items-center'>
+                      <CloseCircle size='16' className='ml-1' />
+                      افزودن آدرس
+                    </p>
+                  </div>
+
+                  <p className='caption-sm lg:body-sm text-gray-600 text-center my-auto'>
+                    شما در حال حاضر هیچ آدرسی ثبت نکرده‌اید!
+                  </p>
+                </div>
+
+                <div className='relative h-[180px] border border-gray-400 rounded-lg text-gray-700 lg:text-gray-800 mb-3'>
+                  <textarea className='w-full h-full p-4 ' />
+
+                  <div className='flex justify-center items-center absolute top-4 right-4'>
+                    <p className='caption-md flex justify-center items-center'>
+                      <Document className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
+                      توضیحات سفارش
+                    </p>
+
+                    <span className=' caption-sm lg:caption-md  mr-1 '>
+                      (اختیاری)
+                    </span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <DeliveryPlace />
+            )}
           </section>
 
           <section className='col-span-2 rounded-lg border border-gray-400 p-6 h-fit'>
@@ -309,7 +375,48 @@ const DeliveryCompletionPage = () => {
               </button>
             </div>
 
-            <div className='w-full flex justify-between items-center border-b border-gray-400 body-sm py-3'>
+            <div className='w-full h-44 overflow-y-scroll my-3'>
+              {cart.map(item => {
+                return (
+                  <div
+                    className='w-full flex justify-between items-center p-2'
+                    key={item.id}>
+                    <p className='flex flex-col'>
+                      <span className='body-sm text-gray-800'>{item.name}</span>
+                      <span className='caption-md text-gray-700'>
+                        {convertToFaNumber(item.price)}
+                      </span>
+                    </p>
+
+                    <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
+                      <li
+                        className=''
+                        onClick={() => dispatch(addToCart(item))}>
+                        <Add size='16' />
+                      </li>
+
+                      <li className='body-sm mx-2'>
+                        {convertToFaNumber(item.quantity)}
+                      </li>
+
+                      <li className=''>
+                        <button
+                          className='w-4 h-4 block'
+                          onClick={() => dispatch(removeFromCart(item))}>
+                          {item.quantity <= 1 ? (
+                            <Trash size='16' />
+                          ) : (
+                            <Minus size='16' />
+                          )}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className='w-full flex justify-between items-center border-y border-gray-400 body-sm py-3'>
               <p className='text-gray-800'>تخفیف محصولات</p>
               <p className='text-gray-700'>
                 {convertToFaNumber(totalDiscountPrice)} تومان
@@ -340,26 +447,14 @@ const DeliveryCompletionPage = () => {
               </p>
             </div>
 
-            <button
-              className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '
-              onClick={() => setShowModal(!showModal)}>
-              {buttonClicked ? (
-                <>
-                  مرحله بعد
-                  <ArrowLeft2 className='mr-1' />
-                </>
-              ) : (
-                <>
-                  <User size='16' className='ml-1' />
-                  ورود/ثبت‌نام
-                </>
-              )}
+            <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
+              ثبت سفارش
+              <TickCircle className='mr-1' />
             </button>
           </section>
         </section>
       </>
 
-      {showModal ? <ModalShoppinCart /> : ''}
       {deleteModal ? <ModalMessage /> : ''}
     </section>
   );
