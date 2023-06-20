@@ -22,20 +22,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 
-import {
-  addToCart,
-  deleteOneItemFromCart,
-  removeFromCart,
-} from '@/redux/cartSlice';
-
-import Link from 'next/link';
-import Image from 'next/image';
-import ModalShoppinCart from '../modules/ModalShoppinCart';
-
-import StarRating from '../modules/StarRating ';
+import { addToCart, removeFromCart } from '@/redux/cartSlice';
 import ModalMessage from '../modules/ModalMessage';
 import { Radio, Typography } from '@material-tailwind/react';
+
 import DeliveryPlace from './DeliveryPlace';
+import Link from 'next/link';
 
 const DeliveryCompletionPage = () => {
   const [delivery, setDelivery] = useState('deliverySend');
@@ -65,8 +57,8 @@ const DeliveryCompletionPage = () => {
   }
 
   const onOptionChange = e => {
-    setDelivery(e.target.value)
-  }
+    setDelivery(e.target.value);
+  };
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
@@ -107,9 +99,8 @@ const DeliveryCompletionPage = () => {
             <Radio
               value='deliverySend'
               checked={delivery === 'deliverySend'}
-               onChange={onOptionChange}
-              name='description'
-              id='description-html'
+              onChange={onOptionChange}
+              name='delivery'
               color='green'
               label={
                 <div className=''>
@@ -135,9 +126,8 @@ const DeliveryCompletionPage = () => {
             <Radio
               value='placeSend'
               checked={delivery === 'placeSend'}
-               onChange={onOptionChange}
-              name='description'
-              id='description-html'
+              onChange={onOptionChange}
+              name='delivery'
               color='green'
               label={
                 <div className=''>
@@ -238,10 +228,10 @@ const DeliveryCompletionPage = () => {
 
                 <p className='text-warning flex justify-between items-start mt-2'>
                   <Warning2 size='16' />
-                  <p className='caption-sm mr-2'>
+                  <span className='caption-sm mr-2'>
                     هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی
                     شما محاسبه و به این مبلغ اضافه خواهد شد.
-                  </p>
+                  </span>
                 </p>
               </div>
 
@@ -261,7 +251,9 @@ const DeliveryCompletionPage = () => {
             </section>
           </>
         ) : (
-          <DeliveryPlace />
+          <section className='lg:hidden'>
+            <DeliveryPlace />
+          </section>
         )}
 
         {/* ------------------- desktop */}
@@ -277,9 +269,8 @@ const DeliveryCompletionPage = () => {
                 <Radio
                   value='deliverySend'
                   checked={delivery === 'deliverySend'}
-                   onChange={onOptionChange}
-                  name='description'
-                  id='description-html'
+                  onChange={onOptionChange}
+                  name='delivery'
                   color='green'
                   label={
                     <div className=''>
@@ -305,9 +296,8 @@ const DeliveryCompletionPage = () => {
                 <Radio
                   value='placeSend'
                   checked={delivery === 'placeSend'}
-                   onChange={onOptionChange}
-                  name='description'
-                  id='description-html'
+                  onChange={onOptionChange}
+                  name='delivery'
                   color='green'
                   label={
                     <div className=''>
@@ -441,10 +431,10 @@ const DeliveryCompletionPage = () => {
 
               <p className='text-warning flex justify-between items-start mt-2'>
                 <Warning2 />
-                <p className='caption-sm mr-2'>
+                <span className='caption-sm mr-2'>
                   هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال انتخابی
                   شما محاسبه و به این مبلغ اضافه خواهد شد.
-                </p>
+                </span>
               </p>
             </div>
 
@@ -455,10 +445,13 @@ const DeliveryCompletionPage = () => {
               </p>
             </div>
 
+<Link href="">
+
             <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
               ثبت سفارش
               <TickCircle className='mr-1' />
             </button>
+</Link>
           </section>
         </section>
       </>
