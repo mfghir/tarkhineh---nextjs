@@ -445,13 +445,12 @@ const DeliveryCompletionPage = () => {
               </p>
             </div>
 
-<Link href="">
-
-            <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
-              ثبت سفارش
-              <TickCircle className='mr-1' />
-            </button>
-</Link>
+            <Link href='/payment'>
+              <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
+                ثبت سفارش
+                <TickCircle className='mr-1' />
+              </button>
+            </Link>
           </section>
         </section>
       </>
