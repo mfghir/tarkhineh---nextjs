@@ -1,9 +1,7 @@
-import React from 'react'
+import SuccessPaymentPage from '@/components/templates/SuccessPaymentPage';
 
 const SuccessPayment = () => {
-  return (
-    <div>SuccessPayment</div>
-  )
-}
+  return <SuccessPaymentPage />;
+};
 
-export default SuccessPayment
+export default SuccessPayment;
