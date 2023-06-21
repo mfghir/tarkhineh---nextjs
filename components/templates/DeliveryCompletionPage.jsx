@@ -71,13 +71,13 @@ const DeliveryCompletionPage = () => {
 
       <div className='justify-center items-center hidden lg:flex mb-12'>
         <span className='flex items-center justify-center text-gray-400 body-sm'>
-          <TickSquare className='ml-1' />
+          <ShoppingCart size='32' className='ml-1' />
           سبد خرید
         </span>
 
         <p className='w-52 border border-dashed  dash text-gray-400 border-gray-400 mx-1'></p>
         <span className='flex items-center justify-center text-primary header-6'>
-          <ShoppingCart size='32' className='ml-1' />
+          <TickSquare className='ml-1' />
           تکمیل اطلاعات
         </span>
 
