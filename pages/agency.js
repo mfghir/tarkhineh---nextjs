@@ -1,8 +1,8 @@
-import React from 'react'
+import AgencyPage from '@/components/templates/AgencyPage'
 
 const Agency = () => {
   return (
-    <div>Agency</div>
+    <AgencyPage />
   )
 }
 

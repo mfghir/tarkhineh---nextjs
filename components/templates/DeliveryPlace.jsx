@@ -23,7 +23,7 @@ const DeliveryPlace = () => {
           </div>
 
           <button className='hidden lg:block caption-md rounded text-gray-700 border border-gray-700 hover:border-gray-800 hover:text-gray-800 active:border-black active:text-black duration-300 py-1 px-8 mt-6 mx-auto'>
-            مشاهده در نقشه{' '}
+            مشاهده در نقشه
           </button>
         </div>
 
