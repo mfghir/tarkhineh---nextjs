@@ -1,6 +1,8 @@
+import { Checkbox } from '@material-tailwind/react';
 import { Bank, Book, Chart, Component, EmptyWallet } from 'iconsax-react';
 import Image from 'next/image';
 import React from 'react';
+import DragDrop from '../modules/DragDrop';
 
 const AgencyPage = () => {
   return (
@@ -152,7 +154,7 @@ const AgencyPage = () => {
             درخواست مشاوره
           </button>
         </div>
-        <div className='flex justify-center items-start md:items-center flex-col pb-6 lg:pb-12 rounded-lg mb-6 lg:mb-12 border border-gray-400'>
+        <div className='flex justify-center items-start p-4  lg:px-4 lg:py-8 md:items-center flex-col pb-6 lg:pb-12 rounded-lg mb-6 lg:mb-12 border border-gray-400'>
           <p className='header-6 lg:header-4 text-gray-800'>
             فرم درخواست نمایندگی
           </p>
@@ -220,9 +222,7 @@ const AgencyPage = () => {
               <div className='w-fit h-fit'>
                 <iframe
                   src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207344.07543142117!2d51.18284130717154!3d35.70774021876205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2s!4v1687255819474!5m2!1sen!2s'
-                  width='100%'
-                //   height='205'
-                  style={{ border: '0' }}
+                  style={{ border: '0' , width : "100%" ,height:"100%" }}
                   allowFullScreen=''
                   loading='lazy'
                   referrerPolicy='no-referrer-when-downgrade'></iframe>
@@ -256,9 +256,38 @@ const AgencyPage = () => {
             </div>
           </div>
 
-          {/* <button className='button-sm lg:button-lg text-white bg-primary rounded py-2 px-4 mx-auto'>
+
+               <div className='w-full flex flex-col items-start mt-6 lg:mt-12'>
+            <p className='body-md lg:body-lg text-gray-800 mb-3'>
+              آدرس ملک متقاضی
+            </p>
+
+            <div className="w-full grid grid-cols-1 gap-y-4 lg:grid-cols-2 lg:gap-x-6">
+
+              <div className=" text-gray-700">
+                <p className="body-md mb-2 lg:mb-4">ملک متقاضی:</p>
+
+                <div className="body-sm grid grid-cols-1 md:grid-cols-2  gap-y-2">
+                <Checkbox  color="green" label="پروانه کسب دارد." />
+                <Checkbox  color="green" label="آشپزخانه دارد." />
+                <Checkbox  color="green" label="پارکینگ دارد." />
+                <Checkbox  color="green" label="انبار دارد." />
+                </div>
+
+              </div>
+
+              <div className="">
+                <p className="body-md text-gray-700 mb-1">تصاویر ملک</p>
+                <DragDrop />
+              </div>
+
+            </div>
+
+</div>
+
+          <button className='button-sm lg:button-lg text-white bg-primary rounded py-2 px-12 mx-auto mt-4'>
             ثبت اطلاعات
-          </button> */}
+          </button>
         </div>
       </section>
     </>
