@@ -27,7 +27,7 @@ const cartSlice = createSlice({
       }
     },
 
-    deleteOneItemFromCart: (state, action) => {
+    deleteOneItemFromCart: (state, action) => {  // XXX didn't work
       console.log('Deleting item:', action.payload);
       return (state = state.filter(item => item !== action.payload));
     },

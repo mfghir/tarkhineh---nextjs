@@ -43,14 +43,14 @@ const ProfileMenu = () => {
           </li>
         </Link>
 
-        <Link href='/profile/orderTracking'>
+        <Link href='/profile/order-tracking'>
           <li
             className={`flex items-center p-2 ${
-              pathname === '/profile/orderTracking'
+              pathname === '/profile/order-tracking'
                 ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
                 : ''
             }`}>
-            {pathname === '/profile/orderTracking' ? (
+            {pathname === '/profile/order-tracking' ? (
               <Wallet2 size='16' className='ml-1' variant='Bold' />
             ) : (
               <Wallet2 size='16' className='ml-1' />
@@ -80,7 +80,6 @@ const ProfileMenu = () => {
           آدرس‌های من
         </li>
 
-
         <Link href='/profile/exit'>
           <li
             className={`flex items-center text-error  p-2 ${
@@ -96,7 +95,6 @@ const ProfileMenu = () => {
             خروج
           </li>
         </Link>
-    
       </ul>
     </section>
   );

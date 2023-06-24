@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 const UerProfilePage = () => {
   const [showBtns, setShowBtns] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const { pathname,push } = useRouter();
+  const { push } = useRouter();
 
   const renderCustomInput = ({ ref }) => (
     <div className='relative w-full'>
@@ -33,7 +33,6 @@ const UerProfilePage = () => {
     <>
       <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between'>
         <div className='hidden lg:block lg:w-[25%] '>
-          {/* {pathname === '/profile/user-profile' ? '' : <ProfileMenu />} */}
           <ProfileMenu />
         </div>
 

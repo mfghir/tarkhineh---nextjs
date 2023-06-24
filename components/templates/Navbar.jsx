@@ -195,7 +195,8 @@ value={selectedValue} onChange={handleSelectChange}
           <li
             className={`relative flex justify-center items-center p-1 md:p-2 rounded  ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 
             ${
-              router.pathname === '/shopping-cart' ||  router.pathname === '/delivery-completion'
+              router.pathname === '/shopping-cart' ||
+              router.pathname === '/delivery-completion'
                 ? 'bg-primary text-white'
                 : 'bg-tint-100'
             }
@@ -224,22 +225,32 @@ value={selectedValue} onChange={handleSelectChange}
                 پروفایل
               </li>
             </Link>
-            <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
-              <Wallet2 size='16' className='ml-1' />
-              پیگیری سفارش
-            </li>
-            <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
-              <Heart size='16' className='ml-1' />
-              علاقه‌مندی‌ها
-            </li>
+
+            <Link href='/profile/order-tracking'>
+              <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
+                <Wallet2 size='16' className='ml-1' />
+                پیگیری سفارش
+              </li>
+            </Link>
+
+            <Link href='/profile/liking'>
+              <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
+                <Heart size='16' className='ml-1' />
+                علاقه‌مندی‌ها
+              </li>
+            </Link>
+
             <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
               <Location size='16' className='ml-1' />
               آدرس‌های من
             </li>
-            <li className='cursor-pointer flex justify-start items-center bg-white hover:bg-tint-100 p-2 whitespace-no-wrap rounded-br rounded-bl'>
-              <LogoutCurve size='16' className='ml-1' />
-              خروج از حساب
-            </li>
+
+            <Link href='/profile/exit'>
+              <li className='cursor-pointer flex justify-start items-center bg-white hover:bg-tint-100 p-2 whitespace-no-wrap rounded-br rounded-bl'>
+                <LogoutCurve size='16' className='ml-1' />
+                خروج از حساب
+              </li>
+            </Link>
           </ul>
         </li>
       </ul>

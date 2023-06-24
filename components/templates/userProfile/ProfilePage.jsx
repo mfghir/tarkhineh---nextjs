@@ -1,10 +1,11 @@
 import { ArrowRight2, Edit } from 'iconsax-react';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from 'react-modern-calendar-datepicker';
 import ProfileMenu from './ProfileMenu';
-import { useRouter } from 'next/router';
+
 
 const ProfilePage = () => {
   const [showBtns, setShowBtns] = useState(false);
