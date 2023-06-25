@@ -1,8 +1,7 @@
 import {
   Add,
-  ArrowLeft2,
+  AddCircle,
   ArrowRight2,
-  CloseCircle,
   Document,
   Location,
   Minus,
@@ -35,7 +34,7 @@ const DeliveryCompletionPage = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.items);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
   const buttonClicked = useSelector(state => state.button);
 
@@ -184,8 +183,8 @@ const DeliveryCompletionPage = () => {
                   آدرس‌ها
                 </p>
 
-                <p className='caption-md text-primary flex justify-center items-center'>
-                  <CloseCircle size='16' className='ml-1' />
+                <p className='caption-md text-primary flex justify-center items-center cursor-pointer'>
+                  <AddCircle size='16' className='ml-1' />
                   افزودن آدرس
                 </p>
               </div>
@@ -329,8 +328,8 @@ const DeliveryCompletionPage = () => {
                       آدرس‌ها
                     </p>
 
-                    <p className='caption-md text-primary flex justify-center items-center'>
-                      <CloseCircle size='16' className='ml-1' />
+                    <p className='caption-md text-primary flex justify-center items-center cursor-pointer'>
+                      <AddCircle size='16' className='ml-1' />
                       افزودن آدرس
                     </p>
                   </div>

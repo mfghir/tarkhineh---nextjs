@@ -23,7 +23,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.items);
 
   const [selectedValue, setSelectedValue] = useState('');
 

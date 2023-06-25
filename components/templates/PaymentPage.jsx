@@ -27,7 +27,7 @@ const PaymentPage = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.items);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
 
   const getTotalPrice = () => {
@@ -104,6 +104,7 @@ const PaymentPage = () => {
               <WalletMoney className='w-4 h-4 lg:w-6 lg:h-6 ml-1' />
               روش پرداخت
             </div>
+
             <div className='w-full lg:w-7/12 lg:mr-11 flex flex-col lg:flex-row justify-between items-center'>
               <div className='w-full flex flex-row items-center text-gray-700'>
                 <Radio
@@ -132,7 +133,7 @@ const PaymentPage = () => {
                 <CardPos className='w-4 h-4 lg:w-6 lg:h-6 mr-1' />
               </div>
 
-              <div className='w-full flex flex-row items-center text-gray-700'>
+              <div className='w-full flex flex-row items-center text-gray-700 '>
                 <Radio
                   value='placePayment'
                   checked={payment === 'placePayment'}

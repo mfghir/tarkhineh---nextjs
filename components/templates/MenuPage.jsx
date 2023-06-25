@@ -6,8 +6,8 @@ import foodMenuData from '@/db/foodMenuData';
 import Image from 'next/image';
 import StarRating from '../modules/StarRating ';
 
-import { useDispatch } from 'react-redux';
-import { addToCart } from '@/redux/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, toggleFavorite } from '@/redux/cartSlice';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 import Link from 'next/link';
 
@@ -21,7 +21,14 @@ const MenuPage = () => {
   const sandwich = foodMenuData.filter(food => food.type === 'sandwich');
 
   const dispatch = useDispatch();
-  // const priceFa= useFarsiNumber(123)
+  // const cart = useSelector(state => state.cart.items);
+  const favorites = useSelector(state => state.cart.favorites);
+
+  // const toggleFavHandler = (item)=>{
+  //   dispatch(toggleFavorite(item))
+  // // const isFavorite = favorites.includes(item.id);
+  // // return isFavorite
+  // }
 
   return (
     <>
@@ -96,6 +103,7 @@ const MenuPage = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
             {iranianFood.map((item, index) => {
               const {
+                id,
                 name,
                 img,
                 ingredient,
@@ -108,7 +116,7 @@ const MenuPage = () => {
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
-                  key={index}>
+                  key={id}>
                   <Image
                     className='object-cover w-[92px] h-full lg:w-[169px]'
                     src={img}
@@ -123,6 +131,7 @@ const MenuPage = () => {
                         <p className='caption-md lg:header-7 text-gray-800'>
                           {name}
                         </p>
+
                         <Heart
                           className='hidden lg:w-6 lg:h-6 lg:block'
                           color='#717171'
@@ -147,10 +156,34 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                        color='#717171'
-                      />
+                      <button onClick={() => dispatch(toggleFavorite(item))}>
+                        {favorites.includes(id) === id ? (
+                          <>
+                            <Heart
+                              className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                            {/* <Heart
+                          className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                          color='#717171'
+                        /> */}
+                          </>
+                        ) : (
+                          <>
+                            <Heart
+                              className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                              color='#717171'
+                            />
+
+                            {/* <Heart
+                          className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
+                          variant='Bold'
+                          color='#ED2E2E'
+                        /> */}
+                          </>
+                        )}
+                      </button>
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
                         <button

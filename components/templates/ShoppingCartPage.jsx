@@ -33,7 +33,7 @@ const ShoppingCartPage = () => {
   const [deleteModal, setDeleteModal] = useState(null);
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.items);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
   const buttonClicked = useSelector(state => state.button);
 
@@ -46,7 +46,7 @@ const ShoppingCartPage = () => {
 
   function getTotalDiscountPrice(cart) {
     let totalDiscountPrice = 0;
-    cart.map(item => {
+    cart?.map(item => {
       if (item.discountPrice) {
         totalDiscountPrice += parseFloat(item.discountPrice);
       }
