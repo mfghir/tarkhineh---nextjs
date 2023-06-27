@@ -57,14 +57,13 @@ const orderTrackingData = [
     type: 'canceled',
     img: '/images/sandwich/sandwich3.png',
     name: 'ساندویچ کتلت کدو سبز',
-    ingredient: 'کدو سبز، هویج، سیب زمینی، پیاز',
     discountPrice: '',
     price: '145000',
     num: 5,
   },
   {
     id: 13,
-    type: 'pizza',
+    type: 'canceled',
     img: '/images/pizza/pizza8.png',
     name: 'پیتزا پنیر',
     discountPrice: '125000',
@@ -73,7 +72,7 @@ const orderTrackingData = [
   },
   {
     id: 14,
-    type: 'pizza',
+    type: 'canceled',
     img: '/images/pizza/pizza4.png',
     name: 'پیتزا قارچ',
     discountPrice: '215000',
@@ -82,7 +81,7 @@ const orderTrackingData = [
   },
   {
     id: 15,
-    type: 'pizza',
+    type: 'canceled',
     img: '/images/pizza/pizza5.png',
     name: 'پیتزا پپرونی',
     discountPrice: '',
