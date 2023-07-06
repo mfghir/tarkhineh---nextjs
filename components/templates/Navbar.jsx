@@ -18,27 +18,33 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setButtonClick } from '@/redux/buttonSlice';
+import MenuPhone from '../modules/MenuPhone';
 
 const Navbar = () => {
+  // const [test, setTest] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const cart = useSelector(state => state.cart.items);
+  const dispatch = useDispatch();
 
-  const [selectedValue, setSelectedValue] = useState('');
 
-  function handleSelectChange(e) {
-    setSelectedValue(e.target.value);
-    router.push(`/branch/${e.target.value}`);
-  }
+  // const [selectedValue, setSelectedValue] = useState('');
+
+  // function handleSelectChange(e) {
+  //   setSelectedValue(e.target.value);
+  //   router.push(`/branch/${e.target.value}`);
+  // }
 
   return (
-    <section className='phoneMenu-shadow w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 lg:flex lg:px-20 lg:py-8'>
+    <section className='phoneMenu-shadow w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 md:grid-flow-row lg:flex lg:px-20 lg:py-8'>
       <HambergerMenu
         className='lg:hidden md:text-2xl text-primary cursor-pointer'
         onClick={() => setShowMenu(!showMenu)}
       />
-      {showMenu && <PhoneMenu showMenu={showMenu} />}
+      {/* {showMenu && <PhoneMenu showMenu={showMenu} />} */}
+      {showMenu && <MenuPhone showMenu={showMenu} />}
 
       <Link href='/'>
         <Image
@@ -50,9 +56,9 @@ const Navbar = () => {
         />
       </Link>
 
-      <Link href='/'>
+      <Link href='/'  className='hidden lg:block'>
         <Image
-          className='hidden lg:block'
+         
           src='/images/Logo-desktop.png'
           alt='Logo-desktop'
           width={155}
@@ -213,7 +219,7 @@ value={selectedValue} onChange={handleSelectChange}
         </Link>
 
         <li className='user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
-          <div className='flex justify-center items-baseline cursor-pointer '>
+          <div className='flex justify-center items-baseline cursor-pointer ' onClick={()=> dispatch(setButtonClick(true)) } >
             <User className='text-primary w-4 h-4 md:w-6 md:h-6' />
             <ArrowDown2 size='16' className='mr-[2px] duration-300 hidden' />
           </div>

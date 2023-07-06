@@ -12,7 +12,9 @@ import { convertToFaNumber } from '../modules/FarsiNumber';
 import Link from 'next/link';
 
 const MenuPage = () => {
+  const cart = useSelector(state => state.cart.items);
   const iranianFood = foodMenuData.filter(food => food.type === 'iranianFood');
+
   const nonIranianFood = foodMenuData.filter(
     food => food.type === 'nonIranianFood'
   );
@@ -21,14 +23,9 @@ const MenuPage = () => {
   const sandwich = foodMenuData.filter(food => food.type === 'sandwich');
 
   const dispatch = useDispatch();
-  // const cart = useSelector(state => state.cart.items);
   const favorites = useSelector(state => state.cart.favorites);
-
-  // const toggleFavHandler = (item)=>{
-  //   dispatch(toggleFavorite(item))
-  // // const isFavorite = favorites.includes(item.id);
-  // // return isFavorite
-  // }
+  const favoriteItems = cart.filter((item) => favorites.includes(item.id));
+  
 
   return (
     <>
@@ -156,8 +153,8 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <button onClick={() => dispatch(toggleFavorite(item))}>
-                        {favorites.includes(id) === id ? (
+                      <button onClick={() => dispatch(toggleFavorite(item) )}>
+                        {favoriteItems   ? (
                           <>
                             <Heart
                               className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
@@ -174,7 +171,7 @@ const MenuPage = () => {
                             <Heart
                               className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
                               color='#717171'
-                            />
+                            />dd
 
                             {/* <Heart
                           className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'

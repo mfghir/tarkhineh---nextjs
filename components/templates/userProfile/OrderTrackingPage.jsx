@@ -15,12 +15,13 @@ import ProfileMenu from './ProfileMenu';
 import { convertToFaNumber } from '@/components/modules/FarsiNumber';
 import orderTrackingData from '@/db/orderTrackingData';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { setItems } from '@/redux/orderSlice';
 
 const OrderTrackingPage = () => {
   const { push } = useRouter();
@@ -37,8 +38,23 @@ const OrderTrackingPage = () => {
     food => food.type === 'delivered'
   );
 
-  const getTotalPrice = () => {
+
+  const getTotalPriceCurrentOrder = () => {
     return currentOrder.reduce(
+      (accumulator, item) => accumulator + item.num * item.price,
+      0
+    );
+  };
+
+  const getTotalPriceCanceledOrder = () => {
+    return canceledOrder.reduce(
+      (accumulator, item) => accumulator + item.num * item.price,
+      0
+    );
+  };
+
+  const getTotalPriceDeliveredOrder = () => {
+    return deliveredOrder.reduce(
       (accumulator, item) => accumulator + item.num * item.price,
       0
     );
@@ -115,7 +131,7 @@ const OrderTrackingPage = () => {
                     <Calendar className='w-3 h-3 lg:w-4 lg:h-4 ml-1' />
                     <span>شنبه، ۸ مرداد، ساعت ۱۸:۵۳</span>
                     <span className='mx-1 hidden lg:block'>
-                      مبلغ: {convertToFaNumber(getTotalPrice())} تومان
+                      مبلغ: {convertToFaNumber(getTotalPriceCurrentOrder())} تومان
                     </span>
                     <span className='hidden lg:block'>تخفیف: ۲۸٬۵۰۰ تومان</span>
                   </p>
@@ -258,7 +274,7 @@ const OrderTrackingPage = () => {
                   <Calendar className='w-3 h-3 lg:w-4 lg:h-4 ml-1' />
                   <span>شنبه، ۸ مرداد، ساعت ۱۸:۵۳</span>
                   <span className='mx-1 hidden lg:block'>
-                    مبلغ: ۲۲۸٬۵۰۰ تومان
+                  مبلغ: {convertToFaNumber(getTotalPriceCanceledOrder())} تومان
                   </span>
                   <span className='hidden lg:block'>تخفیف: ۲۸٬۵۰۰ تومان</span>
                 </li>
@@ -395,7 +411,7 @@ const OrderTrackingPage = () => {
                   <Calendar className='w-3 h-3 lg:w-4 lg:h-4 ml-1' />
                   <span>شنبه، ۸ مرداد، ساعت ۱۸:۵۳</span>
                   <span className='mx-1 hidden lg:block'>
-                    مبلغ: ۲۲۸٬۵۰۰ تومان
+                  مبلغ: {convertToFaNumber(getTotalPriceDeliveredOrder())} تومان
                   </span>
                   <span className='hidden lg:block'>تخفیف: ۲۸٬۵۰۰ تومان</span>
                 </li>

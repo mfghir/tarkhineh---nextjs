@@ -40,7 +40,7 @@ const cartSlice = createSlice({
       const { id } = action.payload;
       const itemIndex = state.items.findIndex(item => item.id === id);
 
-      if (itemIndex === -1) return;
+      if (itemIndex === -1) return; 
 
       const item = state.items[itemIndex];
       const isFavorite = state.favorites.includes(id);
@@ -52,6 +52,19 @@ const cartSlice = createSlice({
       }
 
       state.items[itemIndex] = { ...item, isFavorite: !isFavorite };
+
+
+      // if (!state.favorites.find((item) => item.id === id)) {
+      //   state.favorites.push({
+      //     ...action.payload
+      //   });
+      //   console.log("state.favorites" ,  state.favorites);
+      // }
+      // return {
+      //   ...state,
+      //   favorites: [...state.favorites],
+    
+      // };
 
    
     },
@@ -72,3 +85,5 @@ export const {
   toggleFavorite,
   clearList,
 } = cartSlice.actions;
+
+
