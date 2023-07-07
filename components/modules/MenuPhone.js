@@ -32,6 +32,7 @@ import {
   ArrowDown2,
   CallCalling,
   Home,
+  HomeHashtag,
   MenuBoard,
   Profile2User,
 } from 'iconsax-react';
@@ -50,12 +51,12 @@ export default function MenuPhone({ showMenu }) {
     <>
       {showMenu ? (
         <section
-          className={`phoneMenu-bg z-30  w-full  top-0 right-0 h-screen transition-all 
-          ${close ? 'hidden' : 'fixed'}
-          `}
-          // onClick={() => setClose(!close)}
-        >
-          <Card className='fixed top-0 right-0 h-screen w-64  z-50 rounded-none'>
+          className={`w-full h-screen  top-0 right-0 z-30 transition-all fixed 
+          ${close ? 'hidden' : 'fixed'}`}>
+          <div
+            className='phoneMenu-bg z-40  w-full  top-0 right-0 h-screen transition-all'
+            onClick={() => setClose(!close)}></div>
+          <Card className=' h-screen w-64  z-50 rounded-none fixed top-0 right-0 transition-all'>
             <div className='mb-2 flex items-center'>
               <Link href='/'>
                 <Image
@@ -70,7 +71,8 @@ export default function MenuPhone({ showMenu }) {
             <List className='py-2 px-4 rounded-none'>
               <Link href='/'>
                 <ListItem
-                  className={` hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400 p-0 rounded-none pb-1 mb-2 ${
+                  className={`mb-0 hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400 p-0 rounded-none pb-1
+                  ${
                     router.pathname === '/'
                       ? 'text-primary caption-md'
                       : 'text-gray-800 caption-sm'
@@ -89,7 +91,7 @@ export default function MenuPhone({ showMenu }) {
                     onClick={() => handleOpen(1)}>
                     <MenuBoard size='16' />
 
-                    <Typography className='mr-1 caption-sm '>منو</Typography>
+                    <ListItem className='caption-sm mr-1'>منو</ListItem>
                   </AccordionHeader>
 
                   <ArrowDown2
@@ -107,7 +109,8 @@ export default function MenuPhone({ showMenu }) {
                         router.pathname === '/menu'
                           ? 'text-primary caption-md '
                           : ''
-                      }>
+                      }
+                      onClick={() => setClose(!close)}>
                       <ListItem className='caption-sm p-2'>غذای اصلی</ListItem>
                     </Link>
 
@@ -121,13 +124,12 @@ export default function MenuPhone({ showMenu }) {
               <Accordion open={open === 2}>
                 <ListItem
                   selected={open === 2}
-                  className='p-0 rounded-none border-b border-gray-400 '>
+                  className='p-0 rounded-none border-b border-gray-400 mb-2'>
                   <AccordionHeader
-                    className='flex justify-start items-center hover:text-primary duration-300 p-0 border-none'
+                    className=' flex justify-start items-center hover:text-primary duration-300 p-0 border-none'
                     onClick={() => handleOpen(2)}>
-                    <MenuBoard size='16' />
-
-                    <Typography className='mr-1 caption-sm '>شعبه</Typography>
+                    <HomeHashtag size='16' />
+                    <ListItem className='caption-sm mr-1'>شعبه</ListItem>
                   </AccordionHeader>
 
                   <ArrowDown2
@@ -144,9 +146,10 @@ export default function MenuPhone({ showMenu }) {
                       className={
                         router.pathname === '/branch/ekbatan'
                           ? 'text-primary caption-md '
-                          : ''
-                      }>
-                      <ListItem className='caption-sm p-2'>اکباتان</ListItem>
+                          : 'caption-sm'
+                      }
+                      onClick={() => setClose(!close)}>
+                      <ListItem className='p-2'>اکباتان</ListItem>
                     </Link>
 
                     <ListItem className='caption-sm p-2'>چالوس</ListItem>
@@ -163,7 +166,9 @@ export default function MenuPhone({ showMenu }) {
                     ? 'text-primary caption-md '
                     : 'text-gray-800 caption-sm'
                 }>
-                <ListItem className='hover:caption-md hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400  p-0 rounded-none pb-1 mb-2 '>
+                <ListItem
+                  className='hover:caption-md hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400  p-0 rounded-none pb-1 mb-2 '
+                  onClick={() => setClose(!close)}>
                   <Profile2User size='16' className='ml-2' />
                   درباره ما
                 </ListItem>
@@ -176,7 +181,9 @@ export default function MenuPhone({ showMenu }) {
                     ? 'text-primary caption-md '
                     : 'text-gray-800 caption-sm '
                 }>
-                <ListItem className='hover:caption-md hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400  p-0 rounded-none pb-1'>
+                <ListItem
+                  className='hover:caption-md hover:text-primary duration-300 flex justify-start items-center border-b border-gray-400  p-0 rounded-none pb-1'
+                  onClick={() => setClose(!close)}>
                   <CallCalling size='16' className='ml-2' />
                   تماس با ما
                 </ListItem>
