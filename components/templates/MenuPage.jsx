@@ -24,8 +24,12 @@ const MenuPage = () => {
 
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.cart.favorites);
-  const favoriteItems = cart.filter((item) => favorites.includes(item.id));
-  
+  const favoriteItems = cart.filter(item => favorites.includes(item.id));
+
+  const searchTerm = useSelector(state => state.searchTerm);
+  const filteredResults = foodMenuData.filter(result =>
+    result.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -83,6 +87,8 @@ const MenuPage = () => {
           <SearchBar />
         </div>
       </nav>
+
+    
 
       <section className='px-5 lg:px-20 mt-14 lg:mt-8 '>
         <section className='mb-6 lg:mb-12'>
@@ -153,8 +159,8 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <button onClick={() => dispatch(toggleFavorite(item) )}>
-                        {favoriteItems   ? (
+                      <button onClick={() => dispatch(toggleFavorite(item))}>
+                        {favoriteItems ? (
                           <>
                             <Heart
                               className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
@@ -171,8 +177,8 @@ const MenuPage = () => {
                             <Heart
                               className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
                               color='#717171'
-                            />dd
-
+                            />
+                            dd
                             {/* <Heart
                           className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
                           variant='Bold'
