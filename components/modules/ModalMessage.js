@@ -17,13 +17,12 @@ const ModalMessage = () => {
 
   return (
     <>
-      {showModal && cart.length >0  ? (
+      {showModal && cart.length > 0 ? (
         ''
       ) : (
-
         <div
           className={`inset-0 overflow-y-auto z-50 min-h-screen 
-      ${backModal || cart.length === 0  ? 'hidden' : 'fixed'}`}>
+      ${backModal || cart.length === 0 ? 'hidden' : 'fixed'}`}>
           <div className='flex items-center justify-center min-h-screen'>
             <div className='fixed inset-0 transition-opacity'>
               <div
@@ -37,20 +36,21 @@ const ModalMessage = () => {
                   حذف محصولات
                 </p>
 
-                <svg
-                onClick={toggleModal}
-                  className='h-6 w-6 text-gray-700 cursor-pointer'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M6 18L18 6M6 6l12 12'
-                  />
-                </svg>
+                <button onClick={toggleModal}>
+                  <svg
+                    className='h-6 w-6 text-gray-700 cursor-pointer'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                </button>
               </div>
 
               <div className='p-6'>

@@ -6,6 +6,7 @@ import buttonReducer from '@/redux/buttonSlice';
 import phoneVerificationReducer from '@/redux/phoneVerificationSlice';
 import searchTermReducer from '@/redux/searchTermSlice';
 
+import modalReducer from '@/redux/modalSlice';
 // import {orderReducer}  from '@/redux/orderSlice';
 // import signupReducer from '@/redux/signupSlice';
 
@@ -15,9 +16,10 @@ const createStore = preloadedState =>
       cart: cartReducer,
       input: inputReducer,
       button: buttonReducer,
-      
+
       phoneVerification: phoneVerificationReducer,
       searchTerm: searchTermReducer,
+      modal: modalReducer,
 
       // signup: signupReducer,
       // order: orderReducer,

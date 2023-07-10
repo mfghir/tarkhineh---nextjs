@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import foodMenuData from '@/db/foodMenuData';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 import { addToCart, toggleFavorite } from '@/redux/cartSlice';
+import SearchBar from '../modules/SearchBar';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -22,105 +23,92 @@ const SearchPage = () => {
           {filteredResults.map(item => {
             const {
               id,
-              name,
               img,
-              ingredient,
+              name,
               discount,
               discountPrice,
               price,
               star,
+              totalStars,
             } = item;
 
             return (
-              <div
-                className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
-                key={id}>
-                <Image
-                  className='object-cover w-[92px] h-full lg:w-[169px]'
-                  src={img}
-                  alt={name}
-                  width={169}
-                  height={158}
-                />
+              // <div
+              //   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
+              //   key={id}>
+           
+                  <div
+                  key={id}
+                    className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
+                    <Image
+                      className='object-cover w-full h-[109px]  lg:h-64 '
+                      src={img}
+                      alt={name}
+                      width={288}
+                      height={256}
+                    />
 
-                <ul className='w-full p-2 lg:p-4'>
-                  <li className='flex justify-end items-center lg:flex-wrap'>
-                    <div className='flex justify-between items-center w-full'>
-                      <p className='caption-md lg:header-7 text-gray-800'>
-                        {name}
-                      </p>
-
-                      <Heart
-                        className='hidden lg:w-6 lg:h-6 lg:block'
-                        color='#717171'
-                      />
-                    </div>
-
-                    <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
-                      <span className='text-error mr-2'>{discount}</span>
-                      <span className='text-gray-500 line-through'>
-                        {convertToFaNumber(discountPrice)}
-                      </span>
+                    <p className='caption-md lg:header-7 text-gray-800 text-center my-1 lg:my-2'>
+                      {name}
                     </p>
-                  </li>
 
-                  <li className='flex justify-between items-center text-gray-800 mt-2 mb-1 '>
-                    <p className='caption-sm lg:caption-md line-clamp-1'>
-                      {ingredient}
-                    </p>
-                    <p className='caption-sm lg:body-lg whitespace-nowrap mr-2'>
-                      {convertToFaNumber(price)} تومان
-                    </p>
-                  </li>
+                    <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
+                      <li className='flex justify-center items-center flex-row-reverse caption-sm'>
+                        <span className='text-error mr-2'>{convertToFaNumber(discount)}</span>
+                        <span className='text-gray-500 line-through'>{convertToFaNumber(discountPrice)}</span>
+                      </li>
 
-                  <li className='flex justify-between items-center w-full'>
-                    <button onClick={() => dispatch(toggleFavorite(item))}>
-                      {/* {favoriteItems ? (
-                   <>
-                     <Heart
-                       className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                       variant='Bold'
-                       color='#ED2E2E'
-                     /> */}
-                      <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                        color='#717171'
-                      />
-                      {/* </>
-                 ) : (
-                   <>
-                     <Heart
-                       className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                       color='#717171'
-                     />
-                     dd
-                     {/* <Heart
-                   className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                   variant='Bold'
-                   color='#ED2E2E'
-                 /> */}
-                      {/* </> */}
-                      {/* )} */}
+                      <li className='flex justify-between flex-row-reverse text-gray-500'>
+                        <span className='hidden lg:block caption-sm mr-1'>
+                          افزودن به علاقمندی‌ها
+                        </span>
+                        <Heart size='16' />
+                      </li>
+                    </ul>
+
+                    <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
+                      <li className='caption-sm lg:body-md text-gray-800'>
+                        {convertToFaNumber(price)}
+                      </li>
+
+                      <li className='flex justify-between flex-row-reverse items-center'>
+                        <span className='hidden lg:block caption-sm text-gray-500'>
+                          ({convertToFaNumber(totalStars)})امتیاز
+                        </span>
+                        <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
+                          {convertToFaNumber(star)}
+                        </span>
+                        <span className='text-base flex justify-center items-center text-warning-light'>
+                          &#9733;
+                        </span>
+                      </li>
+                    </ul>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                      افزودن به سبد خرید
                     </button>
-
-                    <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
-                      <button
-                        className='bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white px-2 py-1 caption-sm lg:button-lg mr-2'
-                        onClick={() => dispatch(addToCart(item))}>
-                        افزودن به سبد خرید
-                      </button>
-                      <span className=''>
-                        <StarRating rating={star} />
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                  </div>
+               
+              
             );
           })}
         </div>
       ) : (
-        <section className=''>not</section>
+        <section className='flex flex-col justify-center items-center'>
+          <p className='body-xl text-gray-800 mb-4'>
+            موردی با این مشخصات پیدا نکردیم!
+          </p>
+
+          <div className='w-[360px] mb-12'>
+            <SearchBar />
+          </div>
+
+          <Image
+            src='/images/not-found.png'
+            alt='not-found'
+            width={390}
+            height={345}
+          />
+        </section>
       )}
     </section>
   );

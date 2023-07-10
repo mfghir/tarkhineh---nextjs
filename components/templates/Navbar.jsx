@@ -21,6 +21,7 @@ import { convertToFaNumber } from '../modules/FarsiNumber';
 import { useDispatch, useSelector } from 'react-redux';
 import { setButtonClick } from '@/redux/buttonSlice';
 import MenuPhone from '../modules/MenuPhone';
+import { showModal } from '@/redux/modalSlice';
 
 const Navbar = () => {
   // const [test, setTest] = useState(false);
@@ -29,6 +30,11 @@ const Navbar = () => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
+ 
+ 
+  const handleOpen = () => {
+    dispatch(showModal());
+  }
 
   // const [selectedValue, setSelectedValue] = useState('');
 
@@ -193,13 +199,15 @@ value={selectedValue} onChange={handleSelectChange}
       </ul>
 
       <ul className='text-primary flex justify-between md:justify-end'>
-        <li className='hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100'>
+        <li className='hidden md:flex justify-center items-center p-1 md:p-2 rounded bg-tint-100 hover:text-white hover:bg-shade-200 active:bg-shade-300 duration-300 cursor-pointer'
+        onClick={handleOpen}
+        >
           <SearchNormal1 />
         </li>
 
         <Link href='/shopping-cart'>
           <li
-            className={`relative flex justify-center items-center p-1 md:p-2 rounded  ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 
+            className={`relative flex justify-center items-center p-1 md:p-2 rounded  ml-1 md:mx-2 hover:text-white hover:bg-shade-200 active:bg-shade-300 duration-300 
             ${
               router.pathname === '/shopping-cart' ||
               router.pathname === '/delivery-completion'
@@ -218,7 +226,7 @@ value={selectedValue} onChange={handleSelectChange}
           </li>
         </Link>
 
-        <li className='user-dropdown relative z-20  p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
+        <li className='user-dropdown relative z-20 p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
           <div className='flex justify-center items-baseline cursor-pointer ' onClick={()=> dispatch(setButtonClick(true)) } >
             <User className='text-primary w-4 h-4 md:w-6 md:h-6' />
             <ArrowDown2 size='16' className='mr-[2px] duration-300 hidden' />

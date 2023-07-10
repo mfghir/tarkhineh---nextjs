@@ -9,6 +9,7 @@ import {
 } from '@/redux/phoneVerificationSlice';
 import { useState } from 'react';
 import LoginPage from '../templates/LoginPage';
+import ModalSearch from './ModalSearch';
 
 const estedad = LocalFont({
   src: [
@@ -55,6 +56,7 @@ const estedad = LocalFont({
 
 const Layout = ({ children }) => {
   const buttonClicked = useSelector(state => state.button);
+  const visible = useSelector((state) => state.modal.visible);
 
   return (
     <div className={`${estedad.variable} font-sans relative`}>
@@ -65,8 +67,10 @@ const Layout = ({ children }) => {
       ) : ''}
         <>
           <Navbar />
+          {visible && <ModalSearch />}
           <main>{children}</main>
           <Footer />
+
         </>
       
     </div>
