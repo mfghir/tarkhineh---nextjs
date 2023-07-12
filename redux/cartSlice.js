@@ -31,9 +31,8 @@ const cartSlice = createSlice({
     },
 
     deleteOneItemFromCart(state, action) {
-      return (state.items = state.items.filter(
-        item => item !== action.payload
-      ));
+      const updatedItems = state.items.filter(item => item.id !== action.payload.id);
+      return { ...state, items: updatedItems };
     },
 
     toggleFavorite(state, action) {

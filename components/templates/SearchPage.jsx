@@ -19,7 +19,7 @@ const SearchPage = () => {
   return (
     <section className='px-5 lg:px-20 mt-14 lg:mt-8 mb-6 lg:mb-12'>
       {filteredResults.length > 0 ? (
-        <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6 '>
+        <div className='grid grid-cols-1 md:grid-cols-4 md:gap-x-6 gap-y-3 md:gap-y-6 '>
           {filteredResults.map(item => {
             const {
               id,
@@ -68,12 +68,12 @@ const SearchPage = () => {
 
                     <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
                       <li className='caption-sm lg:body-md text-gray-800'>
-                        {convertToFaNumber(price)}
+                        {convertToFaNumber(price)} تومان
                       </li>
 
                       <li className='flex justify-between flex-row-reverse items-center'>
                         <span className='hidden lg:block caption-sm text-gray-500'>
-                          ({convertToFaNumber(totalStars)})امتیاز
+                          ({convertToFaNumber(20)}) امتیاز
                         </span>
                         <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
                           {convertToFaNumber(star)}

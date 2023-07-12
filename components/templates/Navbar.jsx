@@ -44,7 +44,7 @@ const Navbar = () => {
   // }
 
   return (
-    <section className='phoneMenu-shadow w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 md:grid-flow-row lg:flex lg:px-20 lg:py-8'>
+    <section className='phoneMenu-shadow sticky top-0 z-50 bg-white w-full flex justify-between items-center flex-nowrap p-5 md:grid md:grid-cols-3 md:grid-flow-row lg:flex lg:justify-between lg:px-20 lg:py-8'>
       <HambergerMenu
         className='lg:hidden md:text-2xl text-primary cursor-pointer'
         onClick={() => setShowMenu(!showMenu)}

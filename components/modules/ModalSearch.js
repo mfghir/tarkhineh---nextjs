@@ -24,8 +24,8 @@ const ModalSearch = () => {
           open={visible}
           handler={handlClose}
           size='xs'
-          className='bg-red-200 '>
-          <section className={`bg-white max-w-xl rounded-lg ${router.pathname === '/search' ? handlClose() : ""} `}>
+          className='bg-red-200 h-52 overflow-hidden'>
+          <section className={`bg-white h-full max-w-xl rounded-lg ${router.pathname === '/search' ? handlClose() : ""} `}>
 
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
@@ -64,7 +64,7 @@ const ModalSearch = () => {
           </section>
         </Dialog>
       ) : (
-        'no'
+        'no-----------------------'
       )}
       {/* </section> */}
     </>

@@ -26,10 +26,10 @@ const MenuPage = () => {
   const favorites = useSelector(state => state.cart.favorites);
   const favoriteItems = cart.filter(item => favorites.includes(item.id));
 
-  const searchTerm = useSelector(state => state.searchTerm);
-  const filteredResults = foodMenuData.filter(result =>
-    result.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const searchTerm = useSelector(state => state.searchTerm);
+  // const filteredResults = foodMenuData.filter(result =>
+  //   result.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <>

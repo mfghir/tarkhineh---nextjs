@@ -9,13 +9,21 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import SliderLeftBtn from '../pages/home/SliderLeftBtn';
+
 import SliderEkbatan from '../pages/home/SliderEkbatan';
 import OpinionSlider from '../pages/home/OpinionSlider';
+import { useDispatch } from 'react-redux';
+
+import { addToCart } from '@/redux/cartSlice';
+import { convertToFaNumber } from '../modules/FarsiNumber';
 
 const EkbatanBranch = ({ data }) => {
   const specialOffer = data.filter(food => food.type === 'specialOffer');
   const favFood = data.filter(food => food.type === 'favFood');
   const foreignFood = data.filter(food => food.type === 'foreignFood');
+
+  const dispatch = useDispatch();
+
 
   return (
     <>
@@ -51,8 +59,9 @@ const EkbatanBranch = ({ data }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {specialOffer.map((item, index) => {
+            {specialOffer.map((item) => {
               const {
+                id,
                 img,
                 name,
                 discount,
@@ -62,9 +71,9 @@ const EkbatanBranch = ({ data }) => {
                 totalStars,
               } = item;
               return (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={id}>
                   <div
-                    key={index}
+              
                     className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
@@ -94,22 +103,24 @@ const EkbatanBranch = ({ data }) => {
 
                     <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
                       <li className='caption-sm lg:body-md text-gray-800'>
-                        {price}
+                        {convertToFaNumber(price)}
                       </li>
 
                       <li className='flex justify-between flex-row-reverse items-center'>
                         <span className='hidden lg:block caption-sm text-gray-500'>
-                          ({totalStars})
+                          ({convertToFaNumber(totalStars)}) امتیاز
                         </span>
                         <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
-                          {star}
+                          {convertToFaNumber(star)}
                         </span>
                         <span className='text-base flex justify-center items-center text-warning-light'>
                           &#9733;
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                    onClick={() => dispatch(addToCart(item))}
+                    >
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -146,8 +157,9 @@ const EkbatanBranch = ({ data }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {favFood.map((item, index) => {
+            {favFood.map((item) => {
               const {
+                id,
                 img,
                 name,
                 discount,
@@ -157,9 +169,8 @@ const EkbatanBranch = ({ data }) => {
                 totalStars,
               } = item;
               return (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={id}>
                   <div
-                    key={index}
                     className='rounded lg:rounded-lg flex justify-center flex-col bg-white overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
@@ -189,22 +200,24 @@ const EkbatanBranch = ({ data }) => {
 
                     <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
                       <li className='caption-sm lg:body-md text-gray-800'>
-                        {price}
+                        {convertToFaNumber(price)}
                       </li>
 
                       <li className='flex justify-between flex-row-reverse items-center'>
                         <span className='hidden lg:block caption-sm text-gray-500'>
-                          ({totalStars})
+                          ({convertToFaNumber(totalStars)}) امتیاز
                         </span>
                         <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
-                          {star}
+                          {convertToFaNumber(star)}
                         </span>
                         <span className='text-base flex justify-center items-center text-warning-light'>
                           &#9733;
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                    onClick={() => dispatch(addToCart(item))}
+                    >
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -241,8 +254,9 @@ const EkbatanBranch = ({ data }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {foreignFood.map((item, index) => {
+            {foreignFood.map((item) => {
               const {
+                id,
                 img,
                 name,
                 discount,
@@ -252,9 +266,8 @@ const EkbatanBranch = ({ data }) => {
                 totalStars,
               } = item;
               return (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={id}>
                   <div
-                    key={index}
                     className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
@@ -284,22 +297,24 @@ const EkbatanBranch = ({ data }) => {
 
                     <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
                       <li className='caption-sm lg:body-md text-gray-800'>
-                        {price}
+                        {convertToFaNumber(price)}
                       </li>
 
                       <li className='flex justify-between flex-row-reverse items-center'>
                         <span className='hidden lg:block caption-sm text-gray-500'>
-                          ({totalStars})
+                          ({convertToFaNumber(totalStars)}) امتیاز
                         </span>
                         <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
-                          {star}
+                          {convertToFaNumber(star)}
                         </span>
                         <span className='text-base flex justify-center items-center text-warning-light'>
                           &#9733;
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'>
+                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                    onClick={() => dispatch(addToCart(item))}
+                    >
                       افزودن به سبد خرید
                     </button>
                   </div>
