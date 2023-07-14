@@ -16,11 +16,12 @@ import { useDispatch } from 'react-redux';
 
 import { addToCart } from '@/redux/cartSlice';
 import { convertToFaNumber } from '../modules/FarsiNumber';
+import foodMenuData from '@/db/foodMenuData';
 
-const EkbatanBranch = ({ data }) => {
-  const specialOffer = data.filter(food => food.type === 'specialOffer');
-  const favFood = data.filter(food => food.type === 'favFood');
-  const foreignFood = data.filter(food => food.type === 'foreignFood');
+const EkbatanBranch = ({  }) => {
+  const specialOffer = foodMenuData.filter(food => food.type === 'specialOffer');
+  const favFood = foodMenuData.filter(food => food.type === 'favFood');
+  const foreignFood = foodMenuData.filter(food => food.type === 'foreignFood');
 
   const dispatch = useDispatch();
 

@@ -8,10 +8,12 @@ import { useRouter } from 'next/router';
 
 const ModalSearch = () => {
   const visible = useSelector(state => state.modal.visible);
+  const searchTerm = useSelector(state => state.searchTerm);
+
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const handlClose = () => {
+  const handleClose = () => {
     dispatch(hideModal());
   };
 
@@ -22,17 +24,17 @@ const ModalSearch = () => {
       {visible ? (
         <Dialog
           open={visible}
-          handler={handlClose}
+          handler={searchTerm ? handleClose : ""}
           size='xs'
           className='bg-red-200 h-52 overflow-hidden'>
-          <section className={`bg-white h-full max-w-xl rounded-lg ${router.pathname === '/search' ? handlClose() : ""} `}>
+          <section className={`bg-white h-full max-w-xl rounded-lg   `}>
 
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
               جستجو
             </p>
 
-            <button onClick={handlClose}>
+            <button onClick={handleClose}>
               <svg
                 className='h-6 w-6 text-gray-700 cursor-pointer'
                 xmlns='http://www.w3.org/2000/svg'
@@ -50,12 +52,6 @@ const ModalSearch = () => {
           </div>
 
           <p className='body-md text-gray-800 text-center mt-10 mb-4'>لطفا متن خود را تایپ و سپس دکمه Enter را بزنید.</p>
-
-          {/* <DialogHeader className='bg-gray-300 text-center header-7 mx-auto'>جستجو</DialogHeader>
-        <DialogBody divider>
-        لطفا متن خود را تایپ و سپس دکمه Enter را بزنید.
-        </DialogBody>
-        <SearchBar /> */}
 
           <div className='mx-8'>
             <SearchBar />
