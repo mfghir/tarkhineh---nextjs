@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchTerm } from '@/redux/searchTermSlice';
 
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-
-
-
-
+import { useState } from 'react';
 
 const SearchBar = () => {
   const [searchTermLocal, setSearchTermLocal] = useState('');
@@ -16,36 +12,38 @@ const SearchBar = () => {
 
   const searchTerm = useSelector(state => state.searchTerm);
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     e.preventDefault();
     if (searchTermLocal.trim() !== '') {
       dispatch(setSearchTerm(searchTermLocal));
       router.push({
         pathname: '/search',
-        query: { q: searchTermLocal }
+        query: { q: searchTermLocal },
       });
     }
   };
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchTermLocal(value);
-    dispatch(setSearchTerm(value));
+  const handleChange = e => {
+    e.preventDefault();
+    setSearchTermLocal(e.target.value);
+    // dispatch(setSearchTerm(e.target.value));
   };
-  
-  const handleKeyPress = (e) => {
+
+  const handleKeyPress = e => {
     if (e.key === 'Enter') {
       handleSearch(e);
     }
   };
-
 
   return (
     <form onSubmit={handleSearch} className='relative  w-full text-gray-800'>
       <input
         type='text'
         placeholder='جستجو'
-        className={`w-full h-8 border ${!searchTermLocal  ?  'border-gray-400':'border-error'} focus:border-primary outline-none px-4 py-2 absolute rounded placeholder:text-gray-800 caption-sm`}        value={searchTermLocal || searchTerm}
+        className={`w-full h-8 border ${
+          !searchTermLocal ? 'border-gray-400' : 'border-error'
+        } focus:border-primary outline-none px-4 py-2 absolute rounded placeholder:text-gray-800 caption-sm`}
+        defaultValue={searchTerm}
         onChange={handleChange}
         onKeyPress={handleKeyPress}
       />

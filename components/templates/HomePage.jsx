@@ -35,7 +35,7 @@ const HomePage = () => {
           منوی رستوران
         </h4>
 
-        <ul className='mt-16 lg:mt-20 grid grid-cols-1 gap-y-16 gap-x-4 xs-p:grid-cols-2 md:grid-cols-4 md:gap-x-6'>
+        <ul className='lg:w-full mt-16 lg:mt-20 grid grid-cols-1 gap-y-16 gap-x-4 md:grid-cols-4 md:gap-x-6'>
           <li className='border rounded-lg w-[152px] h-[81px] lg:w-52 lg:h-[120px] xl:w-72 xl:h-[180px] border-primary flex flex-col justify-center items-center relative'>
             <Image
               src='/images/menu1.png'

@@ -63,7 +63,7 @@ module.exports = withMT({
       }
     },
     screens: {
-      'xs-p': '375px', 
+      // 'xs-p': '375px', 
       'md': '768px',
       'lg': '1024px',
       'xl': '1280px',

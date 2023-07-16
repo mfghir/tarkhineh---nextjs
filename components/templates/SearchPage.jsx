@@ -28,18 +28,18 @@ const SearchPage = () => {
   }, [router.query, dispatch]);
 
   return (
-    <section className='px-5 lg:px-20 mt-14 lg:mt-8 mb-6 lg:mb-12'>
+    <section className='w-full px-5 lg:px-20 mt-14 lg:mt-8 mb-6 lg:mb-12 flex flex-col justify-center items-center'>
       {filteredResults?.length > 0 ? (
-        <section className='flex justify-center items-center flex-col'>
-          <p className='header-4 flex justify-center items-center text-gray-800'>
+        <section className='w-full flex justify-center items-center flex-col'>
+          <p className='header-7 lg:header-4 flex justify-center items-center text-gray-800'>
             نتایج جستجو برای:<span className='text-primary'>{searchTerm}</span>
           </p>
 
-          <div className='w-80 mt-6 mb-12'>
+          <div className='w-[280px] lg:w-80 mt-6 mb-12'>
             <SearchBar />
           </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-4 md:gap-x-6 gap-y-3 md:gap-y-6 '>
+          <div className='grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-x-6 gap-y-3 md:gap-y-6 '>
             {filteredResults?.map(item => {
               const {
                 id,
@@ -116,18 +116,19 @@ const SearchPage = () => {
           </div>
         </section>
       ) : (
-        <section className='flex flex-col justify-center items-center'>
-          <p className='body-xl text-gray-800 mb-4'>
+        <section className='wf flex flex-col justify-center items-center'>
+          <p className='body-md lg:body-xl text-gray-800 mb-4'>
             موردی با این مشخصات پیدا نکردیم!
           </p>
 
-          <div className='w-[360px] mb-12'>
+          <div className='w-[280px] lg:w-[360px] mb-12'>
             <SearchBar />
           </div>
 
           <Image
             src='/images/not-found.png'
             alt='not-found'
+            className='w-56 lg:w-[390px]'
             width={390}
             height={345}
           />

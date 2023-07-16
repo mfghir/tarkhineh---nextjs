@@ -12,19 +12,7 @@ import {
   AccordionBody,
   Alert,
 } from '@material-tailwind/react';
-// import {
-//   PresentationChartBarIcon,
-//   ShoppingBagIcon,
-//   UserCircleIcon,
-//   Cog6ToothIcon,
-//   InboxIcon,
-//   PowerIcon,
-// } from "@heroicons/react/24/solid";
-// import {
-//   ChevronRightIcon,
-//   ChevronDownIcon,
-//   CubeTransparentIcon,
-// } from "@heroicons/react/24/outline";
+
 import Link from 'next/link';
 import Image from 'next/image';
 

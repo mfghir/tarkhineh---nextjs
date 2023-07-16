@@ -55,19 +55,19 @@ const estedad = LocalFont({
 });
 
 const Layout = ({ children }) => {
-  const buttonClicked = useSelector(state => state.button);
-  const visible = useSelector((state) => state.modal.visible);
-
+  const userLoginClicked = useSelector(state => state.button.userLoginClicked);
+ 
   return (
     <div className={`${estedad.variable} font-sans relative`}>
-      {buttonClicked ? (
-        <div className='absolute top-0 left-0 w-full h-screen z-50 '>
+      {userLoginClicked ? (
+        // <div className='absolute top-0 left-0 w-full h-screen z-50 '>
         <LoginPage />
-        </div>
+        // </div>
       ) : ''}
         <>
           <Navbar />
-          {visible && <ModalSearch />}
+          <ModalSearch />
+          <LoginPage />
           <main>{children}</main>
           <Footer />
 

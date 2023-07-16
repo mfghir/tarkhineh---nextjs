@@ -1,9 +1,11 @@
 import { codeInputValue, phoneCodeInputValue } from '@/redux/inputSlice';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { convertToFaNumber } from './FarsiNumber';
 import { ArrowRight2, Clock } from 'iconsax-react';
+
 import TwoMinuteTimer from './Timer';
 import ModalShoppinCart from './ModalShoppinCart';
 import { setButtonClick } from '@/redux/buttonSlice';
@@ -14,17 +16,17 @@ const ModalCode = () => {
   
   const code = useSelector(state => state.input);
   const inputValues = useSelector(state => state.input.inputValues);
-  const buttonClicked = useSelector((state) => state.button);
+  const buttonClicked = useSelector((state) => state.button.buttonClicked);
 
   const handleChange = event => {
     const { name, value } = event.target;
     dispatch(codeInputValue({ field: name, value }));
   };
 
-  const total = Object.values(inputValues)
-    .reduce((acc, value) => acc + parseFloat(value), 0)
-    .toString();
-  console.log('total', total);
+  // const total = Object.values(inputValues)
+  //   .reduce((acc, value) => acc + parseFloat(value), 0)
+  //   .toString();
+  // console.log('total', total);
 
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
@@ -32,8 +34,14 @@ const ModalCode = () => {
   };
 
 
+  
+  console.log('inputValues',inputValues);
+  const test = Object.values(inputValues).map(i=> i).join("")
+  console.log('test',test);
+
 
   const handleClick = () => {
+    // if(test)
     dispatch(setButtonClick(true));
   };
 
@@ -99,7 +107,9 @@ const ModalCode = () => {
                 <div className='grid grid-cols-5 gap-x-2 ltr '>
                   <input
                     type='text'
-                    className='w-full outline-none border border-gray-700 focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                      ${test === '12345' ? "border-gray-700" : "border-error"}
+                    `}
                     name='value1'
                     value={inputValues.value1}
                     onChange={handleChange}
@@ -115,24 +125,27 @@ const ModalCode = () => {
 
                   <input
                     type='text'
-                    className='w-full outline-none border border-gray-700 focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm'
-                    name='value3'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${test === '12345' ? "border-gray-700" : "border-error"}
+                  `}                    name='value3'
                     value={inputValues.value3}
                     onChange={handleChange}
                   />
 
                   <input
                     type='text'
-                    className='w-full outline-none border border-gray-700 focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm'
-                    name='value4'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${test === '12345' ? "border-gray-700" : "border-error"}
+                  `}                    name='value4'
                     value={inputValues.value4}
                     onChange={handleChange}
                   />
 
                   <input
                     type='text'
-                    className='w-full outline-none border border-gray-700 focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm'
-                    name='value5'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${test === '12345' ? "border-gray-700" : "border-error"}
+                  `}                    name='value5'
                     value={inputValues.value5}
                     onChange={handleChange}
                   />
@@ -152,7 +165,8 @@ const ModalCode = () => {
                   </p>
                 </div>
 
-                {total === '15' ? (
+                {/* {total === '15' ? ( */}
+                { test === '12345' ? (
                   <button
                     className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
                     onClick={handleClick}>
@@ -165,6 +179,8 @@ const ModalCode = () => {
                     ثبت کد
                   </button>
                 )}
+
+                {test === '12345'? "" : <p className='text-error'>کد تایید نامعتبر</p> }
               </div>
             </section>
           </div>
