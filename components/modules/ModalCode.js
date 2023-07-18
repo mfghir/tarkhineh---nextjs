@@ -9,63 +9,66 @@ import { ArrowRight2, Clock } from 'iconsax-react';
 import TwoMinuteTimer from './Timer';
 import ModalShoppinCart from './ModalShoppinCart';
 import { setButtonClick } from '@/redux/buttonSlice';
+import { closeModal } from '@/redux/modalSlice';
 
 const ModalCode = () => {
   const dispatch = useDispatch();
   const [backModalOne, setBackModalOne] = useState(null);
-  
+
   const code = useSelector(state => state.input);
   const inputValues = useSelector(state => state.input.inputValues);
-  const buttonClicked = useSelector((state) => state.button.buttonClicked);
+  const buttonClicked = useSelector(state => state.button.buttonClicked);
 
-  const handleChange = event => {
-    const { name, value } = event.target;
+  console.log(inputValues.value1);
+
+  const handleChange = e => {
+    const { name, value } = e.target;
     dispatch(codeInputValue({ field: name, value }));
   };
-
-  // const total = Object.values(inputValues)
-  //   .reduce((acc, value) => acc + parseFloat(value), 0)
-  //   .toString();
-  // console.log('total', total);
+  console.log("inputValues" , inputValues.value1);
 
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-
-  
-  console.log('inputValues',inputValues);
-  const test = Object.values(inputValues).map(i=> i).join("")
-  console.log('test',test);
-
+  const originalCode = Object.values(inputValues)
+    .map(i => i)
+    .join('');
+    console.log("originalCode",originalCode);
+    console.log("originalCode[0]",originalCode[0]);
 
   const handleClick = () => {
-    // if(test)
     dispatch(setButtonClick(true));
   };
 
   const backHandler = () => {
     setBackModalOne(true);
-    // console.log('backModalOne', backModalOne);
   };
+
+
+  const isModalOpen = useSelector(state => state.modal['code-login']?.isOpen);
+  const closeModalHandler = () => {
+    dispatch(closeModal({ id: 'code-login' }));
+  };
+
   if (backModalOne === true) return <ModalShoppinCart />;
-
-
-  console.log("buttonClicked" ,buttonClicked);
 
   return (
     <>
       {showModal ? (
         ''
       ) : (
-        <div className={`  inset-0 overflow-y-auto z-50 min-h-screen ${buttonClicked ? "hidden" :"fixed"}`}>
+        <div
+          className={`inset-0 overflow-y-auto z-50 min-h-screen  ${showModal ? "hidden": 'fixed'}
+          ${buttonClicked ? 'hidden' : 'fixed'}
+          `}>
           <div className='flex items-center justify-center min-h-screen'>
-            <div className='fixed inset-0 transition-opacity'>
+            {/* <div className='fixed inset-0 transition-opacity'> */}
               <div
                 className='absolute inset-0 exitPage-bg'
                 onClick={() => toggleModal()}></div>
-            </div>
+            {/* </div> */}
 
             <section className='w-full relative flex justify-center items-center py-4 px-6 lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
               <button onClick={() => toggleModal()}>
@@ -108,7 +111,11 @@ const ModalCode = () => {
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
-                      ${test === '12345' ? "border-gray-700" : "border-error"}
+                      ${
+                        !inputValues.value1 === 1 || ''
+                          ? 'border-gray-700'
+                          : 'border-error'
+                      }
                     `}
                     name='value1'
                     value={inputValues.value1}
@@ -117,7 +124,14 @@ const ModalCode = () => {
 
                   <input
                     type='text'
-                    className='w-full outline-none border border-gray-700 focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                    !inputValues.value2 === 2 || null || ""
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+
+                  `}
                     name='value2'
                     value={inputValues.value2}
                     onChange={handleChange}
@@ -126,8 +140,13 @@ const ModalCode = () => {
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
-                    ${test === '12345' ? "border-gray-700" : "border-error"}
-                  `}                    name='value3'
+                    ${
+                      inputValues.value3 === 3 || ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value3'
                     value={inputValues.value3}
                     onChange={handleChange}
                   />
@@ -135,8 +154,13 @@ const ModalCode = () => {
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
-                    ${test === '12345' ? "border-gray-700" : "border-error"}
-                  `}                    name='value4'
+                    ${
+                      inputValues.value4 === 4
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value4'
                     value={inputValues.value4}
                     onChange={handleChange}
                   />
@@ -144,8 +168,13 @@ const ModalCode = () => {
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
-                    ${test === '12345' ? "border-gray-700" : "border-error"}
-                  `}                    name='value5'
+                    ${
+                      inputValues.value5 ===5
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value5'
                     value={inputValues.value5}
                     onChange={handleChange}
                   />
@@ -165,22 +194,42 @@ const ModalCode = () => {
                   </p>
                 </div>
 
-                {/* {total === '15' ? ( */}
-                { test === '12345' ? (
+                {originalCode === 12345 ? (
                   <button
                     className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
                     onClick={handleClick}>
                     ثبت کد
                   </button>
                 ) : (
-                  <button
-                    className='w-full py-1 caption-lg bg-gray-300 text-gray-400 mt-3 rounded'
-                    >
+                  <button className='w-full py-1 caption-lg bg-gray-300 text-gray-400 mt-3 rounded'>
                     ثبت کد
                   </button>
                 )}
 
-                {test === '12345'? "" : <p className='text-error'>کد تایید نامعتبر</p> }
+                {originalCode === 12345 ? (
+                  ''
+                ) : (
+                  <div className='relative bg-error-lighter p-2 rounded'>
+                    <button onClick={() => toggleModal()}>
+                      <svg
+                        className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'>
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </button>
+                    <p className='caption-lg text-error text-center'>
+                      کد تایید نامعتبر
+                    </p>
+                  </div>
+                )}
               </div>
             </section>
           </div>

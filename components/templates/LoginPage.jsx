@@ -2,13 +2,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ArrowRight2 } from 'iconsax-react';
+import { ArrowRight2, Clock } from 'iconsax-react';
 import ModalShoppinCart from '../modules/ModalShoppinCart';
-import { phoneCodeInputValue } from '@/redux/inputSlice';
+import { codeInputValue, phoneCodeInputValue } from '@/redux/inputSlice';
 import ModalCode from '../modules/ModalCode';
 import { setUserLoginClick } from '@/redux/buttonSlice';
 import { Dialog } from '@material-tailwind/react';
 import { closeModal } from '@/redux/modalSlice';
+import { convertToFaNumber } from '../modules/FarsiNumber';
+import TwoMinuteTimer from '../modules/Timer';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const LoginPage = () => {
   //   }
   // };
 
-  // const [showModal, setShowModal] = useState(false);
+  const [popup, setPopup] = useState(false);
   // const toggleModal = () => {
   //   setShowModal(!showModal);
 
@@ -31,33 +33,59 @@ const LoginPage = () => {
 
   const [inputValue, setInputValue] = useState('');
   const [secondModal, setSecondModal] = useState(false);
+  const [codeBtn, setcodeBtn] = useState(false);
 
   const handleInputChange = e => {
+    e.preventDefault();
     setInputValue(e.target.value);
   };
 
   const handleSubmit = () => {
-    // dispatch(phoneCodeInputValue(inputValue));
     setSecondModal(!secondModal);
+    setInputValue('');
+
+    if (isModalOpen) setInputValue('');
+  };
+
+  const handleClick = () => {
+    dispatch(closeModal({ id: 'phone-login' }));
   };
 
   const isModalOpen = useSelector(state => state.modal['phone-login']?.isOpen);
   const closeModalHandler = () => {
     dispatch(closeModal({ id: 'phone-login' }));
   };
+
+  console.log( "isModalOpen",isModalOpen);
+
+  const inputValues = useSelector(state => state.input.inputValues);
+  const handleChange = e => {
+    const { name, value } = e.target;
+    dispatch(codeInputValue({ field: name, value }));
+  };
+
+  const originalCode = Object.values(inputValues)
+    .map(i => i)
+    .join('');
+
+  // const [backModalOne, setBackModalOne] = useState(false);
+  // const backHandler = () => {
+  //   setBackModalOne(true);
+  // };
+
+  // const isCodeModalOpen = useSelector(
+  //   state => state.modal['code-login']?.isOpen
+  // );
+  // const closeCodeModalHandler = () => {
+  //   dispatch(closeModal({ id: 'code-login' }));
+  // };
+
   return (
     <>
-      {/* {buttonClicked ? */}
-      {/* <>
-        {userLoginClicked ? (
-          ''
-        ) : (
-          <> */}
-
       {isModalOpen ? (
         <section
           className={`lg:hidden fixed top-0 right-0 z-50 w-full h-screen px-5  flex justify-center items-center  bg-white  transition-all
-          
+         
               `}>
           <button onClick={closeModalHandler}>
             <svg
@@ -75,6 +103,15 @@ const LoginPage = () => {
             </svg>
           </button>
 
+          <button
+            className={` h-6 w-6 text-gray-700 absolute top-5 right-5 ${
+              !secondModal && 'hidden'
+            }`}
+            // onClick={()=>setBackModalOne(!backModalOne)}
+            onClick={handleSubmit}>
+            <ArrowRight2 />
+          </button>
+
           <div className='w-full flex flex-col justify-center items-center'>
             <Image
               src='/images/logo-enter-phone.png'
@@ -83,56 +120,352 @@ const LoginPage = () => {
               height={71}
             />
             <button className='header-6 text-gray-800 mt-20'>
-              ورود / ثبت ‌نام
+              {secondModal ? 'کد تایید' : 'ورود / ثبت ‌نام'}
             </button>
 
             <p className='caption-md text-gray-700 text-center my-6'>
-              شماره همراه خود را وارد کنید.
+              {secondModal
+                ? ` کد تایید پنج‌رقمی به شماره 
+                ${convertToFaNumber(inputValue)}
+                  ارسال شد.`
+                : '  شماره همراه خود را وارد کنید.'}
             </p>
 
-            <input
-              type='text'
-              placeholder='شماره همراه'
-              className='mt-6 w-full outline-none border border-gray-400 px-4 py-2  rounded placeholder:text-gray-700 caption-sm focus:border-primary'
-              // value={inputValue}
-              onChange={handleInputChange}
-            />
+            {secondModal ? (
+              <>
+                <div className='grid grid-cols-5 gap-x-2 ltr '>
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                      ${
+                        originalCode === '12345' || originalCode === ''
+                          ? 'border-gray-700'
+                          : 'border-error'
+                      }
+                    `}
+                    name='value1'
+                    value={inputValues.value1}
+                    onChange={handleChange}
+                  />
 
-            <button
-              onClick={handleSubmit}
-              className={`w-full py-1 caption-lg  mt-3 rounded 
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      originalCode === '12345' || originalCode === ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+
+                  `}
+                    name='value2'
+                    value={inputValues.value2}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      originalCode === '12345' || originalCode === ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value3'
+                    value={inputValues.value3}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      originalCode === '12345' || originalCode === ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value4'
+                    value={inputValues.value4}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      originalCode === '12345' || originalCode === ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value5'
+                    value={inputValues.value5}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className='w-full outline-none mt1 mb-4 flex justify-between items-center caption-sm text-gray-700'>
+                  <p className='flex justify-center items-center'>
+                    <Clock size='16' />
+                    <span className='text-primary caption-md mx-1'>
+                      <TwoMinuteTimer />
+                    </span>
+                    <span className=''>تا دریافت مجدد کد</span>
+                  </p>
+
+                  <p className='cursor-pointer' onClick={handleSubmit}>
+                    ویرایش شماره
+                  </p>
+                </div>
+              </>
+            ) : (
+              <input
+                type='text'
+                placeholder='شماره همراه'
+                className='mt-6 w-full outline-none border border-gray-400 px-4 py-2  rounded placeholder:text-gray-700 caption-sm focus:border-primary'
+                value={inputValue}
+                onChange={handleInputChange}
+              />
+            )}
+
+            {secondModal ? (
+              <button
+                onClick={handleClick}
+                className={`w-full py-1 caption-lg  mt-3 rounded 
                         ${
-                          inputValue === '09221234567'
+                          originalCode === '12345'
                             ? 'bg-primary text-white'
                             : 'bg-gray-300 text-gray-400'
                         }
                   `}>
-              ورود
-            </button>
+                ثبت کد
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                className={`w-full py-1 caption-lg  mt-3 rounded 
+                        ${
+                          inputValue === '09221234567' || secondModal
+                            ? 'bg-primary text-white'
+                            : 'bg-gray-300 text-gray-400'
+                        }
+                  `}>
+                ورود
+              </button>
+            )}
 
-            <p className='caption-sm text-center text-[#0C0C0C] mt-1'>
-              ورود و عضویت در ترخینه به منزله قبول
+            <p
+              className={`caption-sm text-center text-[#0C0C0C] mt-1 
+              ${secondModal ? 'hidden' : ''} `}>
+              ورود و عضویت در ترخینه به منزله قبول{' '}
               <span className='text-primary'>قوانین و مقررات</span> است.
             </p>
+
+            <div
+              className={`relative bg-error-lighter p-2 rounded ${
+                !originalCode === '12345' || popup ? 'block' : 'hidden'
+              } `}>
+              <button onClick={() => setPopup(!popup)}>
+                <svg
+                  className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
+              </button>
+              <p className='caption-lg text-error text-center'>
+                کد تایید نامعتبر
+              </p>
+            </div>
           </div>
         </section>
       ) : null}
 
-{secondModal ?  <div className="w-full fixed top-0 right-0 z-50 z-[60] h-screen bg-white">
-  <ModalCode />
-</div> : ''}
+      {/* {secondModal ? (
+       
 
-      {/* </>
-        )}
-      </> */}
+            <section 
+            className={`lg:hidden fixed top-0 right-0 z-[60] w-full h-screen px-5  flex justify-center items-center  bg-white  transition-all
+          
+            `}>
+              <button onClick={closeCodeModalHandler}>
+                <svg
+                  className='h-6 w-6 text-gray-700 absolute top-4 left-6'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
+              </button>
+
+              <button className='h-6 w-6 text-gray-700 absolute top-4 right-6'>
+                <ArrowRight2 />
+              </button>
+
+              <div className='w-full flex flex-col justify-center items-center'>
+                <Image
+                  src='/images/logo-shoppinCartModal.png'
+                  alt='logo-shoppinCartModal.png'
+                  width={40}
+                  height={44}
+                />
+                <button className='caption-lg lg:header-7 text-gray-800 mt-3'>
+                  کد تایید
+                </button>
+
+                <p className='caption-md text-gray-700 text-center mb-6'>
+                  کد تایید پنج‌رقمی به شماره {convertToFaNumber(code.value)}
+                  ارسال شد.
+                </p>
+
+                <div className='grid grid-cols-5 gap-x-2 ltr '>
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                      ${
+                        !inputValues.value1 === 1 || ''
+                          ? 'border-gray-700'
+                          : 'border-error'
+                      }
+                    `}
+                    name='value1'
+                    value={inputValues.value1}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      !inputValues.value2 === 2 || null || ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+
+                  `}
+                    name='value2'
+                    value={inputValues.value2}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      inputValues.value3 === 3 || ''
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value3'
+                    value={inputValues.value3}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      inputValues.value4 === 4
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value4'
+                    value={inputValues.value4}
+                    onChange={handleChange}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    ${
+                      inputValues.value5 === 5
+                        ? 'border-gray-700'
+                        : 'border-error'
+                    }
+                  `}
+                    name='value5'
+                    value={inputValues.value5}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className='w-full outline-none mt1 mb-4 flex justify-between items-center caption-sm text-gray-700'>
+                  <p className='flex justify-center items-center'>
+                    <Clock size='16' />
+                    <span className='text-primary caption-md mx-1'>
+                      <TwoMinuteTimer />
+                    </span>
+                    <span className=''>تا دریافت مجدد کد</span>
+                  </p>
+
+                  <p className='cursor-pointer' onClick={backHandler}>
+                    ویرایش شماره
+                  </p>
+                </div>
+
+                {originalCode === 12345 ? (
+                  <button
+                    className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
+                    onClick={handleClick}>
+                    ثبت کد
+                  </button>
+                ) : (
+                  <button className='w-full py-1 caption-lg bg-gray-300 text-gray-400 mt-3 rounded'>
+                    ثبت کد
+                  </button>
+                )}
+
+                {originalCode === 12345 ? (
+                  ''
+                ) : (
+                  <div className='relative bg-error-lighter p-2 rounded'>
+                    <button onClick={() => toggleModal()}>
+                      <svg
+                        className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'>
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </button>
+                    <p className='caption-lg text-error text-center'>
+                      کد تایید نامعتبر
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
+        
+      ) : (
+        ''
+      )} */}
 
       <section className='hidden lg:block'>
-        {userLoginClicked ? <ModalShoppinCart /> : ''}
+        {isModalOpen ? <ModalShoppinCart /> : ''}
       </section>
-
-      {/* :
-      "tr"
-  } */}
     </>
   );
 };
