@@ -93,7 +93,7 @@ const ModalShoppinCart = () => {
                       </button>
                     )}
 
-                    <p className='caption-sm text-center text-[#0C0C0C] mt-1'>
+                    <p className='caption-sm text-center text-[#0C0C0C] mt-2'>
                       ورود و عضویت در ترخینه به منزله قبول
                       <span className='text-primary'>قوانین و مقررات</span> است.
                     </p>

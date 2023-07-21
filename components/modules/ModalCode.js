@@ -112,71 +112,76 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                       ${
-                        !inputValues.value1 === 1 || ''
-                          ? 'border-gray-700'
-                          : 'border-error'
+                        !inputValues.value1 === '1' || originalCode !== '12345'
+                        ? 'border-error'
+                        : 'border-gray-700'
                       }
                     `}
                     name='value1'
                     value={inputValues.value1}
                     onChange={handleChange}
+                    maxLength={1}
                   />
 
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                    !inputValues.value2 === 2 || null || ""
-                        ? 'border-gray-700'
-                        : 'border-error'
+                      !inputValues.value2 === '2' || originalCode !== '12345'
+                      ? 'border-error'
+                      : 'border-gray-700'
                     }
 
                   `}
                     name='value2'
                     value={inputValues.value2}
                     onChange={handleChange}
+                    maxLength={1}
                   />
 
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value3 === 3 || ''
-                        ? 'border-gray-700'
-                        : 'border-error'
+                      !inputValues.value3 === '3' || originalCode !== '12345'
+                      ? 'border-error'
+                      : 'border-gray-700'
                     }
                   `}
                     name='value3'
                     value={inputValues.value3}
                     onChange={handleChange}
+                    maxLength={1}
                   />
 
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value4 === 4
-                        ? 'border-gray-700'
-                        : 'border-error'
+                      !inputValues.value4 === '4' || originalCode !== '12345'
+                      ? 'border-error'
+                      : 'border-gray-700'
                     }
                   `}
                     name='value4'
                     value={inputValues.value4}
                     onChange={handleChange}
+                    maxLength={1}
                   />
 
                   <input
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value5 ===5
-                        ? 'border-gray-700'
-                        : 'border-error'
+                      !inputValues.value5 === '5' || originalCode !== '12345'
+                      ? 'border-error'
+                      : 'border-gray-700'
                     }
                   `}
                     name='value5'
                     value={inputValues.value5}
                     onChange={handleChange}
+                    maxLength={1}
                   />
                 </div>
 
@@ -194,7 +199,7 @@ const ModalCode = () => {
                   </p>
                 </div>
 
-                {originalCode === 12345 ? (
+                {originalCode === '12345' ? (
                   <button
                     className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
                     onClick={handleClick}>
@@ -206,9 +211,7 @@ const ModalCode = () => {
                   </button>
                 )}
 
-                {originalCode === 12345 ? (
-                  ''
-                ) : (
+                {originalCode !== '12345' &&
                   <div className='relative bg-error-lighter p-2 rounded'>
                     <button onClick={() => toggleModal()}>
                       <svg
@@ -229,7 +232,7 @@ const ModalCode = () => {
                       کد تایید نامعتبر
                     </p>
                   </div>
-                )}
+                }
               </div>
             </section>
           </div>
