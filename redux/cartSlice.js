@@ -1,45 +1,49 @@
+import foodMenuData from '@/db/foodMenuData';
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: [],
+    items: foodMenuData,
     favorites: [],
+    cart: [],
   },
   reducers: {
     addToCart(state, action) {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const item = state.cart.find(item => item.id === action.payload.id);
       if (item) {
         item.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
 
     removeFromCart(state, action) {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const item = state.cart.find(item => item.id === action.payload.id);
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
         } else {
-          const itemIndex = state.items.indexOf(item => {
+          const itemIndex = state.cart.indexOf(item => {
             if (item.id === action.payload.id) return item;
           });
-          state.items.splice(itemIndex, 1);
+          state.cart.splice(itemIndex, 1);
         }
       }
     },
 
     deleteOneItemFromCart(state, action) {
-      const updatedItems = state.items.filter(item => item.id !== action.payload.id);
-      return { ...state, items: updatedItems };
+      const updatedItems = state.cart.filter(
+        item => item.id !== action.payload.id
+      );
+      return { ...state, cart: updatedItems };
     },
 
     toggleFavorite(state, action) {
       const { id } = action.payload;
       const itemIndex = state.items.findIndex(item => item.id === id);
 
-      if (itemIndex === -1) return; 
+      if (itemIndex === -1) return;
 
       const item = state.items[itemIndex];
       const isFavorite = state.favorites.includes(id);
@@ -50,26 +54,11 @@ const cartSlice = createSlice({
         state.favorites.push(id);
       }
 
-      state.items[itemIndex] = { ...item, isFavorite: !isFavorite };
-
-
-      // if (!state.favorites.find((item) => item.id === id)) {
-      //   state.favorites.push({
-      //     ...action.payload
-      //   });
-      //   console.log("state.favorites" ,  state.favorites);
-      // }
-      // return {
-      //   ...state,
-      //   favorites: [...state.favorites],
-    
-      // };
-
-   
+      state.items[itemIndex] = { ...item, fav: true, isFavorite: !isFavorite };
     },
 
     clearList(state) {
-      state.items = [];
+      state.cart = [];
       state.favorites = [];
     },
   },
@@ -84,5 +73,3 @@ export const {
   toggleFavorite,
   clearList,
 } = cartSlice.actions;
-
-

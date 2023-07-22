@@ -1,14 +1,22 @@
-import { ArrowRight2, CloseCircle } from 'iconsax-react';
+import { ArrowRight2, CloseCircle, Heart } from 'iconsax-react';
 import ProfileMenu from './ProfileMenu';
 import { useRouter } from 'next/router';
 import SearchBar from '@/components/modules/SearchBar';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import { convertToFaNumber } from '@/components/modules/FarsiNumber';
+import { addToCart, toggleFavorite } from '@/redux/cartSlice';
 
 const LikingPage = () => {
   const { push } = useRouter();
+  const dispatch = useDispatch();
   const favorites = useSelector(state => state.cart.favorites);
+
+  const favoriteIds = useSelector(state => state.cart.favorites);
+  const favoriteItems = useSelector(state =>
+    state.cart.cart.filter(item => favoriteIds.includes(item.id))
+  );
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between min-h-screen lg:min-h-fit'>
@@ -28,12 +36,94 @@ const LikingPage = () => {
           </p>
         </div>
 
-        {favorites.length>0 ? (
-          <div>
-            {favorites.map(fav => {
-              <div>{fav.name}</div>
+        {favoriteItems.length>0 ? (
+          <section className='grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3'>
+            
+{favoriteItems.map(item => {
+              const {
+                id,
+                img,
+                name,
+                discount,
+                discountPrice,
+                price,
+                star,
+                totalStars,
+              } = item;
+              return (
+                
+                  <div  key={id} className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
+                    <Image
+                      className='object-cover w-full h-[109px]  lg:h-64 '
+                      src={img}
+                      alt={name}
+                      width={288}
+                      height={256}
+                    />
+
+                    <p className='caption-md lg:header-7 text-gray-800 text-center my-1 lg:my-2'>
+                      {name}
+                    </p>
+
+                    <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
+                      <li className='flex justify-center items-center flex-row-reverse caption-sm'>
+                        <span className='text-error mr-2'>
+                          {convertToFaNumber(discount)}
+                        </span>
+                        <span className='text-gray-500 line-through'>
+                          {convertToFaNumber(discountPrice)}
+                        </span>
+                      </li>
+
+                      <li className='flex justify-between flex-row-reverse text-gray-500'>
+                        <span className='hidden lg:block caption-sm mr-1'>
+                          افزودن به علاقمندی‌ها
+                        </span>
+
+                          
+                        <button
+                          onClick={() => dispatch(toggleFavorite(item ) )}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart
+                              size='16'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                          ) : (
+                            <Heart size='16' color='#717171' />
+                          )}
+                        </button>
+                      </li>
+                    </ul>
+
+                    <ul className='w-full flex justify-between items-center flex-row-reverse px-2 lg:px-4 mb-3'>
+                      <li className='caption-sm lg:body-md text-gray-800'>
+                        {convertToFaNumber(price)}
+                      </li>
+
+                      <li className='flex justify-between flex-row-reverse items-center'>
+                        <span className='hidden lg:block caption-sm text-gray-500'>
+                          ({convertToFaNumber(totalStars)}) امتیاز
+                        </span>
+                        <span className='caption-sm lg:button-sm text-gray-800 mx-1'>
+                          {convertToFaNumber(star)}
+                        </span>
+                        <span className='text-base flex justify-center items-center text-warning-light'>
+                          &#9733;
+                        </span>
+                      </li>
+                    </ul>
+                    <button
+                      className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                      onClick={() => dispatch(addToCart(item))}>
+                      افزودن به سبد خرید
+                    </button>
+                  </div>
+           
+              );
             })}
-          </div>
+          </section>
         ) : (
           <>
             <nav className='hidden mt-5 lg:grid lg:grid-cols-5 lg:gap-4'>

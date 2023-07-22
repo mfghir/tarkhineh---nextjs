@@ -9,6 +9,7 @@ const foodMenuData = [
     discountPrice: '180000',
     price: '145000',
     star: '5',
+    fav: false,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '95000',
     star: '5',
+    fav: false,
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const foodMenuData = [
     discountPrice: '165000',
     price: '142500',
     star: '5',
+    fav: false,
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ const foodMenuData = [
     discountPrice: '205000',
     price: '180000',
     star: '4',
+    fav: false,
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '80000',
     star: '3',
+    fav: false,
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ const foodMenuData = [
     discountPrice: '210000',
     price: '203000',
     star: '4',
+    fav: false,
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ const foodMenuData = [
     discountPrice: '170000',
     price: '148000',
     star: '5',
+    fav: false,
   },
   {
     id: 8,
@@ -86,6 +93,7 @@ const foodMenuData = [
     discountPrice: '150000',
     price: '136000',
     star: '4',
+    fav: false,
   },
   {
     id: 9,
@@ -97,6 +105,7 @@ const foodMenuData = [
     discountPrice: '220000',
     price: '209000',
     star: '5',
+    fav: false,
   },
   {
     id: 10,
@@ -108,6 +117,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '195000',
     star: '2',
+    fav: false,
   },
   {
     id: 11,
@@ -119,6 +129,7 @@ const foodMenuData = [
     discountPrice: '300000',
     price: '270000',
     star: '5',
+    fav: false,
   },
   {
     id: 12,
@@ -130,6 +141,7 @@ const foodMenuData = [
     discountPrice: '135000',
     price: '105000',
     star: '1',
+    fav: false,
   },
   // ------------------------------------------------------------- nonIranianFood
   // -------------------------------------------------------------
@@ -147,6 +159,7 @@ const foodMenuData = [
     discountPrice: '175000',
     price: '140000',
     star: '5',
+    fav: false,
   },
   {
     id: 14,
@@ -159,6 +172,7 @@ const foodMenuData = [
     discountPrice: '170000',
     price: '160000 ',
     star: '4',
+    fav: false,
   },
   {
     id: 15,
@@ -171,6 +185,7 @@ const foodMenuData = [
     discountPrice: '180000',
     price: '95000',
     star: '4',
+    fav: false,
   },
   {
     id: 16,
@@ -183,6 +198,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '150000 ',
     star: '5',
+    fav: false,
   },
   {
     id: 17,
@@ -195,6 +211,7 @@ const foodMenuData = [
     discountPrice: '100000',
     price: '85000',
     star: '4',
+    fav: false,
   },
   {
     id: 18,
@@ -206,6 +223,7 @@ const foodMenuData = [
     discountPrice: '125000',
     price: '110000 ',
     star: '4',
+    fav: false,
   },
 
   {
@@ -219,6 +237,7 @@ const foodMenuData = [
     discountPrice: '190000',
     price: '177000 ',
     star: '5',
+    fav: false,
   },
   {
     id: 20,
@@ -230,6 +249,7 @@ const foodMenuData = [
     discountPrice: '200000',
     price: '180000 ',
     star: '4',
+    fav: false,
   },
   // ------------------------------------------------------------- pizza
   // -------------------------------------------------------------
@@ -249,6 +269,7 @@ const foodMenuData = [
     discountPrice: '195000',
     price: '188000 ',
     star: '5',
+    fav: false,
   },
   {
     id: 22,
@@ -261,6 +282,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '150000 ',
     star: '4',
+    fav: false,
   },
   {
     id: 23,
@@ -273,6 +295,7 @@ const foodMenuData = [
     discountPrice: '210000',
     price: '185000 ',
     star: '4',
+    fav: false,
   },
   {
     id: 24,
@@ -285,6 +308,7 @@ const foodMenuData = [
     discountPrice: '215000',
     price: '175000',
     star: '3',
+    fav: false,
   },
   {
     id: 25,
@@ -297,6 +321,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '100000',
     star: '4',
+    fav: false,
   },
   {
     id: 26,
@@ -308,6 +333,7 @@ const foodMenuData = [
     discountPrice: '280000',
     price: '252000',
     star: '5',
+    fav: false,
   },
 
   {
@@ -320,6 +346,7 @@ const foodMenuData = [
     discountPrice: '165000',
     price: '147000',
     star: '2',
+    fav: false,
   },
   {
     id: 28,
@@ -332,6 +359,7 @@ const foodMenuData = [
     discountPrice: '125000',
     price: '105000 ',
     star: '3',
+    fav: false,
   },
 
   // ------------------------------------------------------------- sandwich
@@ -352,6 +380,7 @@ const foodMenuData = [
     discountPrice: '230000',
     price: '205000',
     star: '5',
+    fav: false,
   },
   {
     id: 30,
@@ -363,6 +392,7 @@ const foodMenuData = [
     discountPrice: '205000',
     price: '165000',
     star: '4',
+    fav: false,
   },
   {
     id: 31,
@@ -374,6 +404,7 @@ const foodMenuData = [
     discountPrice: '',
     price: '145000',
     star: '5',
+    fav: false,
   },
   {
     id: 32,
@@ -386,6 +417,7 @@ const foodMenuData = [
     discountPrice: '210000',
     price: '190000',
     star: '3',
+    fav: false,
   },
     // ------------------------------------------------------------- ekbatan data
   // -------------------------------------------------------------
@@ -414,7 +446,9 @@ const foodMenuData = [
       discountPrice: '220000',
       price: '209000',
       star: '5',
+      fav: false,
       totalStars: '52',
+      fav: false,
     },
     {
       id: 92,
@@ -425,7 +459,9 @@ const foodMenuData = [
       discountPrice: '150000',
       price: '136000 ',
       star: '4',
+      fav: false,
       totalStars: '32',
+      fav: false,
     },
     {
       id: 93,
@@ -436,7 +472,9 @@ const foodMenuData = [
       discountPrice: '190000',
       price: '177000',
       star: '5',
+      fav: false,
       totalStars: '62',
+      fav: false,
     },
     {
       id: 94,
@@ -447,7 +485,9 @@ const foodMenuData = [
       discountPrice: '215000',
       price: '175000 ',
       star: '3',
+      fav: false,
       totalStars: '33',
+      fav: false,
     },
     {
       id: 95,
@@ -458,7 +498,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '50',
+      fav: false,
     },
     {
       id: 96,
@@ -469,7 +511,9 @@ const foodMenuData = [
       discountPrice: '220000',
       price: '209000',
       star: '5',
+      fav: false,
       totalStars: '52',
+      fav: false,
     },
     {
       id: 97,
@@ -480,7 +524,9 @@ const foodMenuData = [
       discountPrice: '150000',
       price: '136000 ',
       star: '4',
+      fav: false,
       totalStars: '32',
+      fav: false,
     },
     {
       id: 98,
@@ -491,7 +537,9 @@ const foodMenuData = [
       discountPrice: '190000',
       price: '177000',
       star: '5',
+      fav: false,
       totalStars: '62',
+      fav: false,
     },
     {
       id: 99,
@@ -502,7 +550,9 @@ const foodMenuData = [
       discountPrice: '215000',
       price: '175000 ',
       star: '3',
+      fav: false,
       totalStars: '33',
+      fav: false,
     },
     {
       id: 910,
@@ -513,7 +563,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '50',
+      fav: false,
     },
   
     // -------------------------------------------------------------favFood
@@ -532,7 +584,9 @@ const foodMenuData = [
       discountPrice: '210000',
       price: '190000',
       star: '3',
+      fav: false,
       totalStars: '20',
+      fav: false,
     },
     {
       id: 912,
@@ -543,7 +597,9 @@ const foodMenuData = [
       discountPrice: '',
       price: '100000 ',
       star: '4',
+      fav: false,
       totalStars: '51',
+      fav: false,
     },
     {
       id: 913,
@@ -554,7 +610,9 @@ const foodMenuData = [
       discountPrice: '180000',
       price: '95000 ',
       star: '4',
+      fav: false,
       totalStars: '43',
+      fav: false,
     },
     {
       id: 914,
@@ -565,7 +623,9 @@ const foodMenuData = [
       discountPrice: '170000',
       price: '148000',
       star: '5',
+      fav: false,
       totalStars: '75',
+      fav: false,
     },
     {
       id: 915,
@@ -576,7 +636,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '80',
+      fav: false,
     },
     {
       id: 916,
@@ -587,7 +649,9 @@ const foodMenuData = [
       discountPrice: '210000',
       price: '190000',
       star: '3',
+      fav: false,
       totalStars: '20',
+      fav: false,
     },
     {
       id: 917,
@@ -598,7 +662,9 @@ const foodMenuData = [
       discountPrice: '',
       price: '100000 ',
       star: '4',
+      fav: false,
       totalStars: '51',
+      fav: false,
     },
     {
       id: 918,
@@ -609,7 +675,9 @@ const foodMenuData = [
       discountPrice: '180000',
       price: '95000 ',
       star: '4',
+      fav: false,
       totalStars: '43',
+      fav: false,
     },
     {
       id: 919,
@@ -620,7 +688,9 @@ const foodMenuData = [
       discountPrice: '170000',
       price: '148000',
       star: '5',
+      fav: false,
       totalStars: '75',
+      fav: false,
     },
     {
       id: 920,
@@ -631,7 +701,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '80 ',
+      fav: false,
     },
   
     // -------------------------------------------------------------foreignFood
@@ -649,7 +721,9 @@ const foodMenuData = [
       discountPrice: '100000',
       price: '85000 ',
       star: '4',
+      fav: false,
       totalStars: '70',
+      fav: false,
     },
     {
       id: 922,
@@ -660,7 +734,9 @@ const foodMenuData = [
       discountPrice: '180000',
       price: '95000 ',
       star: '4',
+      fav: false,
       totalStars: '60',
+      fav: false,
     },
     {
       id: 923,
@@ -671,7 +747,9 @@ const foodMenuData = [
       discountPrice: '125000',
       price: '110000',
       star: '4',
+      fav: false,
       totalStars: '75',
+      fav: false,
     },
     {
       id: 924,
@@ -682,7 +760,9 @@ const foodMenuData = [
       discountPrice: '',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '48',
+      fav: false,
     },
     {
       id: 925,
@@ -693,7 +773,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '59',
+      fav: false,
     },
     {
       id: 926,
@@ -704,7 +786,9 @@ const foodMenuData = [
       discountPrice: '100000',
       price: '85000 ',
       star: '4',
+      fav: false,
       totalStars: '70',
+      fav: false,
     },
     {
       id: 927,
@@ -715,7 +799,9 @@ const foodMenuData = [
       discountPrice: '180000',
       price: '95000 ',
       star: '4',
+      fav: false,
       totalStars: '60',
+      fav: false,
     },
     {
       id: 928,
@@ -726,7 +812,9 @@ const foodMenuData = [
       discountPrice: '125000',
       price: '110000',
       star: '4',
+      fav: false,
       totalStars: '75',
+      fav: false,
     },
     {
       id: 929,
@@ -737,7 +825,9 @@ const foodMenuData = [
       discountPrice: '',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '48',
+      fav: false,
     },
     {
       id: 930,
@@ -748,7 +838,9 @@ const foodMenuData = [
       discountPrice: '175000',
       price: '150000 ',
       star: '5',
+      fav: false,
       totalStars: '59',
+      fav: false,
     },
   
   

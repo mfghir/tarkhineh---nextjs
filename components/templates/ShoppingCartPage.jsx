@@ -33,7 +33,7 @@ const ShoppingCartPage = () => {
   const [deleteModal, setDeleteModal] = useState(null);
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart.items);
+  const cart = useSelector(state => state.cart.cart);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
   const buttonClicked = useSelector(state => state.button);
 

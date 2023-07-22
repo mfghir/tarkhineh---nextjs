@@ -24,7 +24,7 @@ import MenuPhone from '../modules/MenuPhone';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.items);
+  const cart = useSelector(state => state.cart.cart);
   const [showMenu, setShowMenu] = useState(false);
 
   const router = useRouter();

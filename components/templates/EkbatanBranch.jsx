@@ -12,26 +12,28 @@ import SliderLeftBtn from '../pages/home/SliderLeftBtn';
 
 import SliderEkbatan from '../pages/home/SliderEkbatan';
 import OpinionSlider from '../pages/home/OpinionSlider';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { addToCart } from '@/redux/cartSlice';
+import { addToCart, toggleFavorite } from '@/redux/cartSlice';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 import foodMenuData from '@/db/foodMenuData';
 
-const EkbatanBranch = ({  }) => {
-  const specialOffer = foodMenuData.filter(food => food.type === 'specialOffer');
+const EkbatanBranch = ({}) => {
+  const specialOffer = foodMenuData.filter(
+    food => food.type === 'specialOffer'
+  );
   const favFood = foodMenuData.filter(food => food.type === 'favFood');
   const foreignFood = foodMenuData.filter(food => food.type === 'foreignFood');
 
   const dispatch = useDispatch();
-
+  const favorites = useSelector(state => state.cart.favorites);
 
   return (
     <>
       <HeaderSlider />
 
       <section className='px-5 mt-4 mb-6 flex lg:hidden'>
-      <SearchBar />
+        <SearchBar />
       </section>
 
       <section className='pr-5 lg:pr-20 pt-6 mb-6 lg:mb-12'>
@@ -60,7 +62,7 @@ const EkbatanBranch = ({  }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {specialOffer.map((item) => {
+            {specialOffer.map(item => {
               const {
                 id,
                 img,
@@ -73,9 +75,7 @@ const EkbatanBranch = ({  }) => {
               } = item;
               return (
                 <SwiperSlide key={id}>
-                  <div
-              
-                    className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
+                  <div className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
                       src={img}
@@ -90,15 +90,28 @@ const EkbatanBranch = ({  }) => {
 
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
-                        <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500 line-through'>{discountPrice}</span>
+                        <span className='text-error mr-2'>
+                          {convertToFaNumber(discount)}
+                        </span>
+                        <span className='text-gray-500 line-through'>
+                          {convertToFaNumber(discountPrice)}
+                        </span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
                         <span className='hidden lg:block caption-sm mr-1'>
                           افزودن به علاقمندی‌ها
                         </span>
-                        <Heart size='16' />
+
+                        <button
+                          onClick={() => dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart size='16' variant='Bold' color='#ED2E2E' />
+                          ) : (
+                            <Heart size='16' color='#717171' />
+                          )}
+                        </button>
                       </li>
                     </ul>
 
@@ -119,9 +132,9 @@ const EkbatanBranch = ({  }) => {
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
-                    onClick={() => dispatch(addToCart(item))}
-                    >
+                    <button
+                      className='caption-sm lg:caption-lg text-white bg-primary rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                      onClick={() => dispatch(addToCart(item))}>
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -158,7 +171,7 @@ const EkbatanBranch = ({  }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {favFood.map((item) => {
+            {favFood.map(item => {
               const {
                 id,
                 img,
@@ -171,8 +184,7 @@ const EkbatanBranch = ({  }) => {
               } = item;
               return (
                 <SwiperSlide key={id}>
-                  <div
-                    className='rounded lg:rounded-lg flex justify-center flex-col bg-white overflow-hidden'>
+                  <div className='rounded lg:rounded-lg flex justify-center flex-col bg-white overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
                       src={img}
@@ -188,14 +200,25 @@ const EkbatanBranch = ({  }) => {
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
                         <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500 line-through'>{discountPrice}</span>
+                        <span className='text-gray-500 line-through'>
+                          {discountPrice}
+                        </span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
                         <span className='hidden lg:block caption-sm mr-1'>
                           افزودن به علاقمندی‌ها
                         </span>
-                        <Heart size='16' />
+
+                        <button
+                          onClick={() => dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart size='16' variant='Bold' color='#ED2E2E' />
+                          ) : (
+                            <Heart size='16' color='#717171' />
+                          )}
+                        </button>
                       </li>
                     </ul>
 
@@ -216,9 +239,9 @@ const EkbatanBranch = ({  }) => {
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
-                    onClick={() => dispatch(addToCart(item))}
-                    >
+                    <button
+                      className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                      onClick={() => dispatch(addToCart(item))}>
                       افزودن به سبد خرید
                     </button>
                   </div>
@@ -255,7 +278,7 @@ const EkbatanBranch = ({  }) => {
             modules={[Pagination]}
             className='mySwiper'>
             <SliderLeftBtn arrow='left' className='' />
-            {foreignFood.map((item) => {
+            {foreignFood.map(item => {
               const {
                 id,
                 img,
@@ -268,8 +291,7 @@ const EkbatanBranch = ({  }) => {
               } = item;
               return (
                 <SwiperSlide key={id}>
-                  <div
-                    className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
+                  <div className='border border-gray-400 rounded lg:rounded-lg flex justify-center flex-col overflow-hidden'>
                     <Image
                       className='object-cover w-full h-[109px]  lg:h-64 '
                       src={img}
@@ -285,14 +307,25 @@ const EkbatanBranch = ({  }) => {
                     <ul className='w-full flex justify-between flex-row-reverse px-2 lg:px-4 mb-2'>
                       <li className='flex justify-center items-center flex-row-reverse caption-sm'>
                         <span className='text-error mr-2'>{discount}</span>
-                        <span className='text-gray-500 line-through'>{discountPrice}</span>
+                        <span className='text-gray-500 line-through'>
+                          {discountPrice}
+                        </span>
                       </li>
 
                       <li className='flex justify-between flex-row-reverse text-gray-500'>
                         <span className='hidden lg:block caption-sm mr-1'>
                           افزودن به علاقمندی‌ها
                         </span>
-                        <Heart size='16' />
+
+                        <button
+                          onClick={() => dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart size='16' variant='Bold' color='#ED2E2E' />
+                          ) : (
+                            <Heart size='16' color='#717171' />
+                          )}
+                        </button>
                       </li>
                     </ul>
 
@@ -313,9 +346,9 @@ const EkbatanBranch = ({  }) => {
                         </span>
                       </li>
                     </ul>
-                    <button className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
-                    onClick={() => dispatch(addToCart(item))}
-                    >
+                    <button
+                      className='caption-sm lg:caption-lg text-white bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 rounded py-2 mb-2 lg:mb-4 mx-2 lg:mx-4'
+                      onClick={() => dispatch(addToCart(item))}>
                       افزودن به سبد خرید
                     </button>
                   </div>

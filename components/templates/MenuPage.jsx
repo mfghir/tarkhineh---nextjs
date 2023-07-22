@@ -24,12 +24,9 @@ const MenuPage = () => {
 
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.cart.favorites);
-  const favoriteItems = cart.filter(item => favorites.includes(item.id));
 
-  // const searchTerm = useSelector(state => state.searchTerm);
-  // const filteredResults = foodMenuData.filter(result =>
-  //   result.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+
+  
 
   return (
     <>
@@ -88,8 +85,6 @@ const MenuPage = () => {
         </div>
       </nav>
 
-    
-
       <section className='px-5 lg:px-20 mt-14 lg:mt-8 '>
         <section className='mb-6 lg:mb-12'>
           <div className='flex justify-between items-center  mb-3 lg:mb-6'>
@@ -104,7 +99,7 @@ const MenuPage = () => {
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
-            {iranianFood.map((item, index) => {
+            {iranianFood.map(item => {
               const {
                 id,
                 name,
@@ -114,6 +109,7 @@ const MenuPage = () => {
                 discountPrice,
                 price,
                 star,
+                fav,
               } = item;
 
               return (
@@ -135,10 +131,19 @@ const MenuPage = () => {
                           {name}
                         </p>
 
-                        <Heart
-                          className='hidden lg:w-6 lg:h-6 lg:block'
-                          color='#717171'
-                        />
+                        <button
+                          onClick={() =>  dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart
+                              className='w-6 h-6'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                          ) : (
+                            <Heart className='w-6 h-6' color='#717171' />
+                          )}
+                        </button>
                       </div>
 
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
@@ -159,32 +164,18 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <button onClick={() => dispatch(toggleFavorite(item))}>
-                        {favoriteItems ? (
-                          <>
-                            <Heart
-                              className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                              variant='Bold'
-                              color='#ED2E2E'
-                            />
-                            {/* <Heart
-                          className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                          color='#717171'
-                        /> */}
-                          </>
+                      <button onClick={() =>  dispatch(toggleFavorite(item))}>
+                        {favorites.includes(id) ? (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            variant='Bold'
+                            color='#ED2E2E'
+                          />
                         ) : (
-                          <>
-                            <Heart
-                              className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                              color='#717171'
-                            />
-                            dd
-                            {/* <Heart
-                          className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                          variant='Bold'
-                          color='#ED2E2E'
-                        /> */}
-                          </>
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            color='#717171'
+                          />
                         )}
                       </button>
 
@@ -212,8 +203,9 @@ const MenuPage = () => {
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
-            {nonIranianFood.map((item, index) => {
+            {nonIranianFood.map((item) => {
               const {
+                id,
                 name,
                 img,
                 ingredient,
@@ -226,7 +218,7 @@ const MenuPage = () => {
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
-                  key={index}>
+                  key={id}>
                   <Image
                     className='object-cover w-[92px] h-full lg:w-[169px]  '
                     src={img}
@@ -241,10 +233,20 @@ const MenuPage = () => {
                         <p className='caption-md lg:header-7 text-gray-800'>
                           {name}
                         </p>
-                        <Heart
-                          className='hidden lg:w-6 lg:h-6 lg:block'
-                          color='#717171'
-                        />
+                       
+                        <button
+                          onClick={() =>  dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart
+                              className='w-6 h-6'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                          ) : (
+                            <Heart className='w-6 h-6' color='#717171' />
+                          )}
+                        </button>
                       </div>
 
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
@@ -265,10 +267,21 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                        color='#717171'
-                      />
+                    <button onClick={() =>  dispatch(toggleFavorite(item))}>
+                        {favorites.includes(id) ? (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            variant='Bold'
+                            color='#ED2E2E'
+                          />
+                        ) : (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            color='#717171'
+                          />
+                        )}
+                      </button>
+
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
                         <button
@@ -294,8 +307,9 @@ const MenuPage = () => {
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
-            {pizza.map((item, index) => {
+            {pizza.map((item) => {
               const {
+                id,
                 name,
                 img,
                 ingredient,
@@ -308,7 +322,7 @@ const MenuPage = () => {
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
-                  key={index}>
+                  key={id}>
                   <Image
                     className='object-cover w-[92px] h-full lg:w-[169px]  '
                     src={img}
@@ -323,10 +337,20 @@ const MenuPage = () => {
                         <p className='caption-md lg:header-7 text-gray-800'>
                           {name}
                         </p>
-                        <Heart
-                          className='hidden lg:w-6 lg:h-6 lg:block'
-                          color='#717171'
-                        />
+                       
+                        <button
+                          onClick={() =>  dispatch(toggleFavorite(item)) }
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart
+                              className='w-6 h-6'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                          ) : (
+                            <Heart className='w-6 h-6' color='#717171' />
+                          )}
+                        </button>
                       </div>
 
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
@@ -347,10 +371,21 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                        color='#717171'
-                      />
+                    <button onClick={() =>  dispatch(toggleFavorite(item)) }>
+                        {favorites.includes(id) ? (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            variant='Bold'
+                            color='#ED2E2E'
+                          />
+                        ) : (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            color='#717171'
+                          />
+                        )}
+                      </button>
+
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
                         <button
@@ -376,8 +411,9 @@ const MenuPage = () => {
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-6 gap-y-3 md:gap-y-6'>
-            {sandwich.map((item, index) => {
+            {sandwich.map((item) => {
               const {
+                id,
                 name,
                 img,
                 ingredient,
@@ -390,7 +426,7 @@ const MenuPage = () => {
               return (
                 <div
                   className='w-full flex justify-center items-center rounded lg:rounded-lg border border-gray-400 overflow-hidden'
-                  key={index}>
+                  key={id}>
                   <Image
                     className='object-cover w-[92px] h-full lg:w-[169px]  '
                     src={img}
@@ -405,10 +441,20 @@ const MenuPage = () => {
                         <p className='caption-md lg:header-7 text-gray-800'>
                           {name}
                         </p>
-                        <Heart
-                          className='hidden lg:w-6 lg:h-6 lg:block'
-                          color='#717171'
-                        />
+                       
+                        <button
+                          onClick={() => dispatch(toggleFavorite(item))}
+                          className='hidden lg:block cursor-pointer'>
+                          {favorites.includes(id) ? (
+                            <Heart
+                              className='w-6 h-6'
+                              variant='Bold'
+                              color='#ED2E2E'
+                            />
+                          ) : (
+                            <Heart className='w-6 h-6' color='#717171' />
+                          )}
+                        </button>
                       </div>
 
                       <p className='flex justify-center items-center flex-row-reverse caption-sm lg:caption-md'>
@@ -429,10 +475,21 @@ const MenuPage = () => {
                     </li>
 
                     <li className='flex justify-between items-center w-full'>
-                      <Heart
-                        className='w-4 h-4 lg:w-6 lg:h-6 lg:hidden'
-                        color='#717171'
-                      />
+                    <button onClick={() =>  dispatch(toggleFavorite(item)) }>
+                        {favorites.includes(id) ? (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            variant='Bold'
+                            color='#ED2E2E'
+                          />
+                        ) : (
+                          <Heart
+                            className='w-4 h-4 lg:hidden'
+                            color='#717171'
+                          />
+                        )}
+                      </button>
+
 
                       <div className=' lg:w-full flex justify-center lg:justify-between items-center flex-row-reverse'>
                         <button
