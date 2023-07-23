@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ArrowRight2, Clock } from 'iconsax-react';
 import ModalShoppinCart from '../modules/ModalShoppinCart';
-import { codeInputValue, phoneCodeInputValue } from '@/redux/inputSlice';
+import { codeInputValue } from '@/redux/inputSlice';
 
 import { closeModal } from '@/redux/modalSlice';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 import TwoMinuteTimer from '../modules/Timer';
+import { setToken } from '@/redux/authSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const LoginPage = () => {
 
   const [inputValue, setInputValue] = useState('');
   const [secondModal, setSecondModal] = useState(false);
+  const tokenSave = useSelector(state => state.auth.token);
 
   const handleInputChange = e => {
     e.preventDefault();
@@ -34,6 +36,10 @@ const LoginPage = () => {
 
   const handleClick = () => {
     dispatch(closeModal({ id: 'phone-login' }));
+    if (originalCode === '12345') {
+      const token = 112233445566778899;
+      dispatch(setToken(token));
+    }
     // dispatch(codeInputValue({ field: '', value: '' }));
   };
 
@@ -49,17 +55,21 @@ const LoginPage = () => {
     dispatch(codeInputValue({ name, value }));
   };
 
-  console.log('isModalColse', isModalColse);
-  if (isModalColse === false) {
-    dispatch(codeInputValue({ name, value: '' }));
-  }
+  // console.log('isModalColse', isModalColse);
+  // if (isModalColse === false) {
+  //   dispatch(codeInputValue({ name, value: '' }));
+  // }
 
   const originalCode = Object.values(inputValues)
     .map(i => i)
     .join('');
-  console.log('originalCode', originalCode);
-  console.log(inputValues);
 
+ 
+ 
+    const userLoginClicked = useSelector(state => state.button.userLoginClicked);
+ 
+
+ 
   return (
     <>
       {isModalOpen ? (

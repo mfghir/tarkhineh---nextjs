@@ -21,21 +21,38 @@ import { convertToFaNumber } from '../modules/FarsiNumber';
 import { openModal } from '@/redux/modalSlice';
 import ModalSearch from '../modules/ModalSearch';
 import MenuPhone from '../modules/MenuPhone';
+import { setToken } from '@/redux/authSlice';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart.cart);
-  const [showMenu, setShowMenu] = useState(false);
 
   const router = useRouter();
+  const [showMenu, setShowMenu] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(false);
 
   const openSearchModalHandler = () => {
     dispatch(openModal({ id: 'searchModal' }));
   };
 
+  const tokenSave = useSelector(state => state.auth.token);
+  console.log('token', typeof(tokenSave));
+
   const openLoginModalHandler = () => {
-    dispatch(openModal({ id: 'phone-login' }));
+    if (!tokenSave ) {
+      dispatch(openModal({ id: 'phone-login' }));
+    }
+    else{
+    setOpenSubMenu(!openSubMenu);
+  }
+   
   };
+
+  //  if (tokenSave ) {
+  //   setOpenSubMenu(!openSubMenu);
+  // }
+  console.log('openSubMenu', openSubMenu);
+
 
 
   return (
@@ -223,13 +240,17 @@ value={selectedValue} onChange={handleSelectChange}
 
           <li className='user-dropdown relative z-20 p-1 md:p-2 rounded bg-tint-100 hover:bg-primary duration-300'>
             <div
-              className='flex justify-center items-baseline cursor-pointer '
+              className='flex justify-center items-baseline cursor-pointer'
               onClick={openLoginModalHandler}>
               <User className='text-primary w-4 h-4 md:w-6 md:h-6' />
               <ArrowDown2 size='16' className='mr-[2px] duration-300 hidden' />
             </div>
 
-            <ul className='dropdown-menu absolute left-0 pt-4 bg-transparent hidden w-36 body-sm rounded text-gray-800'>
+            
+              <ul
+              className={`dropdown-menu absolute left-0 pt-4 bg-transparent  w-36 body-sm rounded text-gray-800
+         ${openSubMenu? "block" : "hidden" }
+            `}>
               <Link href='/profile'>
                 <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl  dropdown-menu-shadow'>
                   <User size='16' className='ml-1' />
@@ -263,6 +284,7 @@ value={selectedValue} onChange={handleSelectChange}
                 </li>
               </Link>
             </ul>
+       
           </li>
         </ul>
       </section>

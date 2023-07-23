@@ -7,20 +7,26 @@ import phoneVerificationReducer from '@/redux/phoneVerificationSlice';
 import searchTermReducer from '@/redux/searchTermSlice';
 
 import modalReducer from '@/redux/modalSlice';
+import persistedAuthReducer from '@/redux/authSlice';
+import { persistStore } from 'redux-persist';
 
-const createStore = preloadedState =>
-  configureStore({
-    reducer: {
-      cart: cartReducer,
-      input: inputReducer,
-      button: buttonReducer,
+const rootReducer = {
+  cart: cartReducer,
+  input: inputReducer,
+  button: buttonReducer,
 
-      phoneVerification: phoneVerificationReducer,
-      searchTerm: searchTermReducer,
-      modal: modalReducer,
-    },
-    devTools: process.env.NODE_ENV === 'development',
-    ...(!!preloadedState && { preloadedState: preloadedState }),
-  });
+  phoneVerification: phoneVerificationReducer,
+  searchTerm: searchTermReducer,
+  modal: modalReducer,
 
-export default createStore;
+  auth: persistedAuthReducer,
+};
+
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV === 'development',
+});
+
+export const persistor = persistStore(store);
+
+export default store;

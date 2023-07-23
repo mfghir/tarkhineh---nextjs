@@ -12,11 +12,12 @@ const LikingPage = () => {
   const { push } = useRouter();
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.cart.favorites);
+  console.log("favorites",favorites);
 
   const favoriteIds = useSelector(state => state.cart.favorites);
-  const favoriteItems = useSelector(state =>
-    state.cart.cart.filter(item => favoriteIds.includes(item.id))
-  );
+  const favoriteItems = useSelector(state =>state.cart.cart.filter(item => favoriteIds.includes(item.id)));
+    console.log("favoriteIds",favoriteIds);
+    console.log("favoriteItems",favoriteItems);
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between min-h-screen lg:min-h-fit'>

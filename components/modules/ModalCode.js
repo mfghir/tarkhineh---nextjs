@@ -9,11 +9,15 @@ import { ArrowRight2, Clock } from 'iconsax-react';
 import TwoMinuteTimer from './Timer';
 import ModalShoppinCart from './ModalShoppinCart';
 import { setButtonClick } from '@/redux/buttonSlice';
+
+import { setToken } from '@/redux/authSlice';
+
 import { closeModal } from '@/redux/modalSlice';
 
 const ModalCode = () => {
   const dispatch = useDispatch();
   const [backModalOne, setBackModalOne] = useState(null);
+  const [popup, setPopup] = useState(false);
 
   const code = useSelector(state => state.input);
   const inputValues = useSelector(state => state.input.inputValues);
@@ -22,24 +26,25 @@ const ModalCode = () => {
   console.log(inputValues.value1);
 
   const handleChange = e => {
+    e.preventDefault();
     const { name, value } = e.target;
-    dispatch(codeInputValue({ field: name, value }));
+    dispatch(codeInputValue({ name, value }));
   };
-  console.log("inputValues" , inputValues.value1);
 
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  const originalCode = Object.values(inputValues)
-    .map(i => i)
-    .join('');
-    console.log("originalCode",originalCode);
-    console.log("originalCode[0]",originalCode[0]);
+  const originalCode = Object.values(inputValues).map(i => i).join('');
+    
 
   const handleClick = () => {
     dispatch(setButtonClick(true));
+    if (originalCode === '12345') {
+      const token = 112233445566778899;
+      dispatch(setToken(token));
+    }
   };
 
   const backHandler = () => {
@@ -47,10 +52,10 @@ const ModalCode = () => {
   };
 
 
-  const isModalOpen = useSelector(state => state.modal['code-login']?.isOpen);
-  const closeModalHandler = () => {
-    dispatch(closeModal({ id: 'code-login' }));
-  };
+  // const isModalOpen = useSelector(state => state.modal['code-login']?.isOpen);
+  // const closeModalHandler = () => {
+  //   dispatch(closeModal({ id: 'code-login' }));
+  // };
 
   if (backModalOne === true) return <ModalShoppinCart />;
 
@@ -112,7 +117,7 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                       ${
-                        !inputValues.value1 === '1' || originalCode !== '12345'
+                        inputValues.value1 !== '1' || originalCode !== '12345'
                         ? 'border-error'
                         : 'border-gray-700'
                       }
@@ -127,9 +132,9 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      !inputValues.value2 === '2' || originalCode !== '12345'
-                      ? 'border-error'
-                      : 'border-gray-700'
+                      inputValues.value2 !== '2' || originalCode !== '12345'
+                          ? 'border-error'
+                          : 'border-gray-700'
                     }
 
                   `}
@@ -143,7 +148,7 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      !inputValues.value3 === '3' || originalCode !== '12345'
+                      inputValues.value3 !== '3' || originalCode !== '12345'
                       ? 'border-error'
                       : 'border-gray-700'
                     }
@@ -158,7 +163,7 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      !inputValues.value4 === '4' || originalCode !== '12345'
+                      inputValues.value4 !== '4' || originalCode !== '12345'
                       ? 'border-error'
                       : 'border-gray-700'
                     }
@@ -173,7 +178,7 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      !inputValues.value5 === '5' || originalCode !== '12345'
+                      inputValues.value5 !== '5' || originalCode !== '12345'
                       ? 'border-error'
                       : 'border-gray-700'
                     }
@@ -211,7 +216,32 @@ const ModalCode = () => {
                   </button>
                 )}
 
-                {originalCode !== '12345' &&
+
+<div
+className={`relative bg-error-lighter p-2 rounded 
+${originalCode == '12345' || popup ? 'hidden' : 'block'}
+`}>
+<button  onClick={() => setPopup(!popup)}>
+  <svg
+    className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
+    xmlns='http://www.w3.org/2000/svg'
+    fill='none'
+    viewBox='0 0 24 24'
+    stroke='currentColor'>
+    <path
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth={2}
+      d='M6 18L18 6M6 6l12 12'
+    />
+  </svg>
+</button>
+<p className='caption-lg text-error text-center'>
+  کد تایید نامعتبر
+</p>
+</div>
+
+                {/* {originalCode !== '12345' &&
                   <div className='relative bg-error-lighter p-2 rounded'>
                     <button onClick={() => toggleModal()}>
                       <svg
@@ -232,7 +262,7 @@ const ModalCode = () => {
                       کد تایید نامعتبر
                     </p>
                   </div>
-                }
+                 }  */}
               </div>
             </section>
           </div>
