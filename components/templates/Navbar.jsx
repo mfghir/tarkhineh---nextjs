@@ -34,7 +34,6 @@ const Navbar = () => {
   };
 
   const tokenSave = useSelector(state => state.auth.token);
-  console.log('token', typeof tokenSave);
 
   const openLoginModalHandler = () => {
     if (!tokenSave) {
@@ -44,10 +43,6 @@ const Navbar = () => {
     }
   };
 
-  //  if (tokenSave ) {
-  //   setOpenSubMenu(!openSubMenu);
-  // }
-  console.log('openSubMenu', openSubMenu);
 
   return (
     <>
@@ -242,9 +237,7 @@ value={selectedValue} onChange={handleSelectChange}
 
             {openSubMenu && (
               <ul
-                className={`dropdown-menu absolute left-0 pt-4 bg-transparent  w-36 body-sm rounded text-gray-800
-        
-            `}>
+                className='dropdown-menu absolute left-0 pt-4 bg-transparent  w-36 body-sm rounded text-gray-800'>
                 <Link href='/profile'>
                   <li
                     className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl  dropdown-menu-shadow'

@@ -25,10 +25,11 @@ const ModalMessage = () => {
   const isClearListOpen = useSelector(
     state => state.modal['clearList-open']?.isOpen
   );
+  console.log('clearList-open---', isClearListOpen);
 
   return (
     <>
-      {cart.length === 0 || !showModal || cart.length > 0 ? (
+      {!showModal || cart.length > 0 || isClearListOpen ? (
         <div
           className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center 
             ${showModal || cart.length === 0 ? 'hidden' : ''}
@@ -66,7 +67,7 @@ const ModalMessage = () => {
               </p>
 
               <div className='w-full flex justify-center items-center'>
-                {isClearListOpen === true && pathname === '/shopping-cart' && (
+                {isClearListOpen ? (
                   <>
                     <button
                       className='w-full lg:w-auto caption-sm lg:button-lg rounded border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300 duration-300 py-1 px-4 lg:px-8'
@@ -80,9 +81,9 @@ const ModalMessage = () => {
                       حذف
                     </button>
                   </>
-                )}
+                ) : null}
 
-                {isExitPageClose === true && pathname === '/profile/exit' && (
+                {isExitPageClose ? (
                   <>
                     <button
                       className='w-full caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1'
@@ -94,7 +95,7 @@ const ModalMessage = () => {
                       خروج
                     </button>
                   </>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

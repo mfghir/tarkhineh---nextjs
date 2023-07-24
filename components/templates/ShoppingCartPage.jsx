@@ -31,17 +31,17 @@ import { openModal } from '@/redux/modalSlice';
 
 const ShoppingCartPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(null);
   const dispatch = useDispatch();
-
   const cart = useSelector(state => state.cart.cart);
+
   const totalDiscountPrice = getTotalDiscountPrice(cart);
-  const buttonClicked = useSelector(state => state.button);
+  const buttonClicked = useSelector(state => state.button.buttonClicked);
+  const tokenSave = useSelector(state => state.auth.token);
+
 
   const isClearListOpen = useSelector(
     state => state.modal['clearList-open']?.isOpen
   );
-  console.log('clearList-open', isClearListOpen);
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -70,7 +70,6 @@ const ShoppingCartPage = () => {
 
         <button
           onClick={() => dispatch(openModal({ id: 'clearList-open' }))}
-          // onClick={() => setDeleteModal(!deleteModal)}
         >
           <Trash
             size='16'
@@ -299,7 +298,6 @@ const ShoppingCartPage = () => {
 
                 <button
                   className='text-gray-800'
-                  // onClick={() => setDeleteModal(!deleteModal)}
                   onClick={() => dispatch(openModal({ id: 'clearList-open' }))}
                   >
                   <Trash />
@@ -337,7 +335,7 @@ const ShoppingCartPage = () => {
                 </p>
               </div>
 
-              {buttonClicked ? (
+              {tokenSave ? (
                 <Link href='/delivery-completion'>
                   <button className='w-full bg-primary flex justify-center items-center hover:bg-shade-200 active:bg-shade-300 duration-300 rounded text-white py-2 caption-md lg:button-lg '>
                     مرحله بعد

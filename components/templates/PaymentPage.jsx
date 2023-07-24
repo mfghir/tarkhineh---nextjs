@@ -13,22 +13,29 @@ import {
   WalletMoney,
   Warning2,
 } from 'iconsax-react';
+
 import Link from 'next/link';
 import React from 'react';
+import { useState } from 'react';
+
 import { convertToFaNumber } from '../modules/FarsiNumber';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import { Radio, Typography } from '@material-tailwind/react';
+
 import Image from 'next/image';
+import { openModal } from '@/redux/modalSlice';
+import { addToCart, removeFromCart } from '@/redux/cartSlice';
+import ModalMessage from '../modules/ModalMessage';
 
 const PaymentPage = () => {
   const [payment, setPayment] = useState('netPayment');
-  const [showModal, setShowModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart.cart);
 
-  const cart = useSelector(state => state.cart.items);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
+  const isClearListOpen = useSelector(
+    state => state.modal['clearList-open']?.isOpen
+  );
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -51,7 +58,12 @@ const PaymentPage = () => {
     setPayment(e.target.value);
   };
 
+  const openModalHandler =()=>{
+    dispatch(openModal({ id: 'clearList-open' }))
+  }
+
   return (
+    <>
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
         <ArrowRight2 className='lg:hidden ml-4' size='16' />
@@ -230,7 +242,7 @@ const PaymentPage = () => {
 
             <button
               className='text-gray-800'
-              onClick={() => setDeleteModal(true)}>
+              onClick={openModalHandler}>
               <Trash />
             </button>
           </div>
@@ -249,7 +261,9 @@ const PaymentPage = () => {
                   </p>
 
                   <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
-                    <li className='' onClick={() => dispatch(addToCart(item))}>
+                    <li
+                      className='cursor-pointer'
+                      onClick={() => dispatch(addToCart(item))}>
                       <Add size='16' />
                     </li>
 
@@ -314,6 +328,9 @@ const PaymentPage = () => {
         </section>
       </section>
     </section>
+
+    {isClearListOpen ? <ModalMessage /> : ''}
+    </>
   );
 };
 

@@ -27,16 +27,18 @@ import { Radio, Typography } from '@material-tailwind/react';
 
 import DeliveryPlace from './DeliveryPlace';
 import Link from 'next/link';
+import { openModal } from '@/redux/modalSlice';
 
 const DeliveryCompletionPage = () => {
   const [delivery, setDelivery] = useState('deliverySend');
   const [showModal, setShowModal] = useState(false);
+
   const [deleteModal, setDeleteModal] = useState(false);
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart.items);
+  const cart = useSelector(state => state.cart.cart);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
-  const buttonClicked = useSelector(state => state.button);
+  // const buttonClicked = useSelector(state => state.button);
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -59,7 +61,12 @@ const DeliveryCompletionPage = () => {
     setDelivery(e.target.value);
   };
 
+  const isClearListOpen = useSelector(
+    state => state.modal['clearList-open']?.isOpen
+  );
+
   return (
+    <>
     <section className='px-5 lg:px-20 py-2 lg:py-12  min-h-screen'>
       <div className='flex items-center my-6 lg:hidden'>
         <ArrowRight2 className='lg:hidden ml-4' size='16' />
@@ -367,7 +374,8 @@ const DeliveryCompletionPage = () => {
 
               <button
                 className='text-gray-800'
-                onClick={() => setDeleteModal(true)}>
+                onClick={() => dispatch(openModal({ id: 'clearList-open' }))}
+                >
                 <Trash />
               </button>
             </div>
@@ -387,7 +395,7 @@ const DeliveryCompletionPage = () => {
 
                     <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
                       <li
-                        className=''
+                        className='cursor-pointer'
                         onClick={() => dispatch(addToCart(item))}>
                         <Add size='16' />
                       </li>
@@ -454,8 +462,13 @@ const DeliveryCompletionPage = () => {
         </section>
       </>
 
-      {deleteModal ? <ModalMessage /> : ''}
+      {isClearListOpen ? <ModalMessage /> : ''}
     </section>
+
+
+    {/* {isClearListOpen  ? <ModalMessage /> : ''} */}
+
+    </>
   );
 };
 
