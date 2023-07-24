@@ -19,9 +19,7 @@ import Link from 'next/link';
 import { convertToFaNumber } from '../modules/FarsiNumber';
 
 import { openModal } from '@/redux/modalSlice';
-import ModalSearch from '../modules/ModalSearch';
 import MenuPhone from '../modules/MenuPhone';
-import { setToken } from '@/redux/authSlice';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -36,24 +34,20 @@ const Navbar = () => {
   };
 
   const tokenSave = useSelector(state => state.auth.token);
-  console.log('token', typeof(tokenSave));
+  console.log('token', typeof tokenSave);
 
   const openLoginModalHandler = () => {
-    if (!tokenSave ) {
+    if (!tokenSave) {
       dispatch(openModal({ id: 'phone-login' }));
+    } else {
+      setOpenSubMenu(!openSubMenu);
     }
-    else{
-    setOpenSubMenu(!openSubMenu);
-  }
-   
   };
 
   //  if (tokenSave ) {
   //   setOpenSubMenu(!openSubMenu);
   // }
   console.log('openSubMenu', openSubMenu);
-
-
 
   return (
     <>
@@ -246,45 +240,55 @@ value={selectedValue} onChange={handleSelectChange}
               <ArrowDown2 size='16' className='mr-[2px] duration-300 hidden' />
             </div>
 
-            
+            {openSubMenu && (
               <ul
-              className={`dropdown-menu absolute left-0 pt-4 bg-transparent  w-36 body-sm rounded text-gray-800
-         ${openSubMenu? "block" : "hidden" }
+                className={`dropdown-menu absolute left-0 pt-4 bg-transparent  w-36 body-sm rounded text-gray-800
+        
             `}>
-              <Link href='/profile'>
-                <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl  dropdown-menu-shadow'>
-                  <User size='16' className='ml-1' />
-                  پروفایل
-                </li>
-              </Link>
+                <Link href='/profile'>
+                  <li
+                    className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2  whitespace-no-wrap rounded-tr rounded-tl  dropdown-menu-shadow'
+                    onClick={() => setOpenSubMenu(false)}>
+                    <User size='16' className='ml-1' />
+                    پروفایل
+                  </li>
+                </Link>
 
-              <Link href='/profile/order-tracking'>
-                <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
-                  <Wallet2 size='16' className='ml-1' />
-                  پیگیری سفارش
-                </li>
-              </Link>
+                <Link href='/profile/order-tracking'>
+                  <li
+                    className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'
+                    onClick={() => setOpenSubMenu(false)}>
+                    <Wallet2 size='16' className='ml-1' />
+                    پیگیری سفارش
+                  </li>
+                </Link>
 
-              <Link href='/profile/liking'>
-                <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
-                  <Heart size='16' className='ml-1' />
-                  علاقه‌مندی‌ها
-                </li>
-              </Link>
+                <Link href='/profile/liking'>
+                  <li
+                    className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'
+                    onClick={() => setOpenSubMenu(false)}>
+                    <Heart size='16' className='ml-1' />
+                    علاقه‌مندی‌ها
+                  </li>
+                </Link>
 
-              <li className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'>
-                <Location size='16' className='ml-1' />
-                آدرس‌های من
-              </li>
-
-              <Link href='/profile/exit'>
-                <li className='cursor-pointer flex justify-start items-center bg-white hover:bg-tint-100 p-2 whitespace-no-wrap rounded-br rounded-bl'>
-                  <LogoutCurve size='16' className='ml-1' />
-                  خروج از حساب
+                <li
+                  className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'
+                  onClick={() => setOpenSubMenu(false)}>
+                  <Location size='16' className='ml-1' />
+                  آدرس‌های من
                 </li>
-              </Link>
-            </ul>
-       
+
+                <Link href='/profile/exit'>
+                  <li
+                    className='cursor-pointer flex justify-start items-center bg-white hover:bg-tint-100 p-2 whitespace-no-wrap rounded-br rounded-bl'
+                    onClick={() => setOpenSubMenu(false)}>
+                    <LogoutCurve size='16' className='ml-1' />
+                    خروج از حساب
+                  </li>
+                </Link>
+              </ul>
+            )}
           </li>
         </ul>
       </section>

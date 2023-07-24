@@ -13,12 +13,10 @@ import { setToken } from '@/redux/authSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const isModalColse = useSelector(state => state.modal['phone-login']?.isOpen);
   const [popup, setPopup] = useState(false);
-
   const [inputValue, setInputValue] = useState('');
+  
   const [secondModal, setSecondModal] = useState(false);
-  const tokenSave = useSelector(state => state.auth.token);
 
   const handleInputChange = e => {
     e.preventDefault();
@@ -40,7 +38,6 @@ const LoginPage = () => {
       const token = 112233445566778899;
       dispatch(setToken(token));
     }
-    // dispatch(codeInputValue({ field: '', value: '' }));
   };
 
   const isModalOpen = useSelector(state => state.modal['phone-login']?.isOpen);
@@ -55,18 +52,13 @@ const LoginPage = () => {
     dispatch(codeInputValue({ name, value }));
   };
 
-  // console.log('isModalColse', isModalColse);
-  // if (isModalColse === false) {
-  //   dispatch(codeInputValue({ name, value: '' }));
-  // }
-
   const originalCode = Object.values(inputValues)
     .map(i => i)
     .join('');
 
  
  
-    const userLoginClicked = useSelector(state => state.button.userLoginClicked);
+    // const userLoginClicked = useSelector(state => state.button.userLoginClicked);
  
 
  

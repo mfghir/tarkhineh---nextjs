@@ -27,6 +27,7 @@ import ModalShoppinCart from '../modules/ModalShoppinCart';
 
 import StarRating from '../modules/StarRating ';
 import ModalMessage from '../modules/ModalMessage';
+import { openModal } from '@/redux/modalSlice';
 
 const ShoppingCartPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,6 +37,11 @@ const ShoppingCartPage = () => {
   const cart = useSelector(state => state.cart.cart);
   const totalDiscountPrice = getTotalDiscountPrice(cart);
   const buttonClicked = useSelector(state => state.button);
+
+  const isClearListOpen = useSelector(
+    state => state.modal['clearList-open']?.isOpen
+  );
+  console.log('clearList-open', isClearListOpen);
 
   const getTotalPrice = () => {
     return cart.reduce(
@@ -62,7 +68,10 @@ const ShoppingCartPage = () => {
           سبد خرید
         </p>
 
-        <button onClick={() => setDeleteModal(!deleteModal)}>
+        <button
+          onClick={() => dispatch(openModal({ id: 'clearList-open' }))}
+          // onClick={() => setDeleteModal(!deleteModal)}
+        >
           <Trash
             size='16'
             className={cart.length === 0 ? 'text-gray-400' : 'text-gray-800'}
@@ -120,7 +129,7 @@ const ShoppingCartPage = () => {
 
                     <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
                       <li
-                        className=''
+                        className='cursor-pointer'
                         onClick={() => dispatch(addToCart(item))}>
                         <Add size='16' />
                       </li>
@@ -246,7 +255,7 @@ const ShoppingCartPage = () => {
 
                             <ul className='flex justify-center items-center bg-tint-100 p-1 rounded text-primary'>
                               <li
-                                className=''
+                                className='cursor-pointer'
                                 onClick={() => dispatch(addToCart(item))}>
                                 <Add size='16' />
                               </li>
@@ -290,7 +299,9 @@ const ShoppingCartPage = () => {
 
                 <button
                   className='text-gray-800'
-                  onClick={() => setDeleteModal(!deleteModal)}>
+                  // onClick={() => setDeleteModal(!deleteModal)}
+                  onClick={() => dispatch(openModal({ id: 'clearList-open' }))}
+                  >
                   <Trash />
                 </button>
               </div>
@@ -347,7 +358,7 @@ const ShoppingCartPage = () => {
       )}
 
       {showModal ? <ModalShoppinCart /> : ''}
-      {deleteModal ? <ModalMessage /> : ''}
+      {isClearListOpen  ? <ModalMessage /> : ''}
     </section>
   );
 };

@@ -3,9 +3,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '@/redux/modalSlice';
 
 const ProfileMenu = () => {
   const { pathname } = useRouter();
+  const dispatch = useDispatch();
+
+  // const isExitPageOpen = useSelector(state => state.modal['exit-page']?.isOpen);
+  // console.log("isExitPageOpen" ,isExitPageOpen);
 
   return (
     <section className='w-full lg:border lg:border-gray-400 lg:rounded-lg lg:px-2 lg:py-4'>
@@ -81,12 +87,12 @@ const ProfileMenu = () => {
         </li>
 
         <Link href='/profile/exit'>
-          <li
-            className={`flex items-center text-error  p-2 ${
+          <li onClick={() => dispatch(openModal({ id: 'exit-page' }))}
+            className={`flex items-center text-error p-2 
+            ${
               pathname === '/profile/exit'
-                ? 'border-r-2 border-errorcaption-lg lg:body-md'
-                : ''
-            }`}>
+                ? 'border-r-2 border-error caption-lg lg:body-md': ''}`}
+            >
             {pathname === '/profile/exit' ? (
               <LogoutCurve size='16' className='ml-1' variant='Bold' />
             ) : (
