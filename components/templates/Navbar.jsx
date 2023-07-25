@@ -24,16 +24,16 @@ import MenuPhone from '../modules/MenuPhone';
 const Navbar = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart.cart);
-
   const router = useRouter();
+
   const [showMenu, setShowMenu] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState(false);
+  const tokenSave = useSelector(state => state.auth.token);
 
   const openSearchModalHandler = () => {
     dispatch(openModal({ id: 'searchModal' }));
   };
 
-  const tokenSave = useSelector(state => state.auth.token);
 
   const openLoginModalHandler = () => {
     if (!tokenSave) {
@@ -265,12 +265,14 @@ value={selectedValue} onChange={handleSelectChange}
                   </li>
                 </Link>
 
+                <Link href='/profile/address'>
                 <li
                   className='cursor-pointer flex justify-start items-center bg-white border border-b border-gray-100 hover:bg-tint-100 p-2 whitespace-no-wrap'
                   onClick={() => setOpenSubMenu(false)}>
                   <Location size='16' className='ml-1' />
                   آدرس‌های من
                 </li>
+                </Link>
 
                 <Link href='/profile/exit'>
                   <li

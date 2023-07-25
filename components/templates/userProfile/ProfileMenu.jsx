@@ -67,7 +67,8 @@ const ProfileMenu = () => {
 
         <Link href='/profile/liking'>
           <li
-            className={`flex items-center p-2 ${
+            className={`flex items-center p-2 
+            ${
               pathname === '/profile/liking'
                 ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
                 : ''
@@ -81,18 +82,32 @@ const ProfileMenu = () => {
           </li>
         </Link>
 
-        <li className='cursor-pointer flex items-center p-2'>
-          <Location size='16' className='ml-1' />
-          آدرس‌های من
-        </li>
+        <Link href='/profile/address'>
+          <li
+            className={`flex items-center p-2 
+            ${
+              pathname === '/profile/address'
+                ? 'border-r-2 border-primary text-primary caption-lg lg:body-md'
+                : ''
+            }`}>
+            {pathname === '/profile/address' ? (
+              <Location size='16' className='ml-1' variant='Bold' />
+            ) : (
+              <Location size='16' className='ml-1' />
+            )}
+            آدرس‌ های من
+          </li>
+        </Link>
 
         <Link href='/profile/exit'>
-          <li onClick={() => dispatch(openModal({ id: 'exit-page' }))}
+          <li
+            onClick={() => dispatch(openModal({ id: 'exit-page' }))}
             className={`flex items-center text-error p-2 
             ${
               pathname === '/profile/exit'
-                ? 'border-r-2 border-error caption-lg lg:body-md': ''}`}
-            >
+                ? 'border-r-2 border-error caption-lg lg:body-md'
+                : ''
+            }`}>
             {pathname === '/profile/exit' ? (
               <LogoutCurve size='16' className='ml-1' variant='Bold' />
             ) : (

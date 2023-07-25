@@ -1,13 +1,11 @@
 import { clearList } from '@/redux/cartSlice';
 import { closeModal } from '@/redux/modalSlice';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 const ModalMessage = () => {
   const [showModal, setShowModal] = useState(false);
-  const { pathname } = useRouter();
   const dispatch = useDispatch();
 
   const cart = useSelector(state => state.cart.cart);

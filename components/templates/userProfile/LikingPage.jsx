@@ -9,6 +9,7 @@ import SearchBar from '@/components/modules/SearchBar';
 import { convertToFaNumber } from '@/components/modules/FarsiNumber';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, toggleFavorite } from '@/redux/cartSlice';
+
 import StarRating from '@/components/modules/StarRating ';
 
 const LikingPage = () => {
