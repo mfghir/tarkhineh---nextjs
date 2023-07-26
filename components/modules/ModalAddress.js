@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Map from './Map';
 
 const ModalAddress = () => {
   const [showModal, setShowModal] = useState(false);
@@ -40,7 +41,18 @@ const ModalAddress = () => {
         </div>
 
         <div className='w-full flex flex-col'>
-          <span className='bg-pink-200 h-60'>jhj</span>
+          <span className='bg-pink-200 h-60'>
+            {/* <Map /> */}
+           
+          <iframe
+            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207344.07543142117!2d51.18284130717154!3d35.70774021876205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2s!4v1687255819474!5m2!1sen!2s'
+            // width='246'
+            // height='205'
+            style={{ border: '0' , width: '100%', height:'100%' }}
+            allowFullScreen=''
+            loading='lazy'
+            referrerPolicy='no-referrer-when-downgrade'></iframe>
+          </span>
           <button className='mx-auto caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8 mb-6'>
             ثبت موقعیت
           </button>

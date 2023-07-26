@@ -1,5 +1,4 @@
 import { Document, Location } from 'iconsax-react';
-import React from 'react';
 
 const DeliveryPlace = () => {
   return (
@@ -40,7 +39,7 @@ const DeliveryPlace = () => {
       </div>
 
       <div className='relative h-[180px] border border-gray-400 rounded-lg text-gray-700 lg:text-gray-800 mb-3'>
-        <textarea className='w-full h-full p-4 ' />
+        <textarea className='w-full h-full p-4' />
 
         <div className='flex justify-center items-center absolute top-4 right-4'>
           <p className='caption-md flex justify-center items-center'>
@@ -48,7 +47,7 @@ const DeliveryPlace = () => {
             توضیحات سفارش
           </p>
 
-          <span className=' caption-sm lg:caption-md  mr-1 '>(اختیاری)</span>
+          <span className=' caption-sm lg:caption-md mr-1'>(اختیاری)</span>
         </div>
       </div>
     </section>

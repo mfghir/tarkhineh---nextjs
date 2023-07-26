@@ -41,7 +41,7 @@ const AddressPage = () => {
 
 
 
-{openModalAdress ? <ModalAddress /> :"" }
+{openModalAdress ? <ModalAddress  /> :"" }
 
     </section>
   );
