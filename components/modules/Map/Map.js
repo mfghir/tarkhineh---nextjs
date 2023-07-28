@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -10,10 +10,11 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import 'leaflet/dist/leaflet.css';
-
+import L from 'leaflet';
 export default function MapPage() {
-  const [latLng, setLatLng] = useState([35.715298, 51.404343]);
+  const [latLng, setLatLng] = useState([35.688813637611936, 51.38913492599499]);
   const [searchText, setSearchText] = useState('');
+  const markerRef = useRef(null);
 
   const handleInputChange = e => {
     const { value } = e.target;
@@ -37,21 +38,34 @@ export default function MapPage() {
     }
   }, [searchText]);
 
-  function MapClickHandler(e) {
-    setLatLng([e.latlng.lat, e.latlng.lng]);
-  }
+  useEffect(() => {
+    if (markerRef.current) {
+      const { lat, lng } = markerRef.current.leafletElement.getLatLng();
+      setLatLng([lat, lng]);
+    }
+  }, [markerRef]);
 
   return (
     <section style={{ height: '100%', width: '100%' }}>
       <MapContainer
+        whenReady={map => {
+          map.target.on('click', function (e) {
+            const { lat, lng } = e.latlng;
+            console.log(lat, lng);
+            setLatLng([lat, lng]);
+          });
+        }}
         center={latLng}
         zoom={13}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
         style={{ height: '100%', width: '100%' }}>
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        <MyMarker position={latLng} setLatLng={setLatLng} />
-
-        <MapEventsHandler onClick={MapClickHandler} />
+        <TileLayer url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`} />
+        <MyMarker
+          position={latLng}
+          setLatLng={setLatLng}
+          markerRef={markerRef}
+        />
+        {/* <MapEventsHandler /> */}
       </MapContainer>
       <input
         style={{ position: 'fixed', zIndex: '999999', top: '0px' }}
@@ -67,7 +81,7 @@ export default function MapPage() {
 function MapEventsHandler(props) {
   const map = useMapEvents({
     click: e => {
-      props.onClick(e);
+      // Do nothing
     },
   });
 
@@ -84,7 +98,8 @@ function MyMarker(props) {
     <Marker
       position={props.position}
       draggable={true}
-      onDragEnd={handleDragEnd}>
+      onDragEnd={handleDragEnd}
+      ref={props.markerRef}>
       <Popup>
         A pretty CSS3 popup. <br /> Easily customizable.
       </Popup>
