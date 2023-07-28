@@ -6,7 +6,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '@/store';
 import { Provider } from 'react-redux';
 
-import 'leaflet/dist/leaflet.css';
+// import 'leaflet/dist/leaflet.css';
+
 
 export default function App({ Component, pageProps }) {
   return (
