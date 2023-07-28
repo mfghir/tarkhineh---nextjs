@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Map from './Map';
+import Map from './Map/Map';
 
 const ModalAddress = () => {
   const [showModal, setShowModal] = useState(false);
