@@ -9,7 +9,7 @@ import {
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-// import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
 
 export default function MapPage() {
   const [latLng, setLatLng] = useState([35.715298, 51.404343]);

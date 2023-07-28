@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import Map from './Map/Map';
-
-
-
+import Map from './Map/index';
 
 const ModalAddress = () => {
   const [showModal, setShowModal] = useState(false);
@@ -47,7 +44,7 @@ const ModalAddress = () => {
           <span className='w-full h-60 overflow-hidden relative'>
             <Map />
 
-{/*            
+            {/*            
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207344.07543142117!2d51.18284130717154!3d35.70774021876205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2s!4v1687255819474!5m2!1sen!2s'
             // width='246'
