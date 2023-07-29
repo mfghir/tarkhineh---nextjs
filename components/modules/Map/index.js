@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const Map = dynamic(() => import('./Map'), {
-  srr: false,
+  ssr: false,
 });
 
 export default Map;

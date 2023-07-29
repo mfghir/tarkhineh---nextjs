@@ -1,108 +1,135 @@
-import { useState, useEffect, useRef } from 'react';
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from 'react-leaflet';
-import 'leaflet-defaulticon-compatibility';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import 'leaflet/dist/leaflet.css';
+// import './App.css';
+import style from './map.module.css';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-export default function MapPage() {
-  const [latLng, setLatLng] = useState([35.688813637611936, 51.38913492599499]);
-  const [searchText, setSearchText] = useState('');
-  const markerRef = useRef(null);
 
-  const handleInputChange = e => {
-    const { value } = e.target;
-    setSearchText(value);
-  };
+import 'leaflet/dist/leaflet.css';
+import { useState, useEffect } from 'react';
+
+function App() {
+  const [markers, setMarkers] = useState([]);
+  const [address, setAddress] = useState({});
+  const [addressTwo, setAddressTwo] = useState({
+    city: '',
+    country: '',
+    country_code: '',
+    county: '',
+    district: '',
+    neighbourhood: '',
+    postcode: '',
+    road: '',
+  });
+
+  const [listAddress, setListAddress] = useState([]);
+
+  const Dimoned = L.icon({
+    iconUrl: '../../../marker1.png',
+    iconSize: [50, 50], // size of the icon
+  });
 
   useEffect(() => {
-    if (searchText) {
-      const provider = new OpenStreetMapProvider();
-      provider
-        .search({ query: searchText })
-        .then(results => {
-          if (results.length > 0) {
-            const { y, x } = results[0];
-            setLatLng([y, x]);
-          }
-        })
-        .catch(error => {
-          console.error('Error while geocoding:', error);
+    const fetchAddress = async () => {
+      // get the last marker in the markers array
+      const marker = markers[markers.length - 1];
+      if (marker) {
+        // fetch the address using a reverse geocoding API
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${
+            marker.getLatLng().lat
+          }&lon=${marker.getLatLng().lng}&format=json`
+        );
+        const data = await response.json();
+        console.log(data, 'DATA IS RESPOMSE FETCH ADDRESS');
+        // * address one set full address
+        setAddress(data);
+        // * address two set detail
+        console.log(data.address);
+        setAddressTwo({
+          city: data.address.city,
+          country: data.address.country,
+          country_code: data.address.country_code,
+          county: data.address.county,
+          district: data.address.district,
+          neighbourhood: data.address.neighbourhood,
+          postcode: data.address.postcode,
+          road: data.address.road,
         });
-    }
-  }, [searchText]);
 
-  useEffect(() => {
-    if (markerRef.current) {
-      const { lat, lng } = markerRef.current.leafletElement.getLatLng();
-      setLatLng([lat, lng]);
-    }
-  }, [markerRef]);
-
+        setListAddress([...listAddress, data.display_name]);
+        console.log(listAddress, 'list address user');
+      }
+      //* list address for display on ui
+    };
+    fetchAddress();
+  }, [markers]);
+  console.log(address.display_name);
+  console.log(listAddress, 'list address user');
   return (
-    <section style={{ height: '100%', width: '100%' }}>
-      <MapContainer
-        whenReady={map => {
-          map.target.on('click', function (e) {
-            const { lat, lng } = e.latlng;
-            console.log(lat, lng);
-            setLatLng([lat, lng]);
-          });
-        }}
-        center={latLng}
-        zoom={13}
-        scrollWheelZoom={true}
-        style={{ height: '100%', width: '100%' }}>
-        <TileLayer url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`} />
-        <MyMarker
-          position={latLng}
-          setLatLng={setLatLng}
-          markerRef={markerRef}
-        />
-        {/* <MapEventsHandler /> */}
-      </MapContainer>
-      <input
-        style={{ position: 'fixed', zIndex: '999999', top: '0px' }}
-        type='text'
-        value={searchText}
-        onChange={handleInputChange}
-        placeholder='Search location...'
-      />
+    <section>
+      {/* show addres two with detail */}
+      {/* <div>
+        <p>country : {addressTwo.country}</p>
+        <p>code :{addressTwo.country_code}</p>
+        <p>county : {addressTwo.county}</p>
+        <p>district : {addressTwo.district}</p>
+        <p>neighbourhood : {addressTwo.neighbourhood}</p>
+        <p>postcode : {addressTwo.postcode}</p>
+        <p>road :{addressTwo.road}</p>
+      </div> */}
+      {/* show addres one full address */}
+
+      <div>
+        <h1>{address.display_name}</h1>
+      </div>
+
+      {/* maping address */}
+      {listAddress.map((address, index) => {
+        return <p key={index}>{address}</p>;
+      })}
+      {/* map */}
+      <div className={style.map}>
+        <MapContainer
+          style={{ height: '100vh', width: ' 100%' }}
+          center={[29.591768, 52.583698]}
+          zoom={13}
+          scrollWheelZoom={false}
+          whenReady={map => {
+            // * this function for click on map
+            map.target.on('click', function (e) {
+              const { lat, lng } = e.latlng;
+              console.log({ lat: lat, lng: lng });
+              // * here added icon to map with click
+              const newMarker = L.marker([lat, lng], {
+                icon: Dimoned,
+              }).addTo(map.target);
+
+              //* here controll icon with state  just show one time
+              setMarkers(prevMarkers => {
+                // Keep only the last 1 marker
+                const newMarkers = [...prevMarkers, newMarker];
+                if (newMarkers.length > 1) {
+                  const oldestMarker = newMarkers.shift();
+                  oldestMarker.remove();
+                }
+                return newMarkers;
+              });
+            });
+          }}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          />
+          {/* Show the address on the map */}
+        </MapContainer>
+      </div>
     </section>
   );
 }
 
-function MapEventsHandler(props) {
-  const map = useMapEvents({
-    click: e => {
-      // Do nothing
-    },
-  });
+export default App;
 
-  return null;
-}
-
-function MyMarker(props) {
-  function handleDragEnd(e) {
-    const { lat, lng } = e.target.getLatLng();
-    props.setLatLng([lat, lng]);
-  }
-
-  return (
-    <Marker
-      position={props.position}
-      draggable={true}
-      onDragEnd={handleDragEnd}
-      ref={props.markerRef}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
-    </Marker>
-  );
-}
+// { address && (
+//   <L.Popup position={markers[markers.length - 1].getLatLng()}>
+//     {/* {address} */}
+//   </L.Popup>
+// )}
