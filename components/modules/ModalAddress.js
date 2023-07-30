@@ -54,9 +54,7 @@ const ModalAddress = () => {
             loading='lazy'
             referrerPolicy='no-referrer-when-downgrade'></iframe> */}
           </span>
-          <button className='absolute bottom-6 left-1/2 -translate-x-1/2 z-50 caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8'>
-            ثبت موقعیت
-          </button>
+         
         </div>
       </div>
     </section>
