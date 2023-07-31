@@ -11,6 +11,7 @@ const inputSlice = createSlice({
       value4: '',
       value5: '',
     },
+    addressValue: '',
   },
   reducers: {
     phoneCodeInputValue: (state, action) => {
@@ -21,8 +22,12 @@ const inputSlice = createSlice({
       const { name, value } = action.payload;
       state.inputValues[name] = value;
     },
+
+    addressInputValue: (state, action) => {
+      state.addressValue = action.payload;
+    },
   },
 });
 
-export const { phoneCodeInputValue, codeInputValue } = inputSlice.actions;
+export const { phoneCodeInputValue, codeInputValue ,addressInputValue } = inputSlice.actions;
 export default inputSlice.reducer;

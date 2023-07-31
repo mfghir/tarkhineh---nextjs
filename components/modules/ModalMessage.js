@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const ModalMessage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-
   const cart = useSelector(state => state.cart.cart);
+
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -23,7 +23,6 @@ const ModalMessage = () => {
   const isClearListOpen = useSelector(
     state => state.modal['clearList-open']?.isOpen
   );
-  console.log('clearList-open---', isClearListOpen);
 
   return (
     <>

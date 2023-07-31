@@ -4,10 +4,13 @@ import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 import ModalAddress from '@/components/modules/ModalAddress';
+import { useSelector } from 'react-redux';
 
 const AddressPage = () => {
   const { push } = useRouter();
   const [openModalAdress, setOpenModalAdress] = useState(false);
+  const addressInputVal = useSelector(state => state.input.addressInputValue);
+
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between min-h-screen lg:min-h-fit'>
@@ -25,6 +28,10 @@ const AddressPage = () => {
           <p className='w-full header-7 lg:header-6 text-gray-800 text-center mx-auto lg:text-right lg:pb-2 lg:border-b lg:border-gray-400'>
             آدرس ها
           </p>
+
+          
+          {addressInputVal ? "jdfdjj" : ""}
+
         </div>
 
         <div className='bg-[url("/images/Empty-page.png")] bg-center bg-no-repeat min-h-[200px] lg:min-h-0 border border-gray-400 rounded-lg lg:border-none p-6 mt-6 flex justify-center items-center flex-col lg:mt-12'>

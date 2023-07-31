@@ -1,4 +1,4 @@
-import { codeInputValue, phoneCodeInputValue } from '@/redux/inputSlice';
+import { codeInputValue } from '@/redux/inputSlice';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -12,18 +12,14 @@ import { setButtonClick } from '@/redux/buttonSlice';
 
 import { setToken } from '@/redux/authSlice';
 
-import { closeModal } from '@/redux/modalSlice';
-
 const ModalCode = () => {
   const dispatch = useDispatch();
   const [backModalOne, setBackModalOne] = useState(null);
   const [popup, setPopup] = useState(false);
 
-  const code = useSelector(state => state.input);
+  // const code = useSelector(state => state.input);
   const inputValues = useSelector(state => state.input.inputValues);
   const buttonClicked = useSelector(state => state.button.buttonClicked);
-
-  console.log(inputValues.value1);
 
   const handleChange = e => {
     e.preventDefault();
@@ -36,8 +32,9 @@ const ModalCode = () => {
     setShowModal(!showModal);
   };
 
-  const originalCode = Object.values(inputValues).map(i => i).join('');
-    
+  const originalCode = Object.values(inputValues)
+    .map(i => i)
+    .join('');
 
   const handleClick = () => {
     dispatch(setButtonClick(true));
@@ -51,12 +48,6 @@ const ModalCode = () => {
     setBackModalOne(true);
   };
 
-
-  // const isModalOpen = useSelector(state => state.modal['code-login']?.isOpen);
-  // const closeModalHandler = () => {
-  //   dispatch(closeModal({ id: 'code-login' }));
-  // };
-
   if (backModalOne === true) return <ModalShoppinCart />;
 
   return (
@@ -65,15 +56,15 @@ const ModalCode = () => {
         ''
       ) : (
         <div
-          className={`inset-0 overflow-y-auto z-50 min-h-screen  ${showModal ? "hidden": 'fixed'}
+          className={`inset-0 overflow-y-auto z-50 min-h-screen  ${
+            showModal ? 'hidden' : 'fixed'
+          }
           ${buttonClicked ? 'hidden' : 'fixed'}
           `}>
           <div className='flex items-center justify-center min-h-screen'>
-            {/* <div className='fixed inset-0 transition-opacity'> */}
-              <div
-                className='absolute inset-0 exitPage-bg'
-                onClick={() => toggleModal()}></div>
-            {/* </div> */}
+            <div
+              className='absolute inset-0 exitPage-bg'
+              onClick={() => toggleModal()}></div>
 
             <section className='w-full relative flex justify-center items-center py-4 px-6 lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
               <button onClick={() => toggleModal()}>
@@ -118,8 +109,8 @@ const ModalCode = () => {
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                       ${
                         inputValues.value1 !== '1' || originalCode !== '12345'
-                        ? 'border-error'
-                        : 'border-gray-700'
+                          ? 'border-error'
+                          : 'border-gray-700'
                       }
                     `}
                     name='value1'
@@ -133,8 +124,8 @@ const ModalCode = () => {
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
                       inputValues.value2 !== '2' || originalCode !== '12345'
-                          ? 'border-error'
-                          : 'border-gray-700'
+                        ? 'border-error'
+                        : 'border-gray-700'
                     }
 
                   `}
@@ -149,8 +140,8 @@ const ModalCode = () => {
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
                       inputValues.value3 !== '3' || originalCode !== '12345'
-                      ? 'border-error'
-                      : 'border-gray-700'
+                        ? 'border-error'
+                        : 'border-gray-700'
                     }
                   `}
                     name='value3'
@@ -164,8 +155,8 @@ const ModalCode = () => {
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
                       inputValues.value4 !== '4' || originalCode !== '12345'
-                      ? 'border-error'
-                      : 'border-gray-700'
+                        ? 'border-error'
+                        : 'border-gray-700'
                     }
                   `}
                     name='value4'
@@ -179,8 +170,8 @@ const ModalCode = () => {
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
                       inputValues.value5 !== '5' || originalCode !== '12345'
-                      ? 'border-error'
-                      : 'border-gray-700'
+                        ? 'border-error'
+                        : 'border-gray-700'
                     }
                   `}
                     name='value5'
@@ -216,53 +207,30 @@ const ModalCode = () => {
                   </button>
                 )}
 
+                <div
+                  className={`relative bg-error-lighter p-2 rounded ${
+                    originalCode == '12345' || popup ? 'hidden' : 'block'
+                  }`}>
+                  <button onClick={() => setPopup(!popup)}>
+                    <svg
+                      className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'>
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M6 18L18 6M6 6l12 12'
+                      />
+                    </svg>
+                  </button>
+                  <p className='caption-lg text-error text-center'>
+                    کد تایید نامعتبر
+                  </p>
+                </div>
 
-<div
-className={`relative bg-error-lighter p-2 rounded 
-${originalCode == '12345' || popup ? 'hidden' : 'block'}
-`}>
-<button  onClick={() => setPopup(!popup)}>
-  <svg
-    className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
-    xmlns='http://www.w3.org/2000/svg'
-    fill='none'
-    viewBox='0 0 24 24'
-    stroke='currentColor'>
-    <path
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth={2}
-      d='M6 18L18 6M6 6l12 12'
-    />
-  </svg>
-</button>
-<p className='caption-lg text-error text-center'>
-  کد تایید نامعتبر
-</p>
-</div>
-
-                {/* {originalCode !== '12345' &&
-                  <div className='relative bg-error-lighter p-2 rounded'>
-                    <button onClick={() => toggleModal()}>
-                      <svg
-                        className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'>
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M6 18L18 6M6 6l12 12'
-                        />
-                      </svg>
-                    </button>
-                    <p className='caption-lg text-error text-center'>
-                      کد تایید نامعتبر
-                    </p>
-                  </div>
-                 }  */}
               </div>
             </section>
           </div>

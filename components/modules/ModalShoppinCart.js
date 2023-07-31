@@ -1,6 +1,7 @@
-import { phoneCodeInputValue } from '@/redux/inputSlice';
+import { useState } from 'react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { phoneCodeInputValue } from '@/redux/inputSlice';
+
 import { useDispatch } from 'react-redux';
 import ModalCode from './ModalCode';
 

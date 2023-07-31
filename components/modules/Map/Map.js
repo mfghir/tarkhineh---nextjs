@@ -4,13 +4,19 @@ import 'leaflet/dist/leaflet.css';
 
 import { useState, useEffect } from 'react';
 import { Location } from 'iconsax-react';
-import { toPersianChars } from '@persian-tools/persian-tools';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addressInputValue } from '@/redux/inputSlice';
 
 function App() {
   const [markers, setMarkers] = useState([]);
   const [address, setAddress] = useState({});
-  // const farsiDisplayName = toPersianChars(address.display_name);
-  // console.log('farsiDisplayName', farsiDisplayName);
+  const [listAddress, setListAddress] = useState([]);
+
+  const dispatch = useDispatch();
+  const addressInputVal = useSelector(state => state.input.addressInputValue);
+  console.log( 'addressInputVal', addressInputVal);
+  const [inpVal, setInpVal] = useState('');
 
   // const [addressTwo, setAddressTwo] = useState({
   //   city: '',
@@ -22,8 +28,6 @@ function App() {
   //   postcode: '',
   //   road: '',
   // });
-
-  const [listAddress, setListAddress] = useState([]);
 
   const MapMarker = L.icon({
     iconUrl: '../../../Location-sign.png',
@@ -39,12 +43,18 @@ function App() {
         const response = await fetch(
           `https://nominatim.openstreetmap.org/reverse?lat=${
             marker.getLatLng().lat
-          }&lon=${marker.getLatLng().lng}&format=json`
+          }&lon=${marker.getLatLng().lng}&format=json`,
+          {
+            headers: {
+              'accept-language': 'eng',
+            },
+          }
         );
         const data = await response.json();
-        console.log(data, 'DATA IS RESPOMSE FETCH ADDRESS');
         // * address one set full address
         setAddress(data);
+        console.log('data.address ----', data.address);
+        console.log('addressdisplay_name ----', address.display_name);
         // * address two set detail
         // console.log(data.address);
         // setAddressTwo({
@@ -57,26 +67,22 @@ function App() {
         //   postcode: data.address?.postcode,
         //   road: data.address?.road,
         // });
-
         setListAddress([...listAddress, data.display_name]);
-        console.log(listAddress, 'list address user');
+        // dispatch(addressInputValue(address));
       }
       //* list address for display on ui
     };
     fetchAddress();
   }, [markers]);
 
-  const [farsiDisplayName, setFarsiDisplayName] = useState('');
-  console.log('farsiDisplayName-------_____________', farsiDisplayName);
-
-  // useEffect(() => {
-  //   if (address.display_name) {
-  //     setFarsiDisplayName(toPersianChars(address.display_name));
-  //   }
-  // }, [address.display_name]);
-
-  console.log('address.display_name-------', address.display_name);
-  console.log('list address user ---------', listAddress);
+  const inputHandler = e => {
+    e.preventDefault();
+    console.log('e------------' , e.target.value);
+    console.log('e------------2' , address.display_name);
+    dispatch(addressInputValue(address.display_name));
+    // dispatch(addressInputValue(inpVal))
+    console.log( 'addressInputVal---2', addressInputVal);
+  };
 
 
   // const reverseGeocode = async (latlng) => {
@@ -90,7 +96,6 @@ function App() {
   //     console.error(error);
   //   }
   // };
-
 
   return (
     <section className='h-full relative'>
@@ -155,26 +160,32 @@ function App() {
           {/* Show the address on the map */}
         </MapContainer>
 
-        <form className='absolute z-[9999] top-[60%]  w-full text-gray-800 px-6'>
+        <form
+          onSubmit={inputHandler}
+          className='absolute z-[9999] top-[60%]  w-full text-gray-800 px-6'>
           <div className='relative w-full '>
             <input
               className='body-sm w-full h-8 px-4 pr-10 text-sm border rounded focus:outline-none focus:ring-1 focus:ring-primary text-right'
               type='text'
               placeholder='آدرس'
               dir='rtl'
+              // value={inpVal}
               value={address.display_name}
-              // onChange={(event) => setAddress(event.target.value)}
+              // onChange={(e) => dispatch(addressInputValue(address.display_name))}
+              onChange={e => setAddress({ display_name: e.target.value })}
               // onBlur={(event) => geocodeAddress(event.target.value)}
             />
             <div className='absolute top-0 right-0 z-10 flex items-center h-8 px-4'>
               <Location color='#717171' />
             </div>
           </div>
-        </form>
 
-        <button className='absolute bottom-6 left-1/2 -translate-x-1/2 z-[9999] caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8'>
-          ثبت موقعیت
-        </button>
+          <button
+            type='submit'
+            className='absolute -bottom-12 left-1/2 -translate-x-1/2 z-[9999] caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8'>
+            ثبت موقعیت
+          </button>
+        </form>
       </div>
     </section>
   );
