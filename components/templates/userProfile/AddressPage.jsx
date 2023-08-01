@@ -29,8 +29,9 @@ const AddressPage = () => {
             آدرس ها
           </p>
 
-          
-          {addressInputVal ? "jdfdjj" : ""}
+          <p className="bg-red-200">
+            -{addressInputVal ? "jdfdjj" : ""}
+          </p>
 
         </div>
 
