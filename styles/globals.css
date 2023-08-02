@@ -201,6 +201,11 @@
     direction: ltr;
   }
   
-  
+  .form-container form div input:valid ~ label,
+.form-container form div input:focus ~ label {
+  top: -2rem;
+  transform: scale(0.75);
+  color: black;
+}
 
 }
