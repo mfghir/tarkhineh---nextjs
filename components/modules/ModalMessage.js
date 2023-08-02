@@ -9,7 +9,6 @@ const ModalMessage = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart.cart);
 
-
   const toggleModal = () => {
     setShowModal(!showModal);
     dispatch(closeModal({ id: 'exit-page' }));

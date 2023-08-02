@@ -3,7 +3,6 @@ import Map from './Map/index';
 
 const ModalAddress = () => {
   const [showModal, setShowModal] = useState(false);
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };

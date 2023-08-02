@@ -75,7 +75,7 @@
 //     fetchAddress();
 //   }, [markers]);
 
-//   const inputHandler = e => {
+//   const submitHandler = e => {
 //     e.preventDefault();
 //     console.log('e------------' , e.target.value);
 //     console.log('e------------2' , address.display_name);
@@ -159,7 +159,7 @@
 //         </MapContainer>
 
 //         <form
-//           onSubmit={inputHandler}
+//           onSubmit={submitHandler}
 //           className='absolute z-[9999] top-[60%]  w-full text-gray-800 px-6'>
 //           <div className='relative w-full '>
 //             <input
@@ -204,11 +204,7 @@ import { addressInputValue } from '@/redux/inputSlice';
 function App() {
   const [markers, setMarkers] = useState([]);
   const [address, setAddress] = useState('');
-
   const dispatch = useDispatch();
-  const addressInputVal = useSelector(state => state.input.addressInputValue);
-  console.log('addressInputVal', addressInputVal);
-  console.log('address', address);
 
   const MapMarker = L.icon({
     iconUrl: '../../../Location-sign.png',
@@ -231,13 +227,12 @@ function App() {
         );
         const data = await response.json();
         setAddress(data.display_name);
-        // dispatch(addressInputValue(address));
       }
     };
     fetchAddress();
   }, [markers]);
 
-  const inputHandler = e => {
+  const submitHandler = e => {
     e.preventDefault(); // prevent form submission
     geocodeAddress(address); // geocode the entered address
     dispatch(addressInputValue(address));
@@ -251,15 +246,20 @@ function App() {
       const data = await response.json();
       if (data.length > 0) {
         const { lat, lon } = data[0];
+
         setMarkers([L.marker([lat, lon], { icon: MapMarker })]);
         setAddress(data[0].display_name);
         mapRef.current.setView([lat, lon], 13); // set the center of the map to the geocoded coordinates
-        dispatch(addressInputValue(address));
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  // const inputHandler = e => {
+  //   setAddress(e.target.value);
+  //   // dispatch(addressInputValue(address));
+  // };
 
   const mapRef = useRef(null);
 
@@ -269,7 +269,7 @@ function App() {
         <MapContainer
           ref={mapRef}
           style={{ height: '100%', width: ' 100%' }}
-          center={[29.591768, 52.583698]}
+          center={[35.715298, 51.404343]}
           zoom={13}
           scrollWheelZoom={true}
           whenReady={map => {
@@ -300,7 +300,7 @@ function App() {
         </MapContainer>
 
         <form
-          onSubmit={inputHandler}
+          onSubmit={submitHandler}
           className='absolute z-[9999] top-[60%]  w-full text-gray-800 px-6'>
           <div className='relative w-full '>
             <input
@@ -309,6 +309,7 @@ function App() {
               placeholder='آدرس'
               dir='rtl'
               value={address}
+              // onChange={inputHandler}
               onChange={e => setAddress(e.target.value)}
             />
             <div className='absolute top-0 right-0 z-10 flex items-center h-8 px-4'>
@@ -319,7 +320,7 @@ function App() {
           <button
             type='submit'
             className='absolute -bottom-12 left-1/2 -translate-x-1/2 z-[9999] caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8'>
-            جستجو
+            ثبت موقعیت
           </button>
         </form>
       </div>

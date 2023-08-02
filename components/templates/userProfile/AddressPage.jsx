@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const AddressPage = () => {
   const { push } = useRouter();
   const [openModalAdress, setOpenModalAdress] = useState(false);
-  const addressInputVal = useSelector(state => state.input.addressInputValue);
+  const addressValue = useSelector(state => state.input.addressValue);
 
 
   return (
@@ -30,7 +30,7 @@ const AddressPage = () => {
           </p>
 
           <p className="bg-red-200">
-            -{addressInputVal ? "jdfdjj" : ""}
+            -{addressValue ? "jdfdjj" : ""}
           </p>
 
         </div>

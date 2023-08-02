@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { closeModal } from '@/redux/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
 import SearchBar from './SearchBar';
 
 const ModalSearch = () => {
