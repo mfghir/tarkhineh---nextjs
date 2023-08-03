@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Map from './Map/index';
-import { useSelector } from 'react-redux';
-import { Input } from '@material-tailwind/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Checkbox, Input } from '@material-tailwind/react';
+import { addressDetailInputValue } from '@/redux/inputSlice';
 
 const ModalAddress = () => {
   const addressValue = useSelector(state => state.input.addressValue);
@@ -10,7 +11,7 @@ const ModalAddress = () => {
     setShowModal(!showModal);
   };
 
-  const [touched, setTouched] = useState({});
+  const dispatch = useDispatch();
   const [inpVal, setInpVal] = useState({
     addressTitle: '',
     phone: '',
@@ -24,11 +25,16 @@ const ModalAddress = () => {
     console.log(inpVal);
   };
 
-  const touchedHandler = e => {
-    setTouched({ ...touched, [e.target.name]: true });
-  };
 
-  const handleSubmit = e => {};
+
+  const [checkboxValue, setCheckboxValue] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    dispatch(addressDetailInputValue(inpVal))
+    setShowModal(!showModal);
+
+  };
 
   return (
     <section
@@ -100,45 +106,123 @@ const ModalAddress = () => {
           </div>
 
           <div className='w-full h-full min-h-[200px] flex flex-col p-6'>
-            {/* <Input dir='rtl' label="عنوان آدرس" color='#417F56' /> */}
-
-            {/* <div className='.form-container'> */}
             <form className='form-container flex flex-col '>
-              <div class='relative mt-2 rtl'>
+              <div className='relative mb-4'>
                 <input
-                  className='block w-full border-gray-400 rounded-md focus:ring focus:ring-gray-800 focus:border-gray-800 body-sm'
+                  className='body-sm rtl block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
                   type='text'
                   name='addressTitle'
                   required
                   value={inpVal.addressTitle}
                   onChange={changeHandler}
-                  onFocus={touchedHandler}
+                  
                 />
                 <label
                   htmlFor='addressTitle'
-                  className='body-sm caption-md absolute left-0 -top-2 transition-all duration-4 ease-in-out'>
+                  className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
                   عنوان آدرس
                 </label>
               </div>
 
-              <div class='relative mt-2'>
+              <div className='flex items-center justify-start flex-row mb-4'>
+                {/* <Checkbox color="#417F56" defaultChecked /> */}
                 <input
-                  className='block w-full border-gray-400 rounded-md focus:ring focus:ring-gray-800 focus:border-gray-800 body-sm'
-                  type='text'
-                  name='phone'
-                  required
-                  value={inpVal.phone}
-                  onChange={changeHandler}
-                  onFocus={touchedHandler}
+                  type='checkbox'
+                  className='checkbox'
+                  checked={checkboxValue}
+                  onChange={e => setCheckboxValue(e.target.checked)}
                 />
+                <p className='caption-md lg:body-sm text-gray-800 mr-1'>
+                  تحویل گیرنده خودم هستم.
+                </p>
+              </div>
+
+              {checkboxValue ? (
+                <div className='relative mb-4'>
+                  <input
+                    className='body-sm rtl block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
+                    type='text'
+                    name='phone'
+                    required
+                    value={inpVal.phone}
+                    onChange={changeHandler}
+                    
+                  />
+                  <label
+                    htmlFor='phone'
+                    className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
+                    شماره همراه
+                  </label>
+                </div>
+              ) : (
+                <>
+                  <div className='relative mb-2'>
+                    <input
+                      className='body-sm rtl block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
+                      type='text'
+                      name='receiverName'
+                      required
+                      value={inpVal.receiverName}
+                      onChange={changeHandler}
+                      
+                    />
+                    <label
+                      htmlFor='receiverName'
+                      className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
+                      نام و نام‌خانوادگی تحویل گیرنده
+                    </label>
+                  </div>
+
+                  <div className='relative mb-4'>
+                    <input
+                      className='body-sm rtl block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
+                      type='text'
+                      name='receiverPhone'
+                      required
+                      value={inpVal.receiverPhone}
+                      onChange={changeHandler}
+                      
+                    />
+                    <label
+                      htmlFor='receiverPhone'
+                      className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
+                      شماره همراه تحویل گیرنده
+                    </label>
+                  </div>
+                </>
+              )}
+
+              <div className='relative mb-4'>
+                <textarea
+                  className='body-sm rtl h-44 block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
+                  name='addressDetail'
+                  id='addressDetail'
+                  required
+                  maxLength='200'
+                  value={inpVal.addressDetail}
+                  onChange={changeHandler}
+                  ></textarea>
                 <label
-                  htmlFor='phone'
-                  className='body-sm caption-md absolute left-0 -top-2 transition-all duration-300 ease-in-out'>
-                  شماره همراه
+                  htmlFor='addressDetail'
+                  className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
+                  آدرس دقیق شما
                 </label>
               </div>
+
+              <div className='grid grid-cols-2 gap-x-5'>
+                <button
+                  className=' caption-sm lg:button-lg rounded hover:text-shade-200 active:text-shade-300 duration-300 text-primary py-1 px-4'
+                  onClick={toggleModal}>
+                  انصراف
+                </button>
+                <button
+                  className=' caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4'
+                  onClick={handleSubmit}
+                  >
+                  ثبت آدرس
+                </button>
+              </div>
             </form>
-            {/* </div> */}
           </div>
         </div>
       )}

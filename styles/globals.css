@@ -200,12 +200,16 @@
   .ltr{
     direction: ltr;
   }
-  
-  .form-container form div input:valid ~ label,
-.form-container form div input:focus ~ label {
-  top: -2rem;
-  transform: scale(0.75);
-  color: black;
-}
+
+  .form-container div textarea:valid ~ label,
+  .form-container div textarea:focus ~ label,
+  .form-container div input:valid ~ label,
+  .form-container div input:focus ~ label {
+    @apply caption-md text-gray-800 -top-3 caption-md  bg-white px-1
+  }
+
+  .checkbox:checked {
+    @apply bg-primary
+  }
 
 }
