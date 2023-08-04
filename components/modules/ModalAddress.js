@@ -3,12 +3,19 @@ import Map from './Map/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, Input } from '@material-tailwind/react';
 import { addressDetailInputValue } from '@/redux/inputSlice';
+import { closeModal } from '@/redux/modalSlice';
 
 const ModalAddress = () => {
+  const isAddressModalOpen = useSelector(
+    state => state.modal['EditAddresshModal']?.isOpen
+  );
   const addressValue = useSelector(state => state.input.addressValue);
+  const [checkboxValue, setCheckboxValue] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     setShowModal(!showModal);
+    dispatch(closeModal({ id: 'EditAddresshModal' }));
   };
 
   const dispatch = useDispatch();
@@ -21,20 +28,20 @@ const ModalAddress = () => {
   });
 
   const changeHandler = e => {
+    e.preventDefault();
     setInpVal({ ...inpVal, [e.target.name]: e.target.value });
     console.log(inpVal);
   };
 
-
-
-  const [checkboxValue, setCheckboxValue] = useState(false);
-
   const handleSubmit = e => {
-    e.preventDefault()
-    dispatch(addressDetailInputValue(inpVal))
+    e.preventDefault();
+    dispatch(addressDetailInputValue(inpVal));
     setShowModal(!showModal);
-
   };
+
+  const addressDetailValue = useSelector(
+    state => state.input.addressDetailValue
+  );
 
   return (
     <section
@@ -49,7 +56,7 @@ const ModalAddress = () => {
         <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-              افزودن آدرس
+             افزودن آدرس
             </p>
 
             <button onClick={toggleModal}>
@@ -85,7 +92,7 @@ const ModalAddress = () => {
         <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-              ثبت آدرس
+            {isAddressModalOpen === true ? 'ویرایش آدرس' : 'افزودن آدرس'}
             </p>
 
             <button onClick={toggleModal}>
@@ -113,9 +120,8 @@ const ModalAddress = () => {
                   type='text'
                   name='addressTitle'
                   required
-                  value={inpVal.addressTitle}
+                  value={inpVal.addressTitle || addressDetailValue.addressTitle}
                   onChange={changeHandler}
-                  
                 />
                 <label
                   htmlFor='addressTitle'
@@ -144,9 +150,8 @@ const ModalAddress = () => {
                     type='text'
                     name='phone'
                     required
-                    value={inpVal.phone}
+                    value={inpVal.phone || addressDetailValue.phone}
                     onChange={changeHandler}
-                    
                   />
                   <label
                     htmlFor='phone'
@@ -162,9 +167,8 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverName'
                       required
-                      value={inpVal.receiverName}
+                      value={inpVal.receiverName ||addressDetailValue.receiverName }
                       onChange={changeHandler}
-                      
                     />
                     <label
                       htmlFor='receiverName'
@@ -179,9 +183,8 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverPhone'
                       required
-                      value={inpVal.receiverPhone}
+                      value={inpVal.receiverPhone || addressDetailValue.receiverPhone}
                       onChange={changeHandler}
-                      
                     />
                     <label
                       htmlFor='receiverPhone'
@@ -199,9 +202,8 @@ const ModalAddress = () => {
                   id='addressDetail'
                   required
                   maxLength='200'
-                  value={inpVal.addressDetail}
-                  onChange={changeHandler}
-                  ></textarea>
+                  value={inpVal.addressDetail || addressDetailValue.addressDetail}
+                  onChange={changeHandler}></textarea>
                 <label
                   htmlFor='addressDetail'
                   className='body-sm text-gray-700 absolute right-2 top-1 transition-all duration-4 ease-in-out'>
@@ -217,8 +219,7 @@ const ModalAddress = () => {
                 </button>
                 <button
                   className=' caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4'
-                  onClick={handleSubmit}
-                  >
+                  onClick={handleSubmit}>
                   ثبت آدرس
                 </button>
               </div>

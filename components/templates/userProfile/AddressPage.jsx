@@ -1,18 +1,28 @@
-import { AddCircle, ArrowRight2 } from 'iconsax-react';
+import { AddCircle, ArrowRight2, Edit2, Trash } from 'iconsax-react';
 import ProfileMenu from './ProfileMenu';
 import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 import ModalAddress from '@/components/modules/ModalAddress';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { convertToFaNumber } from '@/components/modules/FarsiNumber';
+import { openModal } from '@/redux/modalSlice';
 
 const AddressPage = () => {
   const { push } = useRouter();
-  const [openModalAdress, setOpenModalAdress] = useState(false);
+  const [openModalAddress, setOpenModalAddress] = useState(false);
   const addressValue = useSelector(state => state.input.addressValue);
+
+  const dispatch = useDispatch();
+
   const addressDetailValue = useSelector(
     state => state.input.addressDetailValue
   );
+  const isAddressModalOpen = useSelector(
+    state => state.modal['EditAddresshModal']?.isOpen
+  );
+  console.log('isAddressModalOpen', isAddressModalOpen);
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between min-h-screen lg:min-h-fit'>
@@ -43,11 +53,47 @@ const AddressPage = () => {
           </p>
         </div>
 
-        {addressDetailValue ? (
+        {addressValue !== '' ? (
           <section className='grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-4  mt-6 md:mt-4'>
             <div className='border border-gray-400 rounded p-4'>
-              <p className=''>{addressDetailValue.addressTitle}</p>
+              <ul className='flex justify-between items-start text-gray-800 mb-2'>
+                <li className='caption-sm lg:body-sm'>
+                  {addressDetailValue.addressDetail}
+                </li>
+                <li className='grid grid-cols-2 gap-x-3 mr-2'>
+                  <button
+                    onClick={() =>
+                      dispatch(openModal({ id: 'EditAddresshModal' }))
+                    }>
+                    <Edit2 className='w-4 h-4 lg:w-6 lg:h-6' />
+                  </button>
+                  <button onClick={() => console.log('tse')}>
+                    <Trash className='w-4 h-4 lg:w-6 lg:h-6' />
+                  </button>
+                </li>
+              </ul>
+
+              <ul className='caption-sm lg:body-sm text-gray-700 flex justify-between items-center'>
+                <li>محل کار</li>
+                <li>
+                  {addressDetailValue.receiverName
+                    ? addressDetailValue.receiverName
+                    : 'سردار وظیفه'}
+                </li>
+                <li>
+                  {addressDetailValue.phone
+                    ? convertToFaNumber(addressDetailValue.phone)
+                    : convertToFaNumber(addressDetailValue.receiverPhone)}
+                </li>
+              </ul>
             </div>
+
+            <button
+              className='lg:hidden caption-sm lg:button-lg w-32 rounded border border-primary hover:border-shade-200 active:border-shade-300 duration-300 text-primary py-1 px-4 mx-auto'
+              // onClick={handleSubmit}
+            >
+              افزودن آدرس جدید
+            </button>
           </section>
         ) : (
           <div className='bg-[url("/images/Empty-page.png")] bg-center bg-no-repeat min-h-[200px] lg:min-h-0 border border-gray-400 rounded-lg lg:border-none p-6 mt-6 flex justify-center items-center flex-col lg:mt-12'>
@@ -56,14 +102,15 @@ const AddressPage = () => {
             </p>
             <button
               className='caption-sm lg:button-lg rounded border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300 duration-300 py-1 px-4 lg:px-12  mt-4 lg:mt-8'
-              onClick={() => setOpenModalAdress(!openModalAdress)}>
+              onClick={() => setOpenModalAddress(!openModalAddress)}>
               افزودن آدرس
             </button>
           </div>
         )}
       </section>
 
-      {openModalAdress ? <ModalAddress /> : ''}
+      {openModalAddress ? <ModalAddress /> : ''}
+      {isAddressModalOpen ? <ModalAddress /> : ''}
     </section>
   );
 };
