@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Map from './Map/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, Input } from '@material-tailwind/react';
-import { addressDetailInputValue } from '@/redux/inputSlice';
+import { addInput, addressDetailInputValue, clearEditing, editInput } from '@/redux/inputSlice';
 import { closeModal } from '@/redux/modalSlice';
 
 const ModalAddress = () => {
@@ -18,7 +18,11 @@ const ModalAddress = () => {
     dispatch(closeModal({ id: 'EditAddresshModal' }));
   };
 
+  
   const dispatch = useDispatch();
+  const { isEditing, editedIndex, inputList,addressDetailValue }   = useSelector(
+    state => state.input
+  );
   const [inpVal, setInpVal] = useState({
     addressTitle: '',
     phone: '',
@@ -35,13 +39,33 @@ const ModalAddress = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (isEditing && editedIndex !== null) {
+
+      dispatch(editInput({ index: editedIndex, inputValues: inpVal }));
+      dispatch(clearEditing());
+    } else {
+      dispatch(addInput(inpVal));
+    }
+
     dispatch(addressDetailInputValue(inpVal));
+    // dispatch(addInput(inpVal));
     setShowModal(!showModal);
+    setInpVal({
+      addressTitle: '',
+      phone: '',
+      receiverName: '',
+      receiverPhone: '',
+      addressDetail: '',
+    });
+    setCheckboxValue(false);
   };
 
-  const addressDetailValue = useSelector(
-    state => state.input.addressDetailValue
-  );
+  useEffect(() => {
+    // Set the input values when in editing mode
+    if (isEditing && editedIndex !== null) {
+      setInpVal(inputList[editedIndex]);
+    }
+  }, [isEditing, editedIndex, inputList]);
 
   return (
     <section
@@ -120,7 +144,7 @@ const ModalAddress = () => {
                   type='text'
                   name='addressTitle'
                   required
-                  value={inpVal.addressTitle || addressDetailValue.addressTitle}
+                  value={inpVal.addressTitle }
                   onChange={changeHandler}
                 />
                 <label
@@ -150,7 +174,7 @@ const ModalAddress = () => {
                     type='text'
                     name='phone'
                     required
-                    value={inpVal.phone || addressDetailValue.phone}
+                    value={inpVal.phone }
                     onChange={changeHandler}
                   />
                   <label
@@ -167,7 +191,7 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverName'
                       required
-                      value={inpVal.receiverName ||addressDetailValue.receiverName }
+                      value={inpVal.receiverName  }
                       onChange={changeHandler}
                     />
                     <label
@@ -183,7 +207,7 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverPhone'
                       required
-                      value={inpVal.receiverPhone || addressDetailValue.receiverPhone}
+                      value={inpVal.receiverPhone }
                       onChange={changeHandler}
                     />
                     <label
@@ -202,7 +226,7 @@ const ModalAddress = () => {
                   id='addressDetail'
                   required
                   maxLength='200'
-                  value={inpVal.addressDetail || addressDetailValue.addressDetail}
+                  value={inpVal.addressDetail }
                   onChange={changeHandler}></textarea>
                 <label
                   htmlFor='addressDetail'

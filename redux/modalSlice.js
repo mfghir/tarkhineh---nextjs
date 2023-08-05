@@ -7,7 +7,7 @@ const modalSlice = createSlice({
   reducers: {
     openModal: (state, action) => {
       const { id } = action.payload;
-      state[id] = { isOpen: true };
+      state[id] = { isOpen: !state[id]?.isOpen };
     },
     closeModal: (state, action) => {
       const { id } = action.payload;

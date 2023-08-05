@@ -12,7 +12,10 @@ const inputSlice = createSlice({
       value5: '',
     },
     addressValue: '',
-    addressDetailValue:{}
+    addressDetailValue: {},
+    inputList: [],
+    isEditing: false,
+    editedIndex: null,
   },
   reducers: {
     phoneCodeInputValue: (state, action) => {
@@ -30,8 +33,37 @@ const inputSlice = createSlice({
     addressDetailInputValue: (state, action) => {
       state.addressDetailValue = action.payload;
     },
+
+
+    addInput: (state, action) => {
+      state.inputList.push(action.payload);
+    },
+    editInput: (state, action) => {
+      const { index, inputValues } = action.payload;
+      state.inputList[index] = inputValues;
+    },
+    setEditing: (state, action) => {
+      const index = action.payload;
+      state.isEditing = true;
+      state.editedIndex = index;
+    },
+    clearEditing: (state) => {
+      state.isEditing = false;
+      state.editedIndex = null;
+    },
+    deleteInput: (state, action) => {
+      const index = action.payload;
+      state.inputList.splice(index, 1);
+    },
   },
 });
 
-export const { phoneCodeInputValue, codeInputValue ,addressInputValue ,addressDetailInputValue } = inputSlice.actions;
+export const {
+  phoneCodeInputValue,
+  codeInputValue,
+  addressInputValue,
+  addressDetailInputValue,
+  addInput,
+  editInput, setEditing, clearEditing,deleteInput
+} = inputSlice.actions;
 export default inputSlice.reducer;

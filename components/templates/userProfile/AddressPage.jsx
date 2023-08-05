@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { convertToFaNumber } from '@/components/modules/FarsiNumber';
 import { openModal } from '@/redux/modalSlice';
+import { deleteInput, setEditing } from '@/redux/inputSlice';
+import ModalMessage from '@/components/modules/ModalMessage';
 
 const AddressPage = () => {
   const { push } = useRouter();
@@ -15,14 +17,36 @@ const AddressPage = () => {
   const addressValue = useSelector(state => state.input.addressValue);
 
   const dispatch = useDispatch();
-
   const addressDetailValue = useSelector(
     state => state.input.addressDetailValue
   );
   const isAddressModalOpen = useSelector(
     state => state.modal['EditAddresshModal']?.isOpen
   );
-  console.log('isAddressModalOpen', isAddressModalOpen);
+  const inputList = useSelector(state => state.input.inputList);
+  console.log('inputList', inputList);
+
+  const editHandler =(index)=>{
+    dispatch(openModal({ id: 'EditAddresshModal' }))
+    dispatch(setEditing(index));
+console.log( 'index',index);
+
+  }
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [saveAddressIndex, setSaveAddressIndex] = useState('');
+const isDeleteModalOpen = useSelector(
+  state => state.modal['deleteAddressModal']?.isOpen
+);
+  const handleDelete = (index) => {
+    // dispatch(deleteInput(index));
+    setSaveAddressIndex(index)
+    dispatch(openModal({ id: 'deleteAddressModal' }));
+
+    setIsModalOpen(!isModalOpen)
+    console.log('isDeleteModalOpen',isDeleteModalOpen);
+  };
+
 
   return (
     <section className='px-5 lg:px-20 py-2 lg:py-12 lg:flex lg:flex-row lg:justify-between min-h-screen lg:min-h-fit'>
@@ -43,55 +67,57 @@ const AddressPage = () => {
             {addressValue === '' ? (
               ''
             ) : (
-              <p className='hidden lg:flex justify-center items-center text-primary '>
+              <button
+                className='hidden lg:flex justify-center items-center text-primary'
+                onClick={() => setOpenModalAddress(!openModalAddress)}>
                 <AddCircle size='16' />
                 <span className='caption-md whitespace-nowrap mr-1'>
                   افزودن آدرس جدید
                 </span>
-              </p>
+              </button>
             )}
           </p>
         </div>
 
         {addressValue !== '' ? (
           <section className='grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-4  mt-6 md:mt-4'>
-            <div className='border border-gray-400 rounded p-4'>
-              <ul className='flex justify-between items-start text-gray-800 mb-2'>
-                <li className='caption-sm lg:body-sm'>
-                  {addressDetailValue.addressDetail}
-                </li>
-                <li className='grid grid-cols-2 gap-x-3 mr-2'>
-                  <button
-                    onClick={() =>
-                      dispatch(openModal({ id: 'EditAddresshModal' }))
-                    }>
-                    <Edit2 className='w-4 h-4 lg:w-6 lg:h-6' />
-                  </button>
-                  <button onClick={() => console.log('tse')}>
-                    <Trash className='w-4 h-4 lg:w-6 lg:h-6' />
-                  </button>
-                </li>
-              </ul>
+            {inputList.map((item, index) => (
+              <div key={index} className='border border-gray-400 rounded p-4'>
+                <ul className='flex justify-between items-start text-gray-800 mb-2'>
+                  <li className='caption-sm lg:body-sm'>
+                    {item.addressDetail}
+                  </li>
+                  <li className='grid grid-cols-2 gap-x-3 mr-2'>
+                    <button
+                      onClick={()=>editHandler(index)
+                      }>
+                      <Edit2 className='w-4 h-4 lg:w-6 lg:h-6' />
+                    </button>
+                    <button onClick={() =>  handleDelete(index)}>
+                      <Trash className='w-4 h-4 lg:w-6 lg:h-6' />
+                    </button>
+                  </li>
+                </ul>
 
-              <ul className='caption-sm lg:body-sm text-gray-700 flex justify-between items-center'>
-                <li>محل کار</li>
-                <li>
-                  {addressDetailValue.receiverName
-                    ? addressDetailValue.receiverName
-                    : 'سردار وظیفه'}
-                </li>
-                <li>
-                  {addressDetailValue.phone
-                    ? convertToFaNumber(addressDetailValue.phone)
-                    : convertToFaNumber(addressDetailValue.receiverPhone)}
-                </li>
-              </ul>
-            </div>
+                <ul className='caption-sm lg:body-sm text-gray-700 flex justify-between items-center'>
+                  <li>محل کار</li>
+                  <li>
+                    {item.receiverName
+                      ? item.receiverName
+                      : 'سردار وظیفه'}
+                  </li>
+                  <li>
+                    {item.phone
+                      ? convertToFaNumber(item.phone)
+                      : convertToFaNumber(item.receiverPhone)}
+                  </li>
+                </ul>
+              </div>
+            ))}
 
             <button
               className='lg:hidden caption-sm lg:button-lg w-32 rounded border border-primary hover:border-shade-200 active:border-shade-300 duration-300 text-primary py-1 px-4 mx-auto'
-              // onClick={handleSubmit}
-            >
+              onClick={() => setOpenModalAddress(!openModalAddress)}>
               افزودن آدرس جدید
             </button>
           </section>
@@ -111,6 +137,10 @@ const AddressPage = () => {
 
       {openModalAddress ? <ModalAddress /> : ''}
       {isAddressModalOpen ? <ModalAddress /> : ''}
+      
+      {isDeleteModalOpen ? <ModalMessage saveAddressIndex={saveAddressIndex} /> : ""}
+      {isModalOpen ? <ModalMessage saveAddressIndex={saveAddressIndex} /> : ""}
+      {isModalOpen ? 'jh' : ""}
     </section>
   );
 };
