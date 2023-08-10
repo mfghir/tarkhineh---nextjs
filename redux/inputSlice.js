@@ -54,6 +54,8 @@ const inputSlice = createSlice({
     deleteInput: (state, action) => {
       const index = action.payload;
       state.inputList.splice(index, 1);
+      // const itemIdToDelete = action.payload;
+      // state.inputList = state.inputList.filter((item) => item.id !== itemIdToDelete);
     },
   },
 });

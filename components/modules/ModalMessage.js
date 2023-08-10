@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-const ModalMessage = ({saveAddressIndex}) => {
+const ModalMessage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart.cart);
@@ -23,16 +23,12 @@ const ModalMessage = ({saveAddressIndex}) => {
     state => state.modal['clearList-open']?.isOpen
   );
 
-  const isDeleteAddressModalOpen = useSelector(
-    state => state.modal['deleteAddressModal']?.isOpen
-  );
-
   return (
     <>
-      {!showModal || cart.length > 0 || isClearListOpen || isDeleteAddressModalOpen === true ? (
+      {!showModal || cart.length > 0 || isClearListOpen ? (
         <div
           className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center 
-            ${showModal || cart.length === 0 ? 'hidden' : ''}
+           ${showModal || cart.length === 0 ? 'hidden' : ''}
           `}>
           <div
             className='absolute w-full h-full inset-0 exitPage-bg'
@@ -93,22 +89,6 @@ const ModalMessage = ({saveAddressIndex}) => {
 
                     <button className='w-full caption-sm lg:button-lg rounded bg-error-lighter text-error duration-300 py-1 mr-4'>
                       خروج
-                    </button>
-                  </>
-                ) : null}
-
-{isDeleteAddressModalOpen ? (
-                  <>
-                    <button
-                      className='w-full lg:w-auto caption-sm lg:button-lg rounded border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300 duration-300 py-1 px-4 lg:px-8'
-                      onClick={toggleModal}>
-                      بازگشت
-                    </button>
-
-                    <button
-                      className='w-full lg:w-auto caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8 mr-5'
-                      onClick={() => dispatch(deleteInput(saveAddressIndex))}>
-                      حذف آدرس
                     </button>
                   </>
                 ) : null}

@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react';
 import Map from './Map/index';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Checkbox, Input } from '@material-tailwind/react';
-import { addInput, addressDetailInputValue, clearEditing, editInput } from '@/redux/inputSlice';
+import {
+  addInput,
+  addressDetailInputValue,
+  clearEditing,
+  editInput,
+} from '@/redux/inputSlice';
 import { closeModal } from '@/redux/modalSlice';
 
 const ModalAddress = () => {
   const isAddressModalOpen = useSelector(
-    state => state.modal['EditAddresshModal']?.isOpen
+    state => state.modal['EditAddressModal']?.isOpen
   );
+
   const addressValue = useSelector(state => state.input.addressValue);
   const [checkboxValue, setCheckboxValue] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
+
   const toggleModal = () => {
     setShowModal(!showModal);
-    dispatch(closeModal({ id: 'EditAddresshModal' }));
+    dispatch(closeModal({ id: 'EditAddressModal' }));
   };
 
-  
   const dispatch = useDispatch();
-  const { isEditing, editedIndex, inputList,addressDetailValue }   = useSelector(
-    state => state.input
-  );
+  const { isEditing, editedIndex, inputList } = useSelector(state => state.input);
   const [inpVal, setInpVal] = useState({
     addressTitle: '',
     phone: '',
@@ -40,7 +44,6 @@ const ModalAddress = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (isEditing && editedIndex !== null) {
-
       dispatch(editInput({ index: editedIndex, inputValues: inpVal }));
       dispatch(clearEditing());
     } else {
@@ -80,7 +83,7 @@ const ModalAddress = () => {
         <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-             افزودن آدرس
+              افزودن آدرس
             </p>
 
             <button onClick={toggleModal}>
@@ -116,7 +119,7 @@ const ModalAddress = () => {
         <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
           <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
             <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-            {isAddressModalOpen === true ? 'ویرایش آدرس' : 'افزودن آدرس'}
+              {isAddressModalOpen === true ? 'ویرایش آدرس' : 'افزودن آدرس'}
             </p>
 
             <button onClick={toggleModal}>
@@ -144,7 +147,7 @@ const ModalAddress = () => {
                   type='text'
                   name='addressTitle'
                   required
-                  value={inpVal.addressTitle }
+                  value={inpVal?.addressTitle}
                   onChange={changeHandler}
                 />
                 <label
@@ -174,7 +177,7 @@ const ModalAddress = () => {
                     type='text'
                     name='phone'
                     required
-                    value={inpVal.phone }
+                    value={inpVal?.phone}
                     onChange={changeHandler}
                   />
                   <label
@@ -191,7 +194,7 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverName'
                       required
-                      value={inpVal.receiverName  }
+                      value={inpVal?.receiverName}
                       onChange={changeHandler}
                     />
                     <label
@@ -207,7 +210,7 @@ const ModalAddress = () => {
                       type='text'
                       name='receiverPhone'
                       required
-                      value={inpVal.receiverPhone }
+                      value={inpVal?.receiverPhone}
                       onChange={changeHandler}
                     />
                     <label
@@ -226,7 +229,7 @@ const ModalAddress = () => {
                   id='addressDetail'
                   required
                   maxLength='200'
-                  value={inpVal.addressDetail }
+                  value={inpVal?.addressDetail}
                   onChange={changeHandler}></textarea>
                 <label
                   htmlFor='addressDetail'
