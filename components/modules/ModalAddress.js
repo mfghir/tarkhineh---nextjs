@@ -2,31 +2,47 @@ import { useEffect, useState } from 'react';
 import Map from './Map/index';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Checkbox, Input } from '@material-tailwind/react';
+import { closeModal } from '@/redux/modalSlice';
 import {
   addInput,
   addressDetailInputValue,
   clearEditing,
   editInput,
 } from '@/redux/inputSlice';
-import { closeModal } from '@/redux/modalSlice';
 
 const ModalAddress = () => {
-  const isAddressModalOpen = useSelector(
+  const isMapInputAddressModalOpen = useSelector(
+    state => state.modal['MapInputAddressModal']?.isOpen
+  );
+  console.log('isMapInputAddressModalOpen', isMapInputAddressModalOpen);
+
+  const isEditAddressModalOpen = useSelector(
     state => state.modal['EditAddressModal']?.isOpen
   );
+  const isAddAddressModalOpen = useSelector(
+    state => state.modal['AddAddressModal']?.isOpen
+  );
+  console.log('isAddAddressModalOpen', isAddAddressModalOpen);
 
   const addressValue = useSelector(state => state.input.addressValue);
+  console.log('addressValue', addressValue);
+
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
     dispatch(closeModal({ id: 'EditAddressModal' }));
+    dispatch(closeModal({ id: 'AddAddressModal' }));
   };
 
   const dispatch = useDispatch();
-  const { isEditing, editedIndex, inputList } = useSelector(state => state.input);
+  const { isEditing, editedIndex, inputList } = useSelector(
+    state => state.input
+  );
+
+  console.log('isEditing', isEditing);
+
   const [inpVal, setInpVal] = useState({
     addressTitle: '',
     phone: '',
@@ -38,7 +54,6 @@ const ModalAddress = () => {
   const changeHandler = e => {
     e.preventDefault();
     setInpVal({ ...inpVal, [e.target.name]: e.target.value });
-    console.log(inpVal);
   };
 
   const handleSubmit = e => {
@@ -46,22 +61,26 @@ const ModalAddress = () => {
     if (isEditing && editedIndex !== null) {
       dispatch(editInput({ index: editedIndex, inputValues: inpVal }));
       dispatch(clearEditing());
+      dispatch(closeModal({ id: 'EditAddressModal' }));
+
     } else {
       dispatch(addInput(inpVal));
-    }
+      dispatch(addressDetailInputValue(inpVal));
+      setShowModal(!showModal);
 
-    dispatch(addressDetailInputValue(inpVal));
-    // dispatch(addInput(inpVal));
-    setShowModal(!showModal);
-    setInpVal({
-      addressTitle: '',
-      phone: '',
-      receiverName: '',
-      receiverPhone: '',
-      addressDetail: '',
-    });
-    setCheckboxValue(false);
+      setInpVal({
+        addressTitle: '',
+        phone: '',
+        receiverName: '',
+        receiverPhone: '',
+        addressDetail: '',
+      });
+      setCheckboxValue(false);
+      dispatch(closeModal({ id: 'MapInputAddressModal' }));
+      dispatch(closeModal({ id: 'AddAddressModal' }));
+    }
   };
+
 
   useEffect(() => {
     // Set the input values when in editing mode
@@ -73,74 +92,51 @@ const ModalAddress = () => {
   return (
     <section
       className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center 
-      ${showModal ? 'hidden' : ''}
+      ${showModal  ? 'hidden' : ''}
     `}>
       <div
         className='absolute w-full h-full inset-0 exitPage-bg'
         onClick={toggleModal}></div>
 
-      {addressValue === '' ? (
-        <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
-          <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
-            <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-              افزودن آدرس
-            </p>
+      <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
+        <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
+          <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
+            {!isEditAddressModalOpen  ? 'افزودن آدرس' : 'ویرایش آدرس'}
+          </p>
 
-            <button onClick={toggleModal}>
-              <svg
-                className='h-6 w-6 text-gray-700 cursor-pointer'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
-          </div>
+          <button onClick={toggleModal}>
+            <svg
+              className='h-6 w-6 text-gray-700 cursor-pointer'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M6 18L18 6M6 6l12 12'
+              />
+            </svg>
+          </button>
+        </div>
 
+        { !isMapInputAddressModalOpen ? (
           <div className='w-full flex flex-col'>
             <span className='w-full h-80 overflow-hidden relative'>
               <Map />
             </span>
           </div>
-        </div>
-      ) : (
-        ''
-      )}
+        ) : (
+         ''
+        )}
 
-      {addressValue === '' ? (
-        ''
-      ) : (
-        <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
-          <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
-            <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-              {isAddressModalOpen === true ? 'ویرایش آدرس' : 'افزودن آدرس'}
-            </p>
-
-            <button onClick={toggleModal}>
-              <svg
-                className='h-6 w-6 text-gray-700 cursor-pointer'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
-          </div>
-
+        {/* {isEditing || isMapInputAddressModalOpen || isAddAddressModalOpen ===false && inpVal.addressDetail === '' ?  */}
+        {isMapInputAddressModalOpen ||isEditAddressModalOpen ? (
           <div className='w-full h-full min-h-[200px] flex flex-col p-6'>
-            <form className='form-container flex flex-col '>
+            <form
+              className='form-container flex flex-col '
+              onSubmit={handleSubmit}>
               <div className='relative mb-4'>
                 <input
                   className='body-sm rtl block w-full px-4 py-1 border border-gray-400 rounded outline-none focus:border-gray-800'
@@ -246,14 +242,17 @@ const ModalAddress = () => {
                 </button>
                 <button
                   className=' caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4'
-                  onClick={handleSubmit}>
+                  // onClick={handleSubmit}>
+                  type='submit'>
                   ثبت آدرس
                 </button>
               </div>
             </form>
           </div>
-        </div>
-      )}
+        ) : (
+          ''
+        )}
+      </div>
     </section>
   );
 };

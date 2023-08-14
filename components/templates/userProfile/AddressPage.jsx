@@ -13,13 +13,15 @@ import ModalMessage from '@/components/modules/ModalMessage';
 import { ModalDelete } from '@/components/modules/ModalDelete';
 
 const AddressPage = () => {
+  const dispatch = useDispatch();
   const { push } = useRouter();
-  const [openModalAddress, setOpenModalAddress] = useState(false);
   const addressValue = useSelector(state => state.input.addressValue);
 
-  const dispatch = useDispatch();
-  const isAddressModalOpen = useSelector(
+  const isEditAddressModalOpen = useSelector(
     state => state.modal['EditAddressModal']?.isOpen
+  );
+  const isAddAddressModalOpen = useSelector(
+    state => state.modal['AddAddressModal']?.isOpen
   );
 
   const inputList = useSelector(state => state.input.inputList);
@@ -32,12 +34,10 @@ const AddressPage = () => {
   const isDeleteModalOpen = useSelector(
     state => state.modal['deleteAddressModal']?.isOpen
   );
-  
-  console.log('inputList', inputList);
 
   const handleDelete = index => {
     dispatch(openModal({ id: 'deleteAddressModal' }));
-    setSaveAddressIndex(index)
+    setSaveAddressIndex(index);
   };
 
   return (
@@ -54,14 +54,13 @@ const AddressPage = () => {
             onClick={() => push('/profile')}
           />
           <p className='w-full header-7 lg:header-6 text-gray-800 text-center mx-auto lg:text-right lg:pb-2 lg:border-b lg:border-gray-400 lg:flex lg:justify-between  '>
-            {/* <p className='w-full header-7 lg:header-6 text-gray-800 text-center mx-auto'></p> */}
             آدرس ها
             {addressValue === '' ? (
               ''
             ) : (
               <button
                 className='hidden lg:flex justify-center items-center text-primary'
-                onClick={() => setOpenModalAddress(!openModalAddress)}>
+                onClick={() => dispatch(openModal({ id: 'AddAddressModal' }))}>
                 <AddCircle size='16' />
                 <span className='caption-md whitespace-nowrap mr-1'>
                   افزودن آدرس جدید
@@ -100,13 +99,12 @@ const AddressPage = () => {
                       : convertToFaNumber(item.receiverPhone)}
                   </li>
                 </ul>
-
               </div>
             ))}
 
             <button
               className='lg:hidden caption-sm lg:button-lg w-32 rounded border border-primary hover:border-shade-200 active:border-shade-300 duration-300 text-primary py-1 px-4 mx-auto'
-              onClick={() => setOpenModalAddress(!openModalAddress)}>
+              onClick={() => dispatch(openModal({ id: 'AddAddressModal' }))}>
               افزودن آدرس جدید
             </button>
           </section>
@@ -117,15 +115,14 @@ const AddressPage = () => {
             </p>
             <button
               className='caption-sm lg:button-lg rounded border border-primary text-primary hover:text-shade-200 hover:border-shade-200 active:text-shade-300 active:border-shade-300 duration-300 py-1 px-4 lg:px-12  mt-4 lg:mt-8'
-              onClick={() => setOpenModalAddress(!openModalAddress)}>
+              onClick={() => dispatch(openModal({ id: 'AddAddressModal' }))}>
               افزودن آدرس
             </button>
           </div>
         )}
       </section>
 
-      {openModalAddress ? <ModalAddress /> : ''}
-      {isAddressModalOpen ? <ModalAddress /> : ''}
+      { isAddAddressModalOpen ? <ModalAddress /> : ''}
       {isDeleteModalOpen === true ? (
         <ModalDelete saveAddressIndex={saveAddressIndex} />
       ) : (

@@ -200,6 +200,7 @@ import { Location } from 'iconsax-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addressInputValue } from '@/redux/inputSlice';
+import { closeModal, openModal } from '@/redux/modalSlice';
 
 function App() {
   const [markers, setMarkers] = useState([]);
@@ -236,7 +237,12 @@ function App() {
     e.preventDefault(); // prevent form submission
     geocodeAddress(address); // geocode the entered address
     dispatch(addressInputValue(address));
+
+    // dispatch(closeModal({ id: 'AddAddressModal' }))
+    dispatch(openModal({ id: 'MapInputAddressModal' }))
+    setAddress('');
   };
+
 
   const geocodeAddress = async address => {
     try {
@@ -300,7 +306,7 @@ function App() {
         </MapContainer>
 
         <form
-          onSubmit={submitHandler}
+          // onSubmit={submitHandler}
           className='absolute z-[9999] top-[60%]  w-full text-gray-800 px-6'>
           <div className='relative w-full '>
             <input
@@ -309,7 +315,6 @@ function App() {
               placeholder='آدرس'
               dir='rtl'
               value={address}
-              // onChange={inputHandler}
               onChange={e => setAddress(e.target.value)}
             />
             <div className='absolute top-0 right-0 z-10 flex items-center h-8 px-4'>
@@ -318,7 +323,8 @@ function App() {
           </div>
 
           <button
-            type='submit'
+            // type='submit'
+            onClick={submitHandler}
             className='absolute -bottom-12 left-1/2 -translate-x-1/2 z-[9999] caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8'>
             ثبت موقعیت
           </button>
