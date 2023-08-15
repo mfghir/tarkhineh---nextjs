@@ -7,9 +7,9 @@ import ModalAddress from '@/components/modules/ModalAddress';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { convertToFaNumber } from '@/components/modules/FarsiNumber';
-import { openModal } from '@/redux/modalSlice';
-import { deleteInput, setEditing } from '@/redux/inputSlice';
-import ModalMessage from '@/components/modules/ModalMessage';
+import { closeModal, openModal } from '@/redux/modalSlice';
+import { setEditing } from '@/redux/inputSlice';
+
 import { ModalDelete } from '@/components/modules/ModalDelete';
 
 const AddressPage = () => {
@@ -25,8 +25,10 @@ const AddressPage = () => {
   );
 
   const inputList = useSelector(state => state.input.inputList);
+
   const editHandler = index => {
     dispatch(openModal({ id: 'EditAddressModal' }));
+    dispatch(closeModal({ id: 'AddAddressModal' }));
     dispatch(setEditing(index));
   };
 
@@ -122,7 +124,7 @@ const AddressPage = () => {
         )}
       </section>
 
-      { isAddAddressModalOpen ? <ModalAddress /> : ''}
+      {isAddAddressModalOpen || isEditAddressModalOpen ? <ModalAddress /> : ''}
       {isDeleteModalOpen === true ? (
         <ModalDelete saveAddressIndex={saveAddressIndex} />
       ) : (

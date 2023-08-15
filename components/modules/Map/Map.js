@@ -238,11 +238,9 @@ function App() {
     geocodeAddress(address); // geocode the entered address
     dispatch(addressInputValue(address));
 
-    // dispatch(closeModal({ id: 'AddAddressModal' }))
-    dispatch(openModal({ id: 'MapInputAddressModal' }))
+    dispatch(openModal({ id: 'MapInputAddressModal' }));
     setAddress('');
   };
-
 
   const geocodeAddress = async address => {
     try {

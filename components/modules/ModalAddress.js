@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
-import Map from './Map/index';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { closeModal } from '@/redux/modalSlice';
+import { useEffect, useState } from 'react';
+
+import Map from './Map/index';
 import {
   addInput,
   addressDetailInputValue,
   clearEditing,
   editInput,
 } from '@/redux/inputSlice';
+import convertToPersianNumber from './convertToPersianNumber';
 
 const ModalAddress = () => {
   const isMapInputAddressModalOpen = useSelector(
     state => state.modal['MapInputAddressModal']?.isOpen
   );
-  console.log('isMapInputAddressModalOpen', isMapInputAddressModalOpen);
 
   const isEditAddressModalOpen = useSelector(
     state => state.modal['EditAddressModal']?.isOpen
   );
-  const isAddAddressModalOpen = useSelector(
-    state => state.modal['AddAddressModal']?.isOpen
-  );
-  console.log('isAddAddressModalOpen', isAddAddressModalOpen);
-
-  const addressValue = useSelector(state => state.input.addressValue);
-  console.log('addressValue', addressValue);
 
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -41,8 +34,6 @@ const ModalAddress = () => {
     state => state.input
   );
 
-  console.log('isEditing', isEditing);
-
   const [inpVal, setInpVal] = useState({
     addressTitle: '',
     phone: '',
@@ -53,7 +44,17 @@ const ModalAddress = () => {
 
   const changeHandler = e => {
     e.preventDefault();
-    setInpVal({ ...inpVal, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let updatedValue = value;
+
+    if (typeof value === 'string') {
+      updatedValue = convertToPersianNumber(value);
+    }
+
+    setInpVal(prevState => ({
+      ...prevState,
+      [name]: updatedValue,
+    }));
   };
 
   const handleSubmit = e => {
@@ -62,7 +63,6 @@ const ModalAddress = () => {
       dispatch(editInput({ index: editedIndex, inputValues: inpVal }));
       dispatch(clearEditing());
       dispatch(closeModal({ id: 'EditAddressModal' }));
-
     } else {
       dispatch(addInput(inpVal));
       dispatch(addressDetailInputValue(inpVal));
@@ -81,7 +81,6 @@ const ModalAddress = () => {
     }
   };
 
-
   useEffect(() => {
     // Set the input values when in editing mode
     if (isEditing && editedIndex !== null) {
@@ -92,7 +91,7 @@ const ModalAddress = () => {
   return (
     <section
       className={`fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center 
-      ${showModal  ? 'hidden' : ''}
+      ${showModal ? 'hidden' : ''}
     `}>
       <div
         className='absolute w-full h-full inset-0 exitPage-bg'
@@ -101,7 +100,7 @@ const ModalAddress = () => {
       <div className='w-full lg:w-96 bg-white rounded-lg overflow-hidden transform transition-all mx-5'>
         <div className='bg-gray-300 flex justify-end items-center py-4 px-6'>
           <p className='caption-lg lg:header-7 text-gray-800 text-center mx-auto justify-start'>
-            {!isEditAddressModalOpen  ? 'افزودن آدرس' : 'ویرایش آدرس'}
+            {!isEditAddressModalOpen ? 'افزودن آدرس' : 'ویرایش آدرس'}
           </p>
 
           <button onClick={toggleModal}>
@@ -121,18 +120,17 @@ const ModalAddress = () => {
           </button>
         </div>
 
-        { !isMapInputAddressModalOpen ? (
+        {!isMapInputAddressModalOpen && !isEditAddressModalOpen ? (
           <div className='w-full flex flex-col'>
             <span className='w-full h-80 overflow-hidden relative'>
               <Map />
             </span>
           </div>
         ) : (
-         ''
+          ''
         )}
 
-        {/* {isEditing || isMapInputAddressModalOpen || isAddAddressModalOpen ===false && inpVal.addressDetail === '' ?  */}
-        {isMapInputAddressModalOpen ||isEditAddressModalOpen ? (
+        {isMapInputAddressModalOpen || isEditAddressModalOpen ? (
           <div className='w-full h-full min-h-[200px] flex flex-col p-6'>
             <form
               className='form-container flex flex-col '
@@ -154,7 +152,6 @@ const ModalAddress = () => {
               </div>
 
               <div className='flex items-center justify-start flex-row mb-4'>
-                {/* <Checkbox color="#417F56" defaultChecked /> */}
                 <input
                   type='checkbox'
                   className='checkbox'
@@ -242,7 +239,6 @@ const ModalAddress = () => {
                 </button>
                 <button
                   className=' caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4'
-                  // onClick={handleSubmit}>
                   type='submit'>
                   ثبت آدرس
                 </button>

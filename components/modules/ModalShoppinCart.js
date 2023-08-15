@@ -4,19 +4,23 @@ import { phoneCodeInputValue } from '@/redux/inputSlice';
 
 import { useDispatch } from 'react-redux';
 import ModalCode from './ModalCode';
+import convertToPersianNumber from './convertToPersianNumber';
 
 const ModalShoppinCart = () => {
   const [showModal, setShowModal] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [secondModal, setSecondModal] = useState(false);
+  
+  const dispatch = useDispatch();
+  
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  const [inputValue, setInputValue] = useState('');
-  const dispatch = useDispatch();
-  const [secondModal, setSecondModal] = useState(false);
 
-  const handleInputChange = event => {
-    setInputValue(event.target.value);
+  const handleInputChange = e => {
+    const persianValue = convertToPersianNumber(e.target.value);
+    setInputValue(persianValue);
   };
 
   const handleSubmit = () => {
@@ -78,7 +82,7 @@ const ModalShoppinCart = () => {
                     onChange={handleInputChange}
                   />
 
-                  {inputValue === '09221234567' ? (
+                  {inputValue === '۰۹۲۲۱۲۳۴۵۶۷' ? (
                     <button
                       className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
                       onClick={handleSubmit}>

@@ -11,21 +11,25 @@ import { convertToFaNumber } from '../modules/FarsiNumber';
 import TwoMinuteTimer from '../modules/Timer';
 
 import { setToken } from '@/redux/authSlice';
+import convertToPersianNumber from '../modules/convertToPersianNumber';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const [popup, setPopup] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  
+
   const [secondModal, setSecondModal] = useState(false);
 
   const handleInputChange = e => {
     e.preventDefault();
-    setInputValue(e.target.value);
+
+    const persianValue = convertToPersianNumber(e.target.value);
+    setInputValue(persianValue);
   };
 
+  
   const handleSubmit = () => {
-    if (inputValue === '09221234567') {
+    if (inputValue === '۰۹۲۲۱۲۳۴۵۶۷'  ) {
       setSecondModal(!secondModal);
       setInputValue('');
     }
@@ -46,30 +50,23 @@ const LoginPage = () => {
     dispatch(closeModal({ id: 'phone-login' }));
   };
 
-  const inputValues = useSelector(state => state.input.inputValues);
+  const inputValues = useSelector(state => state.input.codeInputValues);
   const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    dispatch(codeInputValue({ name, value }));
+    const persianValue = convertToPersianNumber(value);
+
+    dispatch(codeInputValue({ name, persianValue }));
   };
 
   const originalCode = Object.values(inputValues)
     .map(i => i)
     .join('');
 
- 
- 
-    // const userLoginClicked = useSelector(state => state.button.userLoginClicked);
- 
-
- 
   return (
     <>
       {isModalOpen ? (
-        <section
-          className={`lg:hidden fixed top-0 right-0 z-50 w-full h-screen px-5  flex justify-center items-center  bg-white  transition-all
-         
-              `}>
+        <section className='lg:hidden fixed top-0 right-0 z-50 w-full h-screen px-5  flex justify-center items-center  bg-white  transition-all'>
           <button onClick={closeModalHandler}>
             <svg
               className='h-6 w-6 text-gray-700 absolute top-5 left-5'
@@ -234,7 +231,7 @@ const LoginPage = () => {
                 onClick={handleSubmit}
                 className={`w-full py-1 caption-lg  mt-3 rounded 
                         ${
-                          inputValue === '09221234567'
+                          inputValue === '۰۹۲۲۱۲۳۴۵۶۷'
                             ? 'bg-primary text-white'
                             : 'bg-gray-300 text-gray-400'
                         }
@@ -253,7 +250,7 @@ const LoginPage = () => {
             {secondModal && (
               <div
                 className={`relative bg-error-lighter p-2 rounded 
-            ${originalCode == '12345' || popup ? 'hidden' : 'block'}
+                ${originalCode == '12345' || popup ? 'hidden' : 'block'}
               `}>
                 <button onClick={() => setPopup(!popup)}>
                   <svg

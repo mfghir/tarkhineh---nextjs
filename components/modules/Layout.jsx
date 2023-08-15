@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setPhoneNumber,
   verifyPhoneNumber,
-} from '@/redux/phoneVerificationSlice';
+} from '@/redux/registerSlice';
 import { useState } from 'react';
 import LoginPage from '../templates/LoginPage';
 import ModalSearch from './ModalSearch';

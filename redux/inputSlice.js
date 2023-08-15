@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const inputSlice = createSlice({
   name: 'input',
   initialState: {
-    value: '',
-    inputValues: {
+    phoneValue: '',
+    codeInputValues: {
       value1: '',
       value2: '',
       value3: '',
@@ -18,39 +18,43 @@ const inputSlice = createSlice({
     editedIndex: null,
   },
   reducers: {
-    phoneCodeInputValue: (state, action) => {
-      state.value = action.payload;
+    phoneInputValue: (state, action) => {
+      state.phoneValue = action.payload;
     },
 
     codeInputValue: (state, action) => {
       const { name, value } = action.payload;
-      state.inputValues[name] = value;
+      state.codeInputValues[name] = value;
     },
 
     addressInputValue: (state, action) => {
       state.addressValue = action.payload;
     },
+
     addressDetailInputValue: (state, action) => {
       state.addressDetailValue = action.payload;
     },
 
-
     addInput: (state, action) => {
       state.inputList.push(action.payload);
     },
+
     editInput: (state, action) => {
       const { index, inputValues } = action.payload;
       state.inputList[index] = inputValues;
     },
+
     setEditing: (state, action) => {
       const index = action.payload;
       state.isEditing = true;
       state.editedIndex = index;
     },
-    clearEditing: (state) => {
+
+    clearEditing: state => {
       state.isEditing = false;
       state.editedIndex = null;
     },
+
     deleteInput: (state, action) => {
       const index = action.payload;
       state.inputList.splice(index, 1);
@@ -61,11 +65,14 @@ const inputSlice = createSlice({
 });
 
 export const {
-  phoneCodeInputValue,
+  phoneInputValue,
   codeInputValue,
   addressInputValue,
   addressDetailInputValue,
   addInput,
-  editInput, setEditing, clearEditing,deleteInput
+  editInput,
+  setEditing,
+  clearEditing,
+  deleteInput,
 } = inputSlice.actions;
 export default inputSlice.reducer;

@@ -1,11 +1,13 @@
 import { deleteInput } from '@/redux/inputSlice';
 import { openModal } from '@/redux/modalSlice';
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { useState } from 'react';
 
 export const ModalDelete = ({ saveAddressIndex }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -61,7 +63,6 @@ export const ModalDelete = ({ saveAddressIndex }) => {
 
             <button
               className='w-full lg:w-auto caption-sm lg:button-lg rounded bg-primary hover:bg-shade-200 active:bg-shade-300 duration-300 text-white py-1 px-4 lg:px-8 mr-5'
-              // onClick={() => dispatch(deleteInput(saveAddressIndex))}>
               onClick={handleConfirm}>
               حذف آدرس
             </button>

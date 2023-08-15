@@ -11,20 +11,28 @@ import ModalShoppinCart from './ModalShoppinCart';
 import { setButtonClick } from '@/redux/buttonSlice';
 
 import { setToken } from '@/redux/authSlice';
+import convertToPersianNumber from './convertToPersianNumber';
 
 const ModalCode = () => {
   const dispatch = useDispatch();
   const [backModalOne, setBackModalOne] = useState(null);
   const [popup, setPopup] = useState(false);
 
-  // const code = useSelector(state => state.input);
-  const inputValues = useSelector(state => state.input.inputValues);
+  const codeInputValues = useSelector(state => state.input.codeInputValues);
   const buttonClicked = useSelector(state => state.button.buttonClicked);
+  const phoneNumberRegister = useSelector(state => state.input.value);
 
   const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    dispatch(codeInputValue({ name, value }));
+    
+    const persianValue = convertToPersianNumber(value);
+    dispatch(codeInputValue({ name, persianValue }));
+    
+    // setInpVal((prevState) => ({
+    //   ...prevState,
+    //   [name]: persianValue,
+    // }));
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -32,9 +40,11 @@ const ModalCode = () => {
     setShowModal(!showModal);
   };
 
-  const originalCode = Object.values(inputValues)
+  const originalCode = Object.values(codeInputValues)
     .map(i => i)
     .join('');
+
+    const test = convertToPersianNumber(originalCode)
 
   const handleClick = () => {
     dispatch(setButtonClick(true));
@@ -56,9 +66,8 @@ const ModalCode = () => {
         ''
       ) : (
         <div
-          className={`inset-0 overflow-y-auto z-50 min-h-screen  ${
-            showModal ? 'hidden' : 'fixed'
-          }
+          className={`inset-0 overflow-y-auto z-50 min-h-screen  
+          ${showModal ? 'hidden' : 'fixed'}
           ${buttonClicked ? 'hidden' : 'fixed'}
           `}>
           <div className='flex items-center justify-center min-h-screen'>
@@ -99,7 +108,7 @@ const ModalCode = () => {
                 </button>
 
                 <p className='caption-md text-gray-700 text-center mb-6'>
-                  کد تایید پنج‌رقمی به شماره {convertToFaNumber(code.value)}
+                  کد تایید پنج‌رقمی به شماره {phoneNumberRegister}
                   ارسال شد.
                 </p>
 
@@ -108,13 +117,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                       ${
-                        inputValues.value1 !== '1' || originalCode !== '12345'
+                        codeInputValues.value1 !== '1' || originalCode !== '12345'
                           ? 'border-error'
                           : 'border-gray-700'
                       }
                     `}
                     name='value1'
-                    value={inputValues.value1}
+                    value={codeInputValues.value1}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -123,14 +132,14 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value2 !== '2' || originalCode !== '12345'
+                      codeInputValues.value2 !== '2' || originalCode !== '12345'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
 
                   `}
                     name='value2'
-                    value={inputValues.value2}
+                    value={codeInputValues.value2}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -139,13 +148,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value3 !== '3' || originalCode !== '12345'
+                      codeInputValues.value3 !== '3' || originalCode !== '12345'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value3'
-                    value={inputValues.value3}
+                    value={codeInputValues.value3}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -154,13 +163,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value4 !== '4' || originalCode !== '12345'
+                      codeInputValues.value4 !== '4' || originalCode !== '12345'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value4'
-                    value={inputValues.value4}
+                    value={codeInputValues.value4}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -169,13 +178,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value5 !== '5' || originalCode !== '12345'
+                      codeInputValues.value5 !== '5' || originalCode !== '12345'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value5'
-                    value={inputValues.value5}
+                    value={codeInputValues.value5}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -208,7 +217,8 @@ const ModalCode = () => {
                 )}
 
                 <div
-                  className={`relative bg-error-lighter p-2 rounded ${
+                  className={`relative bg-error-lighter p-2 rounded 
+                  ${
                     originalCode == '12345' || popup ? 'hidden' : 'block'
                   }`}>
                   <button onClick={() => setPopup(!popup)}>
@@ -230,7 +240,6 @@ const ModalCode = () => {
                     کد تایید نامعتبر
                   </p>
                 </div>
-
               </div>
             </section>
           </div>
