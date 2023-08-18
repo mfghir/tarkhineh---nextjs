@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ArrowRight2, Clock } from 'iconsax-react';
 import ModalShoppinCart from '../modules/ModalShoppinCart';
-import { codeInputValue } from '@/redux/inputSlice';
+import { updateCodeValue } from '@/redux/inputSlice';
 
 import { closeModal } from '@/redux/modalSlice';
-import { convertToFaNumber } from '../modules/FarsiNumber';
 import TwoMinuteTimer from '../modules/Timer';
 
 import { setToken } from '@/redux/authSlice';
@@ -19,27 +18,23 @@ const LoginPage = () => {
   const [inputValue, setInputValue] = useState('');
 
   const [secondModal, setSecondModal] = useState(false);
+  const phoneNumberRegister = useSelector(state => state.input.value);
+
+  const codeValues = useSelector(state => state.input.codeValues);
+  const originalCode = Object.values(codeValues)
+    .map(i => i)
+    .join('');
+    
 
   const handleInputChange = e => {
     e.preventDefault();
-
     const persianValue = convertToPersianNumber(e.target.value);
     setInputValue(persianValue);
   };
 
-  
-  const handleSubmit = () => {
-    if (inputValue === '۰۹۲۲۱۲۳۴۵۶۷'  ) {
-      setSecondModal(!secondModal);
-      setInputValue('');
-    }
-
-    if (isModalOpen) setInputValue('');
-  };
-
   const handleClick = () => {
     dispatch(closeModal({ id: 'phone-login' }));
-    if (originalCode === '12345') {
+    if (originalCode === '۱۲۳۴۵') {
       const token = 112233445566778899;
       dispatch(setToken(token));
     }
@@ -48,20 +43,19 @@ const LoginPage = () => {
   const isModalOpen = useSelector(state => state.modal['phone-login']?.isOpen);
   const closeModalHandler = () => {
     dispatch(closeModal({ id: 'phone-login' }));
+    setSecondModal(null);
   };
 
-  const inputValues = useSelector(state => state.input.codeInputValues);
   const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    const persianValue = convertToPersianNumber(value);
+    dispatch(updateCodeValue({ name, value }));
 
-    dispatch(codeInputValue({ name, persianValue }));
+    // if (originalCode !== '۱۲۳۴۵') setPopup(!popup)
   };
 
-  const originalCode = Object.values(inputValues)
-    .map(i => i)
-    .join('');
+      
+
 
   return (
     <>
@@ -86,7 +80,7 @@ const LoginPage = () => {
           <button
             className={` h-6 w-6 text-gray-700 absolute top-5 right-5 
             ${!secondModal && 'hidden'}`}
-            onClick={handleSubmit}>
+            onClick={() => setSecondModal(false)}>
             <ArrowRight2 />
           </button>
 
@@ -103,9 +97,7 @@ const LoginPage = () => {
 
             <p className='caption-md text-gray-700 text-center my-6'>
               {secondModal
-                ? `کد تایید پنج‌رقمی به شماره ${convertToFaNumber(
-                    inputValue
-                  )}ارسال شد.`
+                ? `کد تایید پنج‌رقمی به شماره ${inputValue}ارسال شد.`
                 : 'شماره همراه خود را وارد کنید.'}
             </p>
 
@@ -115,31 +107,15 @@ const LoginPage = () => {
                   <input
                     type='text'
                     className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
-                      ${
-                        inputValues.value1 !== '1' || originalCode !== '12345'
-                          ? 'border-error'
-                          : 'border-gray-700'
-                      }
-                    `}
-                    name='value1'
-                    value={inputValues.value1}
-                    onChange={handleChange}
-                    maxLength={1}
-                  />
-
-                  <input
-                    type='text'
-                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                   
                     ${
-                      inputValues.value2 !== '2' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
-                    }
-
-                  `}
-                    name='value2'
-                    value={inputValues.value2}
+                    `}
+                    name='value1'
+                    value={codeValues.value1}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -148,43 +124,60 @@ const LoginPage = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value3 !== '3' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
+                        ? 'border-error'
+                        : 'border-gray-700'
+                    }
+                  `}
+                    name='value2'
+                    value={codeValues.value2}
+                    onChange={handleChange}
+                    maxLength={1}
+                  />
+
+                  <input
+                    type='text'
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                 
+                    ${
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value3'
-                    value={inputValues.value3}
+                    value={codeValues.value3}
                     onChange={handleChange}
                     maxLength={1}
                   />
 
                   <input
                     type='text'
-                    className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      inputValues.value4 !== '4' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value4'
-                    value={inputValues.value4}
+                    value={codeValues.value4}
                     onChange={handleChange}
                     maxLength={1}
                   />
 
                   <input
                     type='text'
-                    className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
+                    className={`w-full outline-none border focus:border-primary text-gray-800 px-4 py-2 rounded caption-sm
                     ${
-                      inputValues.value5 !== '5' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
+                  
                   `}
                     name='value5'
-                    value={inputValues.value5}
+                    value={codeValues.value5}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -199,7 +192,9 @@ const LoginPage = () => {
                     <span className=''>تا دریافت مجدد کد</span>
                   </p>
 
-                  <p className='cursor-pointer' onClick={handleSubmit}>
+                  <p
+                    className='cursor-pointer'
+                    onClick={() => setSecondModal(false)}>
                     ویرایش شماره
                   </p>
                 </div>
@@ -219,7 +214,7 @@ const LoginPage = () => {
                 onClick={handleClick}
                 className={`w-full py-1 caption-lg  mt-3 rounded 
                   ${
-                    originalCode === '12345'
+                    originalCode === '۱۲۳۴۵'
                       ? 'bg-primary text-white'
                       : 'bg-gray-300 text-gray-400'
                   }
@@ -228,7 +223,7 @@ const LoginPage = () => {
               </button>
             ) : (
               <button
-                onClick={handleSubmit}
+                onClick={() => setSecondModal(true)}
                 className={`w-full py-1 caption-lg  mt-3 rounded 
                         ${
                           inputValue === '۰۹۲۲۱۲۳۴۵۶۷'
@@ -247,10 +242,10 @@ const LoginPage = () => {
               <span className='text-primary'>قوانین و مقررات</span> است.
             </p>
 
-            {secondModal && (
+           
               <div
                 className={`relative bg-error-lighter p-2 rounded 
-                ${originalCode == '12345' || popup ? 'hidden' : 'block'}
+                ${   originalCode === '۱۲۳۴۵' || popup ? 'hidden' : 'block'}
               `}>
                 <button onClick={() => setPopup(!popup)}>
                   <svg
@@ -271,7 +266,7 @@ const LoginPage = () => {
                   کد تایید نامعتبر
                 </p>
               </div>
-            )}
+            
           </div>
         </section>
       ) : null}

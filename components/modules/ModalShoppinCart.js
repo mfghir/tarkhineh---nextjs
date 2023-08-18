@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { phoneCodeInputValue } from '@/redux/inputSlice';
+import { phoneInputValue } from '@/redux/inputSlice';
 
 import { useDispatch } from 'react-redux';
 import ModalCode from './ModalCode';
@@ -10,13 +10,12 @@ const ModalShoppinCart = () => {
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [secondModal, setSecondModal] = useState(false);
-  
+
   const dispatch = useDispatch();
-  
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-
 
   const handleInputChange = e => {
     const persianValue = convertToPersianNumber(e.target.value);
@@ -24,7 +23,7 @@ const ModalShoppinCart = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(phoneCodeInputValue(inputValue));
+    dispatch(phoneInputValue(inputValue));
     setSecondModal(!secondModal);
   };
 
@@ -95,8 +94,9 @@ const ModalShoppinCart = () => {
                   )}
 
                   <p className='caption-sm text-center text-[#0C0C0C] mt-2'>
-                    ورود و عضویت در ترخینه به منزله قبول
-                    <span className='text-primary'>قوانین و مقررات</span> است.
+                    {''}
+                    {''}ورود و عضویت در ترخینه به منزله قبول
+                    <span className='text-primary'> قوانین و مقررات </span> است.
                   </p>
                 </div>
               </section>

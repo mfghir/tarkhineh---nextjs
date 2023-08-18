@@ -16,10 +16,10 @@ import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { convertToFaNumber } from '../modules/FarsiNumber';
-
 import { openModal } from '@/redux/modalSlice';
+
 import MenuPhone from '../modules/MenuPhone';
+import convertToPersianNumber from '../modules/convertToPersianNumber';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -221,7 +221,7 @@ value={selectedValue} onChange={handleSelectChange}
                 ''
               ) : (
                 <span className='caption-sm bg-tint-600 text-white w-3 h-3 p-1 flex justify-center items-center rounded-full absolute bottom-4 left-4 lg:bottom-6 lg:left-6'>
-                  {convertToFaNumber(cart.length)}
+                  {convertToPersianNumber(cart.length)}
                 </span>
               )}
             </li>

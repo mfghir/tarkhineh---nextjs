@@ -1,38 +1,28 @@
-import { codeInputValue } from '@/redux/inputSlice';
 import Image from 'next/image';
 import { useState } from 'react';
+import TwoMinuteTimer from './Timer';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { convertToFaNumber } from './FarsiNumber';
 import { ArrowRight2, Clock } from 'iconsax-react';
-
-import TwoMinuteTimer from './Timer';
 import ModalShoppinCart from './ModalShoppinCart';
-import { setButtonClick } from '@/redux/buttonSlice';
 
+import { updateCodeValue } from '@/redux/inputSlice';
+import { setButtonClick } from '@/redux/buttonSlice';
 import { setToken } from '@/redux/authSlice';
-import convertToPersianNumber from './convertToPersianNumber';
 
 const ModalCode = () => {
   const dispatch = useDispatch();
   const [backModalOne, setBackModalOne] = useState(null);
   const [popup, setPopup] = useState(false);
 
-  const codeInputValues = useSelector(state => state.input.codeInputValues);
+  const codeValues = useSelector(state => state.input.codeValues);
   const buttonClicked = useSelector(state => state.button.buttonClicked);
   const phoneNumberRegister = useSelector(state => state.input.value);
 
   const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    
-    const persianValue = convertToPersianNumber(value);
-    dispatch(codeInputValue({ name, persianValue }));
-    
-    // setInpVal((prevState) => ({
-    //   ...prevState,
-    //   [name]: persianValue,
-    // }));
+    dispatch(updateCodeValue({ name, value }));
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -40,15 +30,13 @@ const ModalCode = () => {
     setShowModal(!showModal);
   };
 
-  const originalCode = Object.values(codeInputValues)
+  const originalCode = Object.values(codeValues)
     .map(i => i)
     .join('');
 
-    const test = convertToPersianNumber(originalCode)
-
   const handleClick = () => {
     dispatch(setButtonClick(true));
-    if (originalCode === '12345') {
+    if (originalCode === '۱۲۳۴۵') {
       const token = 112233445566778899;
       dispatch(setToken(token));
     }
@@ -92,7 +80,9 @@ const ModalCode = () => {
                 </svg>
               </button>
 
-              <button className='h-6 w-6 text-gray-700 absolute top-4 right-6'>
+              <button
+                className='h-6 w-6 text-gray-700 absolute top-4 right-6'
+                onClick={backHandler}>
                 <ArrowRight2 />
               </button>
 
@@ -117,13 +107,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                       ${
-                        codeInputValues.value1 !== '1' || originalCode !== '12345'
+                        originalCode !== '۱۲۳۴۵'
                           ? 'border-error'
                           : 'border-gray-700'
                       }
                     `}
                     name='value1'
-                    value={codeInputValues.value1}
+                    value={codeValues.value1}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -132,14 +122,14 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      codeInputValues.value2 !== '2' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
 
                   `}
                     name='value2'
-                    value={codeInputValues.value2}
+                    value={codeValues.value2}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -148,13 +138,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      codeInputValues.value3 !== '3' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value3'
-                    value={codeInputValues.value3}
+                    value={codeValues.value3}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -163,13 +153,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      codeInputValues.value4 !== '4' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value4'
-                    value={codeInputValues.value4}
+                    value={codeValues.value4}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -178,13 +168,13 @@ const ModalCode = () => {
                     type='text'
                     className={`w-full outline-none border  focus:border-primary text-gray-800 px-4 py-2  rounded caption-sm
                     ${
-                      codeInputValues.value5 !== '5' || originalCode !== '12345'
+                      originalCode !== '۱۲۳۴۵'
                         ? 'border-error'
                         : 'border-gray-700'
                     }
                   `}
                     name='value5'
-                    value={codeInputValues.value5}
+                    value={codeValues.value5}
                     onChange={handleChange}
                     maxLength={1}
                   />
@@ -204,7 +194,7 @@ const ModalCode = () => {
                   </p>
                 </div>
 
-                {originalCode === '12345' ? (
+                {originalCode === '۱۲۳۴۵' ? (
                   <button
                     className='w-full py-1 caption-lg bg-primary text-white mt-3 rounded'
                     onClick={handleClick}>
@@ -218,9 +208,7 @@ const ModalCode = () => {
 
                 <div
                   className={`relative bg-error-lighter p-2 rounded 
-                  ${
-                    originalCode == '12345' || popup ? 'hidden' : 'block'
-                  }`}>
+                  ${originalCode === '۱۲۳۴۵' || popup ? 'hidden' : 'block'}`}>
                   <button onClick={() => setPopup(!popup)}>
                     <svg
                       className='h-4 w-4 text-gray-700 absolute top-1 right-1 mt-2'

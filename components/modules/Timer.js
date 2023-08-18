@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { convertToFaNumber } from './FarsiNumber';
+import convertToPersianNumber from './convertToPersianNumber';
 
 const TwoMinuteTimer = () => {
   const [seconds, setSeconds] = useState(120);
@@ -20,7 +20,7 @@ const TwoMinuteTimer = () => {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  return <>{convertToFaNumber(formatTime(seconds))}</>;
+  return <>{convertToPersianNumber(formatTime(seconds))}</>;
 };
 
 export default TwoMinuteTimer;

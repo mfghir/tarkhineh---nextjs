@@ -2,12 +2,6 @@ import LocalFont from 'next/font/local';
 import Footer from '../templates/Footer';
 import Navbar from '../templates/Navbar';
 
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  setPhoneNumber,
-  verifyPhoneNumber,
-} from '@/redux/registerSlice';
-import { useState } from 'react';
 import LoginPage from '../templates/LoginPage';
 import ModalSearch from './ModalSearch';
 
@@ -55,22 +49,13 @@ const estedad = LocalFont({
 });
 
 const Layout = ({ children }) => {
-  const userLoginClicked = useSelector(state => state.button.userLoginClicked);
- 
   return (
     <div className={`${estedad.variable} font-sans relative`}>
-      {/* {userLoginClicked ? (
-        <LoginPage />
-      ) : ''} */}
-        <>
-          <Navbar />
-          <ModalSearch />
-          <LoginPage />
-          <main>{children}</main>
-          <Footer />
-
-        </>
-      
+      <Navbar />
+      <ModalSearch />
+      <LoginPage />
+      <main>{children}</main>
+      <Footer />
     </div>
   );
 };

@@ -1,10 +1,11 @@
+import convertToPersianNumber from '@/components/modules/convertToPersianNumber';
 import { createSlice } from '@reduxjs/toolkit';
 
 const inputSlice = createSlice({
   name: 'input',
   initialState: {
     phoneValue: '',
-    codeInputValues: {
+    codeValues: {
       value1: '',
       value2: '',
       value3: '',
@@ -22,9 +23,21 @@ const inputSlice = createSlice({
       state.phoneValue = action.payload;
     },
 
-    codeInputValue: (state, action) => {
+    // codeInputValue: (state, action) => {
+    //   const { name, value } = action.payload;
+    //   state.codeValues[name] = value;
+    // },
+
+    updateCodeValue: (state, action) => {
       const { name, value } = action.payload;
-      state.codeInputValues[name] = value;
+      let updatedValue = value;
+
+      if (typeof value === 'string') {
+        // Convert English numbers to Persian numbers for string inputs
+        updatedValue = convertToPersianNumber(value);
+      }
+
+      state.codeValues[name] = updatedValue;
     },
 
     addressInputValue: (state, action) => {
@@ -65,6 +78,7 @@ const inputSlice = createSlice({
 });
 
 export const {
+  updateCodeValue,
   phoneInputValue,
   codeInputValue,
   addressInputValue,
